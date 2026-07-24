@@ -9,10 +9,28 @@ export const metadata: Metadata = {
   title: "Highest Paying Jobs in the World 2026 — Top 100 Global Careers",
   description:
     "Discover the top 100 highest paying jobs in the world for 2026. Compare global salary averages across 195 countries. See which careers pay the most.",
+  alternates: {
+    canonical: "https://www.bestpayingjobs.net/global-ranking",
+  },
   openGraph: {
     title: "Highest Paying Jobs in the World 2026",
     description:
       "Discover the top 100 highest paying jobs in the world for 2026.",
+    images: [
+      {
+        url: "/og/default.webp",
+        width: 1200,
+        height: 750,
+        alt: "Highest Paying Jobs in the World",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Highest Paying Jobs in the World 2026",
+    description:
+      "Discover the top 100 highest paying jobs in the world for 2026.",
+    images: ["/og/default.webp"],
   },
 };
 

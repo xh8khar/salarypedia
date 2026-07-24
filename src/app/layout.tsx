@@ -47,12 +47,21 @@ export const metadata: Metadata = {
     siteName: "BestPayingJobs.net",
     locale: "en_US",
     type: "website",
+    images: [
+      {
+        url: "/og/default.webp",
+        width: 1200,
+        height: 750,
+        alt: "Best Paying Jobs in Every Country",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Best Paying Jobs in Every Country (2026)",
     description:
       "Discover the highest paying jobs in every country. Compare salaries across 30+ career categories. Updated for 2026.",
+    images: ["/og/default.webp"],
   },
   robots: {
     index: true,
@@ -83,9 +92,9 @@ export default function RootLayout({
       "@type": "SearchAction",
       target: {
         "@type": "EntryPoint",
-        urlTemplate: `${siteUrl}/best-paying-jobs-in-{country_slug}`,
+        urlTemplate: `${siteUrl}/?search={search_term_string}`,
       },
-      "query-input": "required name=country_slug",
+      "query-input": "required name=search_term_string",
     },
   };
 

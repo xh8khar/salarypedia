@@ -8,6 +8,27 @@ import FlagImage from "@/components/FlagImage";
 export const metadata: Metadata = {
   title: "Part-Time Jobs for International Students 2026 | BestPayingJobs",
   description: "Discover the highest paying part-time jobs for international students in 195 countries. Compare part-time salaries, hourly rates, and job opportunities worldwide.",
+  alternates: {
+    canonical: "https://www.bestpayingjobs.net/part-time-jobs",
+  },
+  openGraph: {
+    title: "Part-Time Jobs for International Students 2026",
+    description: "Discover the highest paying part-time jobs for international students in 195 countries.",
+    images: [
+      {
+        url: "/og/default.webp",
+        width: 1200,
+        height: 750,
+        alt: "Part-Time Jobs for International Students",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Part-Time Jobs for International Students 2026",
+    description: "Discover the highest paying part-time jobs for international students in 195 countries.",
+    images: ["/og/default.webp"],
+  },
 };
 
 export default function PartTimeJobsIndex() {

@@ -27,9 +27,26 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `Best Paying Jobs in ${cat.name} (${getCurrentYear()}) in Every Country | BestPayingJobs.net`,
     description: `Discover the highest paying ${cat.name.toLowerCase()} jobs in 195 countries. Compare salaries, find top careers, and make data-driven career decisions.`,
+    alternates: {
+      canonical: `https://www.bestpayingjobs.net/jobs/${slug}`,
+    },
     openGraph: {
       title: `Best Paying Jobs in ${cat.name} (${getCurrentYear()})`,
       description: `Discover the highest paying ${cat.name.toLowerCase()} jobs across 195 countries.`,
+      images: [
+        {
+          url: "/og/default.webp",
+          width: 1200,
+          height: 750,
+          alt: `Best Paying Jobs in ${cat.name}`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `Best Paying Jobs in ${cat.name} (${getCurrentYear()})`,
+      description: `Discover the highest paying ${cat.name.toLowerCase()} jobs across 195 countries.`,
+      images: ["/og/default.webp"],
     },
   };
 }

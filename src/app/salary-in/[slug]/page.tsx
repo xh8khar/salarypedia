@@ -30,6 +30,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: `Best Paying Jobs in ${city.name}, ${city.countryName} ${year}`,
       description: `Discover the highest paying jobs in ${city.name}, ${city.countryName} for ${year}.`,
+      images: [
+        {
+          url: `/og/${city.countrySlug}.webp`,
+          width: 1200,
+          height: 750,
+          alt: `Best Paying Jobs in ${city.name}`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `Best Paying Jobs in ${city.name}, ${city.countryName} ${year}`,
+      description: `Discover the highest paying jobs in ${city.name}, ${city.countryName} for ${year}.`,
+      images: [`/og/${city.countrySlug}.webp`],
     },
   };
 }

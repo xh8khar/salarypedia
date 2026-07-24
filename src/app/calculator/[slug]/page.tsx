@@ -26,6 +26,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: calc.ogTitle,
       description: calc.description,
+      images: [
+        {
+          url: "/og/default.webp",
+          width: 1200,
+          height: 750,
+          alt: calc.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: calc.ogTitle,
+      description: calc.description,
+      images: ["/og/default.webp"],
     },
   };
 }

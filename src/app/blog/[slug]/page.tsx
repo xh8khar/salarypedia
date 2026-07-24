@@ -23,10 +23,27 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${post.title} | BestPayingJobs.net`,
     description: post.summary,
+    alternates: {
+      canonical: `https://www.bestpayingjobs.net/blog/${slug}`,
+    },
     openGraph: {
       title: post.title,
       description: post.summary,
       type: "article",
+      images: [
+        {
+          url: "/og/default.webp",
+          width: 1200,
+          height: 750,
+          alt: post.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.summary,
+      images: ["/og/default.webp"],
     },
   };
 }
@@ -41,6 +58,16 @@ export default async function BlogPost({ params }: Props) {
   const allCategories = getCategories();
 
   const siteUrl = "https://www.bestpayingjobs.net";
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: siteUrl },
+      { "@type": "ListItem", position: 2, name: "Blog", item: `${siteUrl}/blog` },
+      { "@type": "ListItem", position: 3, name: post.title, item: `${siteUrl}/blog/${slug}` },
+    ],
+  };
 
   const articleSchema = {
     "@context": "https://schema.org",
@@ -69,6 +96,7 @@ export default async function BlogPost({ params }: Props) {
 
   return (
     <div className="flex flex-col min-h-screen">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <Header />
 

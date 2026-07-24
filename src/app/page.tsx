@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import CountrySearch from "@/components/CountrySearch";
 import Header from "@/components/Header";
@@ -29,6 +30,36 @@ const categoryIcons: Record<string, string> = {
 };
 
 const defaultIcon = "M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4";
+
+export const metadata: Metadata = {
+  title: "Best Paying Jobs in Every Country 2026 | BestPayingJobs.net",
+  description:
+    "Discover the highest paying jobs in every country. Compare salaries across 30+ career categories including AI, Finance, IT, Healthcare, Engineering and more. Updated for 2026.",
+  alternates: {
+    canonical: "https://www.bestpayingjobs.net",
+  },
+  openGraph: {
+    title: "Best Paying Jobs in Every Country (2026)",
+    description:
+      "Discover the highest paying jobs in every country. Compare salaries across 30+ career categories including AI, Finance, IT, Healthcare, Engineering and more. Updated for 2026.",
+    url: "https://www.bestpayingjobs.net",
+    images: [
+      {
+        url: "/og/default.webp",
+        width: 1200,
+        height: 750,
+        alt: "Best Paying Jobs in Every Country",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Best Paying Jobs in Every Country (2026)",
+    description:
+      "Discover the highest paying jobs in every country. Compare salaries across 30+ career categories. Updated for 2026.",
+    images: ["/og/default.webp"],
+  },
+};
 
 export default function Home() {
   const year = getCurrentYear();

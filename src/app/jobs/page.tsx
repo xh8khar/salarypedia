@@ -10,10 +10,28 @@ export const metadata: Metadata = {
   title: "Best Paying Jobs by Career Category 2026",
   description:
     "Browse the highest paying jobs across 31 career categories in 195 countries. Compare salaries in Finance, AI, Healthcare, Engineering, and more.",
+  alternates: {
+    canonical: "https://www.bestpayingjobs.net/jobs",
+  },
   openGraph: {
     title: "Best Paying Jobs by Career Category 2026",
     description:
       "Browse the highest paying jobs across 31 career categories in 195 countries.",
+    images: [
+      {
+        url: "/og/default.webp",
+        width: 1200,
+        height: 750,
+        alt: "Jobs by Career Category",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Best Paying Jobs by Career Category 2026",
+    description:
+      "Browse the highest paying jobs across 31 career categories in 195 countries.",
+    images: ["/og/default.webp"],
   },
 };
 

@@ -1,10 +1,40 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { getCountries, getCategories, getCurrentYear } from "@/lib/db";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import posts from "@/data/blog-posts.json";
 
 const categories = [...new Set(posts.map((p) => p.category))];
+
+export const metadata: Metadata = {
+  title: "Career Blog — Salary Guides & Career Advice | BestPayingJobs.net",
+  description:
+    "Career advice, salary guides, job search tips, and personal finance articles to help you earn more. Expert insights for professionals worldwide.",
+  alternates: {
+    canonical: "https://www.bestpayingjobs.net/blog",
+  },
+  openGraph: {
+    title: "Career Blog — Salary Guides & Career Advice",
+    description:
+      "Career advice, salary guides, job search tips, and personal finance articles to help you earn more.",
+    images: [
+      {
+        url: "/og/default.webp",
+        width: 1200,
+        height: 750,
+        alt: "BestPayingJobs.net Blog",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Career Blog — Salary Guides & Career Advice",
+    description:
+      "Career advice, salary guides, job search tips, and personal finance articles to help you earn more.",
+    images: ["/og/default.webp"],
+  },
+};
 
 export default function BlogIndex() {
   const year = getCurrentYear();

@@ -8,10 +8,28 @@ export const metadata: Metadata = {
   title: "Compare Salaries Between Countries 2026",
   description:
     "Compare salaries across 31 career categories between any two countries. Make data-driven decisions about where to work and earn more.",
+  alternates: {
+    canonical: "https://www.bestpayingjobs.net/compare",
+  },
   openGraph: {
     title: "Compare Salaries Between Countries 2026",
     description:
       "Compare salaries across 31 career categories between any two countries.",
+    images: [
+      {
+        url: "/og/default.webp",
+        width: 1200,
+        height: 750,
+        alt: "Compare Salaries Between Countries",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Compare Salaries Between Countries 2026",
+    description:
+      "Compare salaries across 31 career categories between any two countries.",
+    images: ["/og/default.webp"],
   },
 };
 

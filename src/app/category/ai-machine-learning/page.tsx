@@ -14,10 +14,32 @@ export const metadata: Metadata = {
   title: "Highest Paying AI Jobs 2026 — AI & Machine Learning Salaries by Country",
   description:
     "Discover the highest paying AI and machine learning jobs across 195 countries in 2026. Compare AI engineer salaries, data scientist pay, and machine learning engineer compensation worldwide.",
+  alternates: {
+    canonical: "https://www.bestpayingjobs.net/jobs/ai-machine-learning",
+  },
+  robots: {
+    index: false,
+    follow: true,
+  },
   openGraph: {
     title: "Highest Paying AI Jobs 2026 — AI & Machine Learning Salaries by Country",
     description:
       "Compare AI engineer, ML engineer, and data scientist salaries across 195 countries. Find where AI skills pay the most in 2026.",
+    images: [
+      {
+        url: "/og/default.webp",
+        width: 1200,
+        height: 750,
+        alt: "AI & Machine Learning Salaries",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Highest Paying AI Jobs 2026 — AI & Machine Learning Salaries by Country",
+    description:
+      "Compare AI engineer, ML engineer, and data scientist salaries across 195 countries. Find where AI skills pay the most in 2026.",
+    images: ["/og/default.webp"],
   },
 };
 

@@ -22,6 +22,24 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     alternates: {
       canonical: `https://www.bestpayingjobs.net/salary-increase-letter/${slug}`,
     },
+    openGraph: {
+      title: `${letter.title} — Salary Increase Letter`,
+      description: letter.summary,
+      images: [
+        {
+          url: "/og/default.webp",
+          width: 1200,
+          height: 750,
+          alt: letter.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${letter.title} — Salary Increase Letter`,
+      description: letter.summary,
+      images: ["/og/default.webp"],
+    },
   };
 }
 

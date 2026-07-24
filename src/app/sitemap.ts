@@ -1,6 +1,7 @@
 import { MetadataRoute } from "next";
 import { getCountries, getCategories } from "@/lib/db";
 import { getCities } from "@/lib/city";
+import { hasCountryJobs } from "@/lib/db";
 import calculators from "@/data/calculators.json";
 import blogPosts from "@/data/blog-posts.json";
 import salaryLetters from "@/data/salary-letters.json";
@@ -22,6 +23,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${siteUrl}/blog`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },
     { url: `${siteUrl}/salary-increase-letter`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.6 },
     { url: `${siteUrl}/jobs/ai-machine-learning`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
+    { url: `${siteUrl}/part-time-jobs`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
   ];
 
   const countryPages: MetadataRoute.Sitemap = countries.map((c) => ({
@@ -30,6 +32,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: "monthly" as const,
     priority: 0.9,
   }));
+
+  const partTimeCountryPages: MetadataRoute.Sitemap = countries
+    .filter((c) => hasCountryJobs(c.code))
+    .map((c) => ({
+      url: `${siteUrl}/part-time-jobs-in-${c.slug}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    }));
 
   const cityPages: MetadataRoute.Sitemap = cities.map((c) => ({
     url: `${siteUrl}/salary-in-${c.slug}`,
@@ -69,6 +80,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     ...staticPages,
     ...countryPages,
+    ...partTimeCountryPages,
     ...cityPages,
     ...categoryPages,
     ...calculatorPages,

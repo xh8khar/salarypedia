@@ -1,8 +1,35 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { getCountries, getCategories, getCurrentYear } from "@/lib/db";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import letters from "@/data/salary-letters.json";
+
+export const metadata: Metadata = {
+  title: "Salary Increase Letter Templates 2026 | BestPayingJobs.net",
+  description: "24 professionally crafted salary increase letter templates for every situation. Copy, customize, and send. Get the raise you deserve.",
+  alternates: {
+    canonical: "https://www.bestpayingjobs.net/salary-increase-letter",
+  },
+  openGraph: {
+    title: "Salary Increase Letter Templates 2026",
+    description: "24 professionally crafted salary increase letter templates for every situation. Copy, customize, and send.",
+    images: [
+      {
+        url: "/og/default.webp",
+        width: 1200,
+        height: 750,
+        alt: "Salary Increase Letter Templates",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Salary Increase Letter Templates 2026",
+    description: "24 professionally crafted salary increase letter templates for every situation.",
+    images: ["/og/default.webp"],
+  },
+};
 
 export default function SalaryIncreaseLetterIndex() {
   const year = getCurrentYear();

@@ -7,6 +7,27 @@ import Footer from "@/components/Footer";
 export const metadata: Metadata = {
   title: "Free Salary Calculators 2026",
   description: "Use our free salary calculators: hourly rate, take-home pay, after-tax, raise, overtime, bonus, commission, affordability, FIRE, and more.",
+  alternates: {
+    canonical: "https://www.bestpayingjobs.net/calculator",
+  },
+  openGraph: {
+    title: "Free Salary Calculators 2026",
+    description: "Use our free salary calculators: hourly rate, take-home pay, after-tax, raise, overtime, bonus, commission, and more.",
+    images: [
+      {
+        url: "/og/default.webp",
+        width: 1200,
+        height: 750,
+        alt: "Free Salary Calculators",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Free Salary Calculators 2026",
+    description: "Use our free salary calculators: hourly rate, take-home pay, after-tax, raise, overtime, bonus, commission, and more.",
+    images: ["/og/default.webp"],
+  },
 };
 
 export default function CalculatorIndex() {
