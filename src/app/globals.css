@@ -17,3 +17,21 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.recharts-wrapper,
+.recharts-wrapper *,
+.recharts-surface,
+.recharts-surface * {
+  outline: none !important;
+}
+
+.recharts-bar-rectangle:focus,
+.recharts-bar-rectangle:focus-visible,
+.recharts-bar-rectangle:focus-within {
+  outline: none !important;
+}
+
+.recharts-sector:focus,
+.recharts-sector:focus-visible {
+  outline: none !important;
+}
