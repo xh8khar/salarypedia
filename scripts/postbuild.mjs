@@ -1,10 +1,25 @@
-import { readFileSync, writeFileSync, mkdirSync } from "fs";
-import { resolve, dirname } from "path";
+import { readFileSync, writeFileSync, mkdirSync, readdirSync, rmSync, existsSync, statSync } from "fs";
+import { resolve, dirname, join } from "path";
 import { fileURLToPath } from "url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const dataDir = resolve(__dirname, "../src/data");
 const outDir = resolve(__dirname, "../out");
+
+// Clean up Turbopack debug files (__next.*) and .txt files
+function cleanDir(dir) {
+  if (!existsSync(dir)) return;
+  for (const entry of readdirSync(dir, { withFileTypes: true })) {
+    const full = join(dir, entry.name);
+    if (entry.isDirectory()) {
+      cleanDir(full);
+    } else if (entry.name.startsWith("__next.") || (entry.isFile() && entry.name.endsWith(".txt") && entry.name !== "robots.txt")) {
+      rmSync(full);
+    }
+  }
+}
+console.log("Cleaning Turbopack debug files...");
+cleanDir(outDir);
 
 const countries = JSON.parse(readFileSync(resolve(dataDir, "countries.json"), "utf-8"));
 const categories = JSON.parse(readFileSync(resolve(dataDir, "categories.json"), "utf-8"));

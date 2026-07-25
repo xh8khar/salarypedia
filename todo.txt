@@ -1,0 +1,28 @@
+# Site Improvements TODO
+
+## Niche Content Gaps (Priority Order)
+
+1. [ ] Cost of Living vs Salary pages — use existing col-index.json, create /cost-of-living/[slug] routes
+2. [ ] Salary by Experience Level pages — entry/mid/senior/executive breakdown per country
+3. [ ] Tax / Take-Home Pay by Country pages — reuse calculator logic as static SSR pages
+4. [ ] Skill Premiums & Certifications pages — "highest paying certifications", "skills that boost salary"
+5. [ ] Industry Growth Projections pages — "fastest growing industries [year]"
+6. [ ] Company Salary pages — "highest paying companies in [country]"
+7. [ ] Work Visa Salary Thresholds pages — "minimum salary for work visa in [country]"
+8. [ ] Remote Work Salary Data pages — remote vs on-site salary comparisons by country
+9. [ ] Gender Pay Gap by Country pages — authority/backlink content
+10. [ ] Email Capture / Newsletter signup component — lead generation
+
+## Previously Fixed SEO Items (Verified Complete)
+- [x] Homepage metadata + OG image + canonical
+- [x] Jobs pages canonical + OG + twitter
+- [x] /category/* canonical to /jobs/* + noindex
+- [x] Compare, global-ranking, blog pages metadata
+- [x] Part-time, salary-letter, calculator pages twitter
+- [x] robots.txt domain fixed (www.)
+- [x] robots.ts cleaned (aiCrawlers removed)
+- [x] Breadcrumb JSON-LD on blog/[slug]
+- [x] SearchAction schema fixed
+- [x] Sitemap includes part-time routes
+- [x] Default OG image created at public/og/default.webp
+- [x] Chart blue outline removed

@@ -1,0 +1,13 @@
+- next.config.ts: added COL/THP rewrites, conditional output export for dev
+- src/app/cost-of-living/[slug]/page.tsx: new per-country COL page (index cards, COL-adjusted salary table, category table, article content, FAQ, JSON-LD)
+- src/app/cost-of-living/page.tsx: new COL index landing page with country grid, JSON-LD (BreadcrumbList + CollectionPage)
+- src/app/take-home-pay/[slug]/page.tsx: new per-country THP page (tax breakdown table, per-job take-home in local currency, category table, FAQ, JSON-LD)
+- src/app/take-home-pay/page.tsx: new THP index landing page with country grid, JSON-LD (BreadcrumbList + CollectionPage)
+- src/app/not-found.tsx: new custom 404 page with navigation links
+- src/app/sitemap.ts: added COL + THP index and per-country entries
+- src/components/Header.tsx: added COL and THP nav links, removed salary letters link
+- src/app/best-paying-jobs-in/[slug]/page.tsx: added title suffix, FAQPage schema + visible FAQ, COL/THP interlinking CTA section
+- src/app/blog/[slug]/page.tsx: fixed dates (computed from post index), fixed logo ref (favicon.svg)
+- src/app/layout.tsx: added apple-touch-icon favicon references
+- removed: highest-paying-companies-in feature (pages, data, lib, script, rewrite)
+- scripts/postbuild.mjs: added cleanup of Turbopack __next.* debug files to fix CF Pages 20k file limit
