@@ -45,6 +45,17 @@ for (const [code, data] of Object.entries(allJobs)) {
 }
 console.log(`Generated ${jobCount} API job files`);
 
+// Generate Cloudflare Pages _redirects (rewrites don't work with static export)
+const redirects = [
+  "/cost-of-living-* /cost-of-living/:splat 301",
+  "/take-home-pay-* /take-home-pay/:splat 301",
+  "/best-paying-jobs-in-* /best-paying-jobs-in/:splat 301",
+  "/salary-in-* /salary-in/:splat 301",
+  "/part-time-jobs-in-* /part-time-jobs-in/:splat 301",
+];
+writeFileSync(resolve(outDir, "_redirects"), redirects.join("\n") + "\n");
+console.log("Generated _redirects");
+
 // Generate /llms.txt
 const content = `# BestPayingJobs.net
 

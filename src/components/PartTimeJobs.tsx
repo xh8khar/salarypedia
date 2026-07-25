@@ -97,7 +97,7 @@ export default function PartTimeJobs({
     setTimeout(() => setCopied(false), 2000);
   }, [jobs, currency, countryName, year]);
 
-  const shareUrl = `https://www.bestpayingjobs.net/part-time-jobs-in-${countrySlug}`;
+  const shareUrl = `https://www.bestpayingjobs.net/part-time-jobs-in/${countrySlug}/`;
   const shareTitle = `Part-Time Jobs in ${countryName} for International Students ${year} | BestPayingJobs.net`;
 
   return (

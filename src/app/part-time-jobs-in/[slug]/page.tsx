@@ -51,7 +51,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: resolve(cfg.metaTitle),
     description: resolve(cfg.metaDescription),
     alternates: {
-      canonical: `https://www.bestpayingjobs.net/part-time-jobs-in-${c.slug}`,
+      canonical: `https://www.bestpayingjobs.net/part-time-jobs-in/${c.slug}/`,
     },
     openGraph: {
       title: resolve(cfg.metaTitle),
@@ -84,7 +84,7 @@ export default async function PartTimeJobsPage({ params }: Props) {
       .replace(/\{currency\}/g, c.currency);
 
   const siteUrl = "https://www.bestpayingjobs.net";
-  const pageUrl = `${siteUrl}/part-time-jobs-in-${c.slug}`;
+  const pageUrl = `${siteUrl}/part-time-jobs-in/${c.slug}/`;
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",
@@ -147,7 +147,7 @@ export default async function PartTimeJobsPage({ params }: Props) {
       <section className="bg-gradient-to-br from-emerald-50 via-white to-emerald-50 py-12">
         <div className="mx-auto max-w-5xl px-4">
           <Link
-            href={`/best-paying-jobs-in-${c.slug}`}
+            href={`/best-paying-jobs-in/${c.slug}/`}
             className="inline-flex items-center gap-1.5 text-xs text-emerald-600 hover:text-emerald-700 mb-4 transition-colors"
           >
             <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -219,7 +219,7 @@ export default async function PartTimeJobsPage({ params }: Props) {
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             <Link
-              href={`/best-paying-jobs-in-${c.slug}`}
+              href={`/best-paying-jobs-in/${c.slug}/`}
               className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-emerald-700 transition-colors"
             >
               Full-Time Jobs in {c.name}
@@ -228,7 +228,7 @@ export default async function PartTimeJobsPage({ params }: Props) {
               </svg>
             </Link>
             <Link
-              href={`/salary-in-${c.slug}`}
+              href={`/salary-in/${c.slug}/`}
               className="inline-flex items-center gap-2 rounded-lg border border-emerald-600 bg-white px-5 py-2.5 text-sm font-semibold text-emerald-600 hover:bg-emerald-50 transition-colors"
             >
               Salary Data for {c.name}
@@ -263,7 +263,7 @@ export default async function PartTimeJobsPage({ params }: Props) {
               .map((oc) => (
                 <Link
                   key={oc.code}
-                  href={`/part-time-jobs-in-${oc.slug}`}
+                  href={`/part-time-jobs-in/${oc.slug}/`}
                   className="group flex flex-col items-center gap-1.5 rounded-xl border border-gray-200 bg-white px-3 py-3 hover:border-emerald-200 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200"
                 >
                   <span className="text-xs font-medium text-gray-700 text-center leading-tight line-clamp-2 group-hover:text-emerald-600 transition-colors">{oc.name}</span>

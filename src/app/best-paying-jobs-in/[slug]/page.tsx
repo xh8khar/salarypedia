@@ -47,12 +47,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `Best Paying Jobs in ${c.name} ${year} | BestPayingJobs.net`,
     description: `Discover the highest paying jobs in ${c.name} for ${year}. Top careers include ${top3}. Compare salaries across 30+ career categories in ${c.name}.`,
     alternates: {
-      canonical: `https://www.bestpayingjobs.net/best-paying-jobs-in-${c.slug}`,
+      canonical: `https://www.bestpayingjobs.net/best-paying-jobs-in/${c.slug}/`,
     },
     openGraph: {
       title: `Best Paying Jobs in ${c.name} ${year} | BestPayingJobs.net`,
       description: `Discover the highest paying jobs in ${c.name} for ${year}. Compare salaries across 30+ categories.`,
-      url: `https://www.bestpayingjobs.net/best-paying-jobs-in-${c.slug}`,
+      url: `https://www.bestpayingjobs.net/best-paying-jobs-in/${c.slug}/`,
       images: [metaImage],
     },
     twitter: {
@@ -77,7 +77,7 @@ export default async function CountryPage({ params }: Props) {
   const top10 = data?.top10 ?? [];
 
   const siteUrl = "https://www.bestpayingjobs.net";
-  const pageUrl = `${siteUrl}/best-paying-jobs-in-${c.slug}`;
+  const pageUrl = `${siteUrl}/best-paying-jobs-in/${c.slug}/`;
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",
@@ -290,7 +290,7 @@ export default async function CountryPage({ params }: Props) {
               {cities.map((city) => (
                 <Link
                   key={city.slug}
-                  href={`/salary-in-${city.slug}`}
+                  href={`/salary-in/${city.slug}/`}
                   className="group bg-white rounded-xl border border-gray-200 p-4 hover:border-emerald-300 hover:shadow-md transition-all"
                 >
                   <div className="flex items-center gap-3">
@@ -339,7 +339,7 @@ export default async function CountryPage({ params }: Props) {
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             <Link
-              href={`/cost-of-living-${c.slug}`}
+              href={`/cost-of-living/${c.slug}/`}
               className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-emerald-700 transition-colors"
             >
               Cost of Living in {c.name}
@@ -348,7 +348,7 @@ export default async function CountryPage({ params }: Props) {
               </svg>
             </Link>
             <Link
-              href={`/take-home-pay-${c.slug}`}
+              href={`/take-home-pay/${c.slug}/`}
               className="inline-flex items-center gap-2 rounded-lg border border-emerald-600 bg-white px-5 py-2.5 text-sm font-semibold text-emerald-600 hover:bg-emerald-50 transition-colors"
             >
               Take-Home Pay in {c.name}
@@ -410,7 +410,7 @@ export default async function CountryPage({ params }: Props) {
               .map((oc) => (
                 <Link
                   key={oc.code}
-                  href={`/best-paying-jobs-in-${oc.slug}`}
+                  href={`/best-paying-jobs-in/${oc.slug}/`}
                   className="group flex flex-col items-center gap-1.5 rounded-xl border border-gray-200 bg-white px-3 py-3 hover:border-emerald-200 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200"
                 >
                   <FlagImage slug={oc.slug} name={oc.name} className="w-6 h-6 rounded-sm" />
