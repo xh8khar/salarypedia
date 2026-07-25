@@ -45,13 +45,13 @@ for (const [code, data] of Object.entries(allJobs)) {
 }
 console.log(`Generated ${jobCount} API job files`);
 
-// Generate Cloudflare Pages _redirects (rewrites don't work with static export)
+// Generate Cloudflare Pages _redirects (rewrites keep hyphen URL in address bar)
 const redirects = [
-  "/cost-of-living-* /cost-of-living/:splat 301",
-  "/take-home-pay-* /take-home-pay/:splat 301",
-  "/best-paying-jobs-in-* /best-paying-jobs-in/:splat 301",
-  "/salary-in-* /salary-in/:splat 301",
-  "/part-time-jobs-in-* /part-time-jobs-in/:splat 301",
+  "/cost-of-living-* /cost-of-living/:splat 200",
+  "/take-home-pay-* /take-home-pay/:splat 200",
+  "/best-paying-jobs-in-* /best-paying-jobs-in/:splat 200",
+  "/salary-in-* /salary-in/:splat 200",
+  "/part-time-jobs-in-* /part-time-jobs-in/:splat 200",
 ];
 writeFileSync(resolve(outDir, "_redirects"), redirects.join("\n") + "\n");
 console.log("Generated _redirects");

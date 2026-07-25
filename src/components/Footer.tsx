@@ -46,7 +46,7 @@ export default function Footer() {
             <h4 className="text-sm font-semibold text-gray-900 mb-4">Top Countries</h4>
             <ul className="space-y-3">
               {topCountries.map((c) => (
-                <li key={c.code}><Link href={`/best-paying-jobs-in/${c.slug}/`} className="text-sm text-gray-500 hover:text-emerald-600 transition-colors"><FlagImage slug={c.slug} name={c.name} className="w-5 h-5 inline-block rounded-sm mr-1.5 -mt-0.5" />{c.name}</Link></li>
+                <li key={c.code}><Link href={`/best-paying-jobs-in-${c.slug}`} className="text-sm text-gray-500 hover:text-emerald-600 transition-colors"><FlagImage slug={c.slug} name={c.name} className="w-5 h-5 inline-block rounded-sm mr-1.5 -mt-0.5" />{c.name}</Link></li>
               ))}
               <li><Link href="/" className="text-sm text-emerald-600 font-medium hover:underline">View all &rarr;</Link></li>
             </ul>

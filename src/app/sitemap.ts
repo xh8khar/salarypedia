@@ -30,7 +30,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
 
   const countryPages: MetadataRoute.Sitemap = countries.map((c) => ({
-    url: `${siteUrl}/best-paying-jobs-in/${c.slug}/`,
+    url: `${siteUrl}/best-paying-jobs-in-${c.slug}`,
     lastModified: new Date(),
     changeFrequency: "monthly" as const,
     priority: 0.9,
@@ -39,7 +39,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const partTimeCountryPages: MetadataRoute.Sitemap = countries
     .filter((c) => hasCountryJobs(c.code))
     .map((c) => ({
-      url: `${siteUrl}/part-time-jobs-in/${c.slug}/`,
+      url: `${siteUrl}/part-time-jobs-in-${c.slug}`,
       lastModified: new Date(),
       changeFrequency: "monthly" as const,
       priority: 0.7,
@@ -48,7 +48,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const colPages: MetadataRoute.Sitemap = countries
     .filter((c) => c.code in colData)
     .map((c) => ({
-      url: `${siteUrl}/cost-of-living/${c.slug}/`,
+      url: `${siteUrl}/cost-of-living-${c.slug}`,
       lastModified: new Date(),
       changeFrequency: "monthly" as const,
       priority: 0.7,
@@ -57,14 +57,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const takeHomePages: MetadataRoute.Sitemap = countries
     .filter((c) => hasCountryJobs(c.code))
     .map((c) => ({
-      url: `${siteUrl}/take-home-pay/${c.slug}/`,
+      url: `${siteUrl}/take-home-pay-${c.slug}`,
       lastModified: new Date(),
       changeFrequency: "monthly" as const,
       priority: 0.7,
     }));
 
   const cityPages: MetadataRoute.Sitemap = cities.map((c) => ({
-    url: `${siteUrl}/salary-in/${c.slug}/`,
+    url: `${siteUrl}/salary-in-${c.slug}`,
     lastModified: new Date(),
     changeFrequency: "monthly" as const,
     priority: 0.7,

@@ -135,7 +135,7 @@ export default async function BlogPost({ params }: Props) {
                   <Link key={cat.slug} href={`/jobs/${cat.slug}`} className="text-xs bg-gray-100 hover:bg-emerald-100 hover:text-emerald-600 px-3 py-1.5 rounded-full transition-colors">{cat.name} Salaries</Link>
                 ))}
                 {seededShuffle(countries, post.id).slice(0, 3).map((c) => (
-                  <Link key={c.code} href={`/best-paying-jobs-in/${c.slug}/`} className="text-xs bg-gray-100 hover:bg-emerald-100 hover:text-emerald-600 px-3 py-1.5 rounded-full transition-colors">Jobs in {c.name}</Link>
+                  <Link key={c.code} href={`/best-paying-jobs-in-${c.slug}`} className="text-xs bg-gray-100 hover:bg-emerald-100 hover:text-emerald-600 px-3 py-1.5 rounded-full transition-colors">Jobs in {c.name}</Link>
                 ))}
                 <Link href="/calculator" className="text-xs bg-gray-100 hover:bg-emerald-100 hover:text-emerald-600 px-3 py-1.5 rounded-full transition-colors">Salary Calculators</Link>
               </div>

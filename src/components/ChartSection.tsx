@@ -41,7 +41,7 @@ export default function ChartSection({
     }
   }, [countrySlug]);
 
-  const shareUrl = `https://www.bestpayingjobs.net/best-paying-jobs-in/${countrySlug}/`;
+  const shareUrl = `https://www.bestpayingjobs.net/best-paying-jobs-in-${countrySlug}`;
   const shareTitle = `Top 10 Highest Paying Jobs in ${countryName} 2026 | BestPayingJobs.net`;
 
   return (

@@ -124,7 +124,7 @@ export default function Home() {
       itemListElement: countries.map((c, i) => ({
         "@type": "ListItem",
         position: i + 1,
-        url: `${siteUrl}/best-paying-jobs-in/${c.slug}/`,
+        url: `${siteUrl}/best-paying-jobs-in-${c.slug}`,
         name: `Best Paying Jobs in ${c.name}`,
       })),
     },
@@ -271,7 +271,7 @@ export default function Home() {
               return (
                 <Link
                   key={c.code}
-                  href={`/best-paying-jobs-in/${c.slug}/`}
+                  href={`/best-paying-jobs-in-${c.slug}`}
                   className="group flex flex-col items-center gap-1.5 rounded-xl border border-gray-200 bg-white px-3 py-4 hover:border-emerald-200 hover:shadow-lg hover:shadow-emerald-100/20 hover:-translate-y-1 transition-all duration-200"
                 >
                   <FlagImage slug={c.slug} name={c.name} className="w-7 h-7 group-hover:scale-110 transition-transform duration-200 rounded-sm" />
