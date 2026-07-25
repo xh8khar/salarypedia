@@ -44,19 +44,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 
   return {
-    title: `Best Paying Jobs in ${c.name} ${year}`,
+    title: `Best Paying Jobs in ${c.name} ${year} | BestPayingJobs.net`,
     description: `Discover the highest paying jobs in ${c.name} for ${year}. Top careers include ${top3}. Compare salaries across 30+ career categories in ${c.name}.`,
     alternates: {
       canonical: `https://www.bestpayingjobs.net/best-paying-jobs-in-${c.slug}`,
     },
     openGraph: {
-      title: `Best Paying Jobs in ${c.name} ${year}`,
+      title: `Best Paying Jobs in ${c.name} ${year} | BestPayingJobs.net`,
       description: `Discover the highest paying jobs in ${c.name} for ${year}. Compare salaries across 30+ categories.`,
       url: `https://www.bestpayingjobs.net/best-paying-jobs-in-${c.slug}`,
       images: [metaImage],
     },
     twitter: {
-      title: `Best Paying Jobs in ${c.name} ${year}`,
+      title: `Best Paying Jobs in ${c.name} ${year} | BestPayingJobs.net`,
       description: `Discover the highest paying jobs in ${c.name} for ${year}. Compare salaries across 30+ categories.`,
       card: "summary_large_image",
       images: [metaImage],
@@ -173,6 +173,16 @@ export default async function CountryPage({ params }: Props) {
 
   const cities = getCitiesByCountry(c.code);
 
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      { "@type": "Question", name: `What is the highest paying job in ${c.name}?`, acceptedAnswer: { "@type": "Answer", text: top10[0] ? `The highest paying job in ${c.name} is ${top10[0].title} with a salary range of ${Intl.NumberFormat("en-US").format(top10[0].salaryMin)} to ${Intl.NumberFormat("en-US").format(top10[0].salaryMax)} ${data?.currency ?? c.currency} per year.` : "" } },
+      { "@type": "Question", name: `How many jobs are tracked in ${c.name}?`, acceptedAnswer: { "@type": "Answer", text: `We track salaries across ${categories.filter((cat) => (data?.jobs[cat.slug]?.length ?? 0) > 0).length} career categories in ${c.name}, covering hundreds of individual job titles.` } },
+      { "@type": "Question", name: `What is the average salary in ${c.name}?`, acceptedAnswer: { "@type": "Answer", text: `Average salaries in ${c.name} vary by industry. You can compare salaries across ${categories.length}+ categories to find the right career path.` } },
+    ],
+  };
+
   return (
     <div className="flex flex-col min-h-screen">
       <script
@@ -191,6 +201,12 @@ export default async function CountryPage({ params }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(imageSchema),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(faqSchema),
         }}
       />
       {categoryItemLists.map((schema) => (
@@ -314,6 +330,35 @@ export default async function CountryPage({ params }: Props) {
           </div>
         </section>
 
+        <section className="mb-12 rounded-xl border border-gray-200 bg-white px-6 py-8 text-center">
+          <h2 className="text-xl font-bold text-gray-900 mb-2">
+            Cost of Living & Take-Home Pay in {c.name}
+          </h2>
+          <p className="text-sm text-gray-500 mb-6">
+            See how far your salary goes in {c.name} and estimate your take-home pay after taxes.
+          </p>
+          <div className="flex flex-wrap justify-center gap-3">
+            <Link
+              href={`/cost-of-living-${c.slug}`}
+              className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-emerald-700 transition-colors"
+            >
+              Cost of Living in {c.name}
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </Link>
+            <Link
+              href={`/take-home-pay-${c.slug}`}
+              className="inline-flex items-center gap-2 rounded-lg border border-emerald-600 bg-white px-5 py-2.5 text-sm font-semibold text-emerald-600 hover:bg-emerald-50 transition-colors"
+            >
+              Take-Home Pay in {c.name}
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </Link>
+          </div>
+        </section>
+
         <section>
           <h2 className="text-xl font-semibold text-gray-900 mb-4">
             Job Categories in {c.name}
@@ -330,6 +375,26 @@ export default async function CountryPage({ params }: Props) {
                 countrySlug={c.slug}
               />
             ))}
+          </div>
+        </section>
+
+        <section className="mb-12">
+          <h2 className="text-xl font-semibold text-gray-900 mb-4">
+            Frequently Asked Questions
+          </h2>
+          <div className="space-y-4">
+            <details className="rounded-xl border border-gray-200 bg-white overflow-hidden group">
+              <summary className="px-5 py-4 font-semibold text-gray-900 cursor-pointer hover:bg-gray-50 transition-colors">What is the highest paying job in {c.name}?</summary>
+              <div className="px-5 pb-4 text-sm text-gray-500">{top10[0] ? `The highest paying job in ${c.name} is ${top10[0].title} with a salary range of ${Intl.NumberFormat("en-US").format(top10[0].salaryMin)} to ${Intl.NumberFormat("en-US").format(top10[0].salaryMax)} ${data?.currency ?? c.currency} per year.` : `Salary data for ${c.name} covers multiple career categories. Browse the sections above to find specific job salaries.`}</div>
+            </details>
+            <details className="rounded-xl border border-gray-200 bg-white overflow-hidden group">
+              <summary className="px-5 py-4 font-semibold text-gray-900 cursor-pointer hover:bg-gray-50 transition-colors">How many jobs are tracked in {c.name}?</summary>
+              <div className="px-5 pb-4 text-sm text-gray-500">We track salaries across {categories.filter((cat) => (data?.jobs[cat.slug]?.length ?? 0) > 0).length} career categories in {c.name}, covering hundreds of individual job titles across every major industry.</div>
+            </details>
+            <details className="rounded-xl border border-gray-200 bg-white overflow-hidden group">
+              <summary className="px-5 py-4 font-semibold text-gray-900 cursor-pointer hover:bg-gray-50 transition-colors">How are these salary estimates calculated?</summary>
+              <div className="px-5 pb-4 text-sm text-gray-500">Salary data on this page is based on research from the Economic Research Institute (ERI) and SalaryExpert. Figures are estimates and may vary based on experience, location, and industry. We update our data annually to reflect current market conditions.</div>
+            </details>
           </div>
         </section>
       </main>

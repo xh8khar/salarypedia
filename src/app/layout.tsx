@@ -16,7 +16,13 @@ const siteUrl = "https://www.bestpayingjobs.net";
 
 export const metadata: Metadata = {
   icons: {
-    icon: "/favicon.svg",
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+    ],
+    apple: "/favicon.svg",
+    other: [
+      { rel: "apple-touch-icon-precomposed", url: "/favicon.svg" },
+    ],
   },
   title: {
     default: "Best Paying Jobs in Every Country 2026 | BestPayingJobs.net",

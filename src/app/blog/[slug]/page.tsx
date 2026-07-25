@@ -59,6 +59,11 @@ export default async function BlogPost({ params }: Props) {
 
   const siteUrl = "https://www.bestpayingjobs.net";
 
+  const postIndex = posts.findIndex((p) => p.id === slug);
+  const pubDate = new Date(2026, 0, 1 + postIndex);
+  const datePublished = pubDate.toISOString().split("T")[0];
+  const dateModified = datePublished;
+
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -83,11 +88,11 @@ export default async function BlogPost({ params }: Props) {
       name: "BestPayingJobs.net",
       logo: {
         "@type": "ImageObject",
-        url: `${siteUrl}/favicon-96x96.png`,
+        url: `${siteUrl}/favicon.svg`,
       },
     },
-    datePublished: "2026-01-01",
-    dateModified: "2026-07-01",
+    datePublished,
+    dateModified,
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": `${siteUrl}/blog/${slug}`,

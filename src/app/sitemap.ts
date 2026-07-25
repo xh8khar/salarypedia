@@ -5,6 +5,7 @@ import { hasCountryJobs } from "@/lib/db";
 import calculators from "@/data/calculators.json";
 import blogPosts from "@/data/blog-posts.json";
 import salaryLetters from "@/data/salary-letters.json";
+import colData from "@/data/col-index.json";
 
 export const dynamic = "force-static";
 
@@ -24,6 +25,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${siteUrl}/salary-increase-letter`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.6 },
     { url: `${siteUrl}/jobs/ai-machine-learning`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
     { url: `${siteUrl}/part-time-jobs`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
+    { url: `${siteUrl}/cost-of-living`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },
+    { url: `${siteUrl}/take-home-pay`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },
   ];
 
   const countryPages: MetadataRoute.Sitemap = countries.map((c) => ({
@@ -37,6 +40,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
     .filter((c) => hasCountryJobs(c.code))
     .map((c) => ({
       url: `${siteUrl}/part-time-jobs-in-${c.slug}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    }));
+
+  const colPages: MetadataRoute.Sitemap = countries
+    .filter((c) => c.code in colData)
+    .map((c) => ({
+      url: `${siteUrl}/cost-of-living-${c.slug}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    }));
+
+  const takeHomePages: MetadataRoute.Sitemap = countries
+    .filter((c) => hasCountryJobs(c.code))
+    .map((c) => ({
+      url: `${siteUrl}/take-home-pay-${c.slug}`,
       lastModified: new Date(),
       changeFrequency: "monthly" as const,
       priority: 0.7,
@@ -81,6 +102,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...staticPages,
     ...countryPages,
     ...partTimeCountryPages,
+    ...colPages,
+    ...takeHomePages,
     ...cityPages,
     ...categoryPages,
     ...calculatorPages,

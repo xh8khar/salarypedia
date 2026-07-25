@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: "export",
+  output: process.env.NODE_ENV === "development" ? undefined : "export",
   images: { unoptimized: true },
   trailingSlash: true,
   async rewrites() {
@@ -21,6 +21,14 @@ const nextConfig: NextConfig = {
       {
         source: "/part-time-jobs-in-:slug",
         destination: "/part-time-jobs-in/:slug",
+      },
+      {
+        source: "/cost-of-living-:slug",
+        destination: "/cost-of-living/:slug",
+      },
+      {
+        source: "/take-home-pay-:slug",
+        destination: "/take-home-pay/:slug",
       },
     ];
   },

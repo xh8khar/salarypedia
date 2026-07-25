@@ -5,10 +5,11 @@ import Link from "next/link";
 const links = [
   { href: "/jobs", label: "Categories" },
   { href: "/global-ranking", label: "Global Ranking" },
+  { href: "/cost-of-living", label: "Cost of Living" },
+  { href: "/take-home-pay", label: "Take-Home Pay" },
   { href: "/part-time-jobs", label: "Part-Time Jobs" },
   { href: "/calculator", label: "Calculators" },
   { href: "/compare", label: "Compare" },
-  { href: "/salary-increase-letter", label: "Salary Letters" },
   { href: "/blog", label: "Blog" },
 ];
 
