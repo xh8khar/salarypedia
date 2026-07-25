@@ -47,8 +47,8 @@ export default function CategoryAccordion({
       >
         <img
           src={`/og/${countrySlug}/categories/${category.slug}.webp`}
-          alt={`Highest paying ${category.name} jobs in ${countryName}`}
-          title={`${category.name} salary data for ${countryName}`}
+          alt={`Highest Paying Jobs in ${category.name} in ${countryName} ${year}`}
+          title={`Highest Paying Jobs in ${category.name} in ${countryName} ${year}`}
           className="w-full h-auto"
           loading="lazy"
         />
