@@ -45,7 +45,8 @@ export default function CountryCompare({
 
   function updateUrl(s1: string, s2: string) {
     if (s1 && s2) {
-      router.push(`/compare/${s1}-vs-${s2}`, { scroll: false });
+      const [a, b] = [s1, s2].sort();
+      router.push(`/compare/${a}-vs-${b}`, { scroll: false });
     }
   }
 
