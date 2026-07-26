@@ -13,6 +13,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PartTimeJobs from "@/components/PartTimeJobs";
 import ShareButtons from "@/components/ShareButtons";
+import { getCitiesByCountry } from "@/lib/city";
 import posts from "@/data/blog-posts.json";
 
 export async function generateStaticParams() {
@@ -78,6 +79,9 @@ export default async function PartTimeJobsPage({ params }: Props) {
   const { slug } = await params;
   const c = getCountryBySlug(slug);
   if (!c) notFound();
+
+  const cities = getCitiesByCountry(c.code);
+  const citySlug = cities.length > 0 ? cities[0].slug : null;
 
   const year = getCurrentYear();
   const countries = getCountries();
@@ -235,7 +239,7 @@ export default async function PartTimeJobsPage({ params }: Props) {
               </svg>
             </Link>
             <Link
-              href={`/salary-in-${c.slug}`}
+              href={citySlug ? `/salary-in-${citySlug}` : `/best-paying-jobs-in-${c.slug}`}
               className="inline-flex items-center gap-2 rounded-lg border border-emerald-600 bg-white px-5 py-2.5 text-sm font-semibold text-emerald-600 hover:bg-emerald-50 transition-colors"
             >
               Salary Data for {c.name}
