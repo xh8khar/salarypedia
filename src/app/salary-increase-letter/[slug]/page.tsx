@@ -19,6 +19,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${letter.title} — Salary Increase Letter`,
     description: letter.summary,
+    keywords: [
+      `salary increase letter`,
+      `raise request letter`,
+      `${letter.title.toLowerCase()}`,
+      `salary negotiation template`,
+      `pay raise letter sample`,
+    ],
     alternates: {
       canonical: `https://www.bestpayingjobs.net/salary-increase-letter/${slug}`,
     },

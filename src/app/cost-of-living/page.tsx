@@ -13,6 +13,13 @@ const siteUrl = "https://www.bestpayingjobs.net";
 export const metadata: Metadata = {
   title: "Cost of Living by Country 2026 | BestPayingJobs.net",
   description: "Compare cost of living indexes across 195 countries. See how salaries and purchasing power compare in every country worldwide.",
+  keywords: [
+    "cost of living index",
+    "cost of living by country",
+    "COL index comparison",
+    "country living expenses",
+    "purchasing power by country",
+  ],
   alternates: {
     canonical: `${siteUrl}/cost-of-living`,
   },

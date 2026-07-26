@@ -14,6 +14,14 @@ export const metadata: Metadata = {
   title: "Highest Paying AI Jobs 2026 — AI & Machine Learning Salaries by Country",
   description:
     "Discover the highest paying AI and machine learning jobs across 195 countries in 2026. Compare AI engineer salaries, data scientist pay, and machine learning engineer compensation worldwide.",
+  keywords: [
+    "AI jobs",
+    "machine learning jobs",
+    "AI salary",
+    "machine learning engineer salary",
+    "data scientist salary",
+    "AI careers",
+  ],
   alternates: {
     canonical: "https://www.bestpayingjobs.net/jobs/ai-machine-learning",
   },

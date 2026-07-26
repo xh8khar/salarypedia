@@ -9,6 +9,13 @@ export const metadata: Metadata = {
   title: "Highest Paying Jobs in the World 2026 — Top 100 Global Careers",
   description:
     "Discover the top 100 highest paying jobs in the world for 2026. Compare global salary averages across 195 countries. See which careers pay the most.",
+  keywords: [
+    "highest paying jobs in the world",
+    "top 100 highest paying jobs",
+    "global salary ranking",
+    "best paid careers worldwide",
+    "highest salary careers",
+  ],
   alternates: {
     canonical: "https://www.bestpayingjobs.net/global-ranking",
   },

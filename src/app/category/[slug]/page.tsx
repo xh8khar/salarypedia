@@ -26,6 +26,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `Best Paying Jobs in ${cat.name} (${getCurrentYear()}) in Every Country | BestPayingJobs.net`,
     description: `Discover the highest paying ${cat.name.toLowerCase()} jobs in 195 countries. Compare salaries, find top careers, and make data-driven career decisions.`,
+    keywords: [
+      `${cat.name.toLowerCase()} jobs`,
+      `${cat.name.toLowerCase()} salary`,
+      `best ${cat.name.toLowerCase()} jobs`,
+      `highest paying ${cat.name.toLowerCase()} careers`,
+      `${cat.name.toLowerCase()} careers`,
+    ],
     alternates: {
       canonical: `https://www.bestpayingjobs.net/jobs/${slug}`,
     },

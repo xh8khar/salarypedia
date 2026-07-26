@@ -24,6 +24,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `Best Paying Jobs in ${city.name}, ${city.countryName} ${year}`,
     description: `Discover the highest paying jobs in ${city.name}, ${city.countryName} for ${year}. Compare salaries across 30+ career categories.`,
+    keywords: [
+      `${city.name} salary`,
+      `${city.name} average salary`,
+      `${city.name} jobs`,
+      `${city.name} income`,
+      `${city.name} ${city.countryName} salary`,
+    ],
     alternates: {
       canonical: `https://www.bestpayingjobs.net/salary-in-${slug}`,
     },

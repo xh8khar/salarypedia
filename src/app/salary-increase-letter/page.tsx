@@ -8,6 +8,13 @@ import letters from "@/data/salary-letters.json";
 export const metadata: Metadata = {
   title: "Salary Increase Letter Templates 2026 | BestPayingJobs.net",
   description: "24 professionally crafted salary increase letter templates for every situation. Copy, customize, and send. Get the raise you deserve.",
+  keywords: [
+    "salary increase letter",
+    "raise letter template",
+    "pay raise letter",
+    "salary negotiation letter",
+    "request raise email",
+  ],
   alternates: {
     canonical: "https://www.bestpayingjobs.net/salary-increase-letter",
   },

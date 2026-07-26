@@ -8,6 +8,13 @@ import FlagImage from "@/components/FlagImage";
 export const metadata: Metadata = {
   title: "Part-Time Jobs for International Students 2026 | BestPayingJobs",
   description: "Discover the highest paying part-time jobs for international students in 195 countries. Compare part-time salaries, hourly rates, and job opportunities worldwide.",
+  keywords: [
+    "part time jobs for students",
+    "international student jobs",
+    "student work abroad",
+    "part time salary",
+    "student job opportunities",
+  ],
   alternates: {
     canonical: "https://www.bestpayingjobs.net/part-time-jobs",
   },

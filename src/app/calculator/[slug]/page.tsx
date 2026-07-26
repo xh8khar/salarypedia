@@ -20,6 +20,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: calc.ogTitle,
     description: calc.description,
+    keywords: [
+      `${calc.slug.replace(/-/g, " ")} calculator`,
+      `${calc.title.toLowerCase()} calculator`,
+      `free salary calculator`,
+      `${calc.slug.replace(/-/g, " ")} tool`,
+    ],
     alternates: {
       canonical: `https://www.bestpayingjobs.net/calculator/${slug}`,
     },

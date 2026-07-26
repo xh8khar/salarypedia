@@ -23,6 +23,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${post.title} | BestPayingJobs.net`,
     description: post.summary,
+    keywords: [
+      post.title.toLowerCase(),
+      `salary guide`,
+      `career advice`,
+      `job search tips`,
+      `salary negotiation`,
+    ],
     alternates: {
       canonical: `https://www.bestpayingjobs.net/blog/${slug}`,
     },

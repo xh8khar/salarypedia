@@ -11,6 +11,14 @@ export const metadata: Metadata = {
   title: "Career Blog — Salary Guides & Career Advice | BestPayingJobs.net",
   description:
     "Career advice, salary guides, job search tips, and personal finance articles to help you earn more. Expert insights for professionals worldwide.",
+  keywords: [
+    "career blog",
+    "salary guide",
+    "career advice",
+    "job search tips",
+    "personal finance",
+    "salary negotiation tips",
+  ],
   alternates: {
     canonical: "https://www.bestpayingjobs.net/blog",
   },

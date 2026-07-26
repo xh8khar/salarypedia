@@ -50,6 +50,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: resolve(cfg.metaTitle),
     description: resolve(cfg.metaDescription),
+    keywords: [
+      `part time jobs ${c.name}`,
+      `${c.name} student jobs`,
+      `hourly jobs in ${c.name}`,
+      `freelance work ${c.name}`,
+      `${c.name} international student work`,
+    ],
     alternates: {
       canonical: `https://www.bestpayingjobs.net/part-time-jobs-in-${c.slug}`,
     },

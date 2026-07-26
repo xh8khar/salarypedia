@@ -40,6 +40,10 @@ export const metadata: Metadata = {
     "best paying jobs 2026",
     "AI jobs salary",
     "highest paying professions",
+    "salary by country",
+    "global salary comparison",
+    "career salary guide",
+    "job salary data",
   ],
   metadataBase: new URL(siteUrl),
   alternates: {

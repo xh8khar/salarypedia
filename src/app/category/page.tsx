@@ -10,6 +10,13 @@ export const metadata: Metadata = {
   title: "Best Paying Jobs by Career Category 2026",
   description:
     "Browse the highest paying jobs across 31 career categories in 195 countries. Compare salaries in Finance, AI, Healthcare, Engineering, and more.",
+  keywords: [
+    "jobs by category",
+    "career categories",
+    "best paying careers",
+    "high salary jobs by field",
+    "professional career salaries",
+  ],
   openGraph: {
     title: "Best Paying Jobs by Career Category 2026",
     description:

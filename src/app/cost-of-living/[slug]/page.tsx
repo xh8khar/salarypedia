@@ -47,6 +47,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `Cost of Living in ${c.name} (${year}) | COL Index & Adjusted Salaries | BestPayingJobs.net`,
     description: `Cost of living in ${c.name} is ${index}% of the US national average (${year}). See how far your salary goes, compare purchasing power across categories.`,
+    keywords: [
+      `cost of living in ${c.name}`,
+      `${c.name} COL index`,
+      `${c.name} living expenses`,
+      `${c.name} purchasing power`,
+      `${c.name} cost of living comparison`,
+      `living in ${c.name} cost`,
+    ],
     alternates: {
       canonical: `https://www.bestpayingjobs.net/cost-of-living-${c.slug}`,
     },

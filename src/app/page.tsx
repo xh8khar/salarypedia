@@ -35,6 +35,15 @@ export const metadata: Metadata = {
   title: "Best Paying Jobs in Every Country 2026 | BestPayingJobs.net",
   description:
     "Discover the highest paying jobs in every country. Compare salaries across 30+ career categories including AI, Finance, IT, Healthcare, Engineering and more. Updated for 2026.",
+  keywords: [
+    "best paying jobs",
+    "highest salary jobs",
+    "salary by country",
+    "jobs by country",
+    "global salary comparison",
+    "high paying careers",
+    "career salary guide",
+  ],
   alternates: {
     canonical: "https://www.bestpayingjobs.net",
   },

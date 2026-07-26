@@ -8,6 +8,14 @@ export const metadata: Metadata = {
   title: "Compare Salaries Between Countries 2026",
   description:
     "Compare salaries across 31 career categories between any two countries. Make data-driven decisions about where to work and earn more.",
+  keywords: [
+    "salary comparison",
+    "compare salaries",
+    "country salary comparison",
+    "salary by country",
+    "compare job salaries",
+    "international salary comparison",
+  ],
   alternates: {
     canonical: "https://www.bestpayingjobs.net/compare",
   },

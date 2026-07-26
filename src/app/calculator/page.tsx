@@ -7,6 +7,13 @@ import Footer from "@/components/Footer";
 export const metadata: Metadata = {
   title: "Free Salary Calculators 2026",
   description: "Use our free salary calculators: hourly rate, take-home pay, after-tax, raise, overtime, bonus, commission, affordability, FIRE, and more.",
+  keywords: [
+    "salary calculator",
+    "free salary calculator",
+    "pay calculator",
+    "salary conversion tool",
+    "wage calculator",
+  ],
   alternates: {
     canonical: "https://www.bestpayingjobs.net/calculator",
   },

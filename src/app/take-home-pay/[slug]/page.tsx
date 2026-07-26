@@ -49,6 +49,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `Take-Home Pay in ${c.name} (${year}) | After-Tax Salary Calculator | BestPayingJobs.net`,
     description: `Calculate take-home pay in ${c.name} for ${year}. See gross-to-net salary breakdowns, tax rates, and how much you keep after deductions.`,
+    keywords: [
+      `take home pay ${c.name}`,
+      `salary after tax ${c.name}`,
+      `net salary ${c.name}`,
+      `${c.name} tax rates`,
+      `${c.name} income tax calculator`,
+      `${c.name} salary deduction`,
+    ],
     alternates: {
       canonical: `https://www.bestpayingjobs.net/take-home-pay-${c.slug}`,
     },

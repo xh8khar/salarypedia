@@ -11,6 +11,13 @@ const siteUrl = "https://www.bestpayingjobs.net";
 export const metadata: Metadata = {
   title: "Take-Home Pay by Country 2026 | BestPayingJobs.net",
   description: "Compare estimated take-home pay after taxes across 195 countries. See salary after tax and net pay for every country worldwide.",
+  keywords: [
+    "take home pay by country",
+    "salary after tax",
+    "net pay by country",
+    "after tax salary comparison",
+    "tax rates by country",
+  ],
   alternates: {
     canonical: `${siteUrl}/take-home-pay`,
   },
