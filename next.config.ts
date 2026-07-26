@@ -59,6 +59,10 @@ const nextConfig: NextConfig = {
         source: "/take-home-pay-:slug",
         destination: "/take-home-pay/:slug",
       },
+      {
+        source: "/compare/:slug",
+        destination: "/compare?pair=:slug",
+      },
     ];
   },
 };

@@ -8,17 +8,13 @@ import type { Country, Category, CountryJobs } from "@/lib/db";
 export default function CountryCompare({
   countries,
   categories,
-  initialSlug1 = "",
-  initialSlug2 = "",
 }: {
   countries: Country[];
   categories: Category[];
-  initialSlug1?: string;
-  initialSlug2?: string;
 }) {
   const router = useRouter();
-  const [slug1, setSlug1] = useState(initialSlug1);
-  const [slug2, setSlug2] = useState(initialSlug2);
+  const [slug1, setSlug1] = useState("");
+  const [slug2, setSlug2] = useState("");
   const [data1, setData1] = useState<CountryJobs | null>(null);
   const [data2, setData2] = useState<CountryJobs | null>(null);
   const [loading, setLoading] = useState(false);
@@ -39,8 +35,18 @@ export default function CountryCompare({
   }
 
   useEffect(() => {
-    if (initialSlug1) loadCountry(initialSlug1, setData1);
-    if (initialSlug2) loadCountry(initialSlug2, setData2);
+    const params = new URLSearchParams(window.location.search);
+    const pair = params.get("pair");
+    if (pair) {
+      const parts = pair.split("-vs-");
+      if (parts.length === 2) {
+        const [a, b] = parts.sort();
+        setSlug1(a);
+        setSlug2(b);
+        loadCountry(a, setData1);
+        loadCountry(b, setData2);
+      }
+    }
   }, []);
 
   function updateUrl(s1: string, s2: string) {
