@@ -72,6 +72,11 @@ const redirects = [
   "/category/* /jobs/:splat 200",
   "",
   // Rewrite /compare/:pair to compare index (client component reads pathname to extract pair)
+  "/compare/ /compare/index.html 200",
+  "/compare /compare/index.html 200",
+  // Per-country prefix rules (195 rules) - match any compare URL by first country slug
+  ...countries.map((c) => `/compare/${c.slug}-* /compare/index.html 200`),
+  // Fallback wildcard for any unmatched compare paths
   "/compare/* /compare/index.html 200",
   "",
   // Serve JSON API files through .json extension
