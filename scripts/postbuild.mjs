@@ -48,6 +48,8 @@ console.log(`Generated ${jobCount} API job files`);
 // Generate Cloudflare Pages _redirects
 // Redirects (301) from slash URLs to hyphen URLs, then rewrites (200) from hyphens to slash routes
 const redirects = [
+  "/index.html  /",
+  "",
   // Index listing pages - serve normally (no redirect to hyphens)
   "/cost-of-living/ /cost-of-living 200",
   "/cost-of-living /cost-of-living 200",
@@ -69,6 +71,15 @@ const redirects = [
   "/best-paying-jobs-in-* /best-paying-jobs-in/:splat 200",
   "/salary-in-* /salary-in/:splat 200",
   "/part-time-jobs-in-* /part-time-jobs-in/:splat 200",
+  "",
+  // Rewrite /category/:slug to /jobs/:slug
+  "/category/* /jobs/:splat 200",
+  "",
+  // Serve JSON API files (used by compare page and calculators)
+  "/api/jobs/* /api/jobs/:splat.json 200",
+  "",
+  // WWW domain redirect
+  "https://bestpayingjobs.net/* https://www.bestpayingjobs.net/:splat 301",
 ];
 writeFileSync(resolve(outDir, "_redirects"), redirects.join("\n") + "\n");
 console.log("Generated _redirects");
