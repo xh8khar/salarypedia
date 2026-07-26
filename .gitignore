@@ -17,6 +17,9 @@
 /.next/
 /out/
 
+# generated API data files (prebuild + postbuild)
+/public/api/jobs/
+
 # production
 /build
 

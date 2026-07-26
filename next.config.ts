@@ -63,6 +63,10 @@ const nextConfig: NextConfig = {
         source: "/compare/:slug",
         destination: "/compare",
       },
+      {
+        source: "/api/jobs/:path*",
+        destination: "/api/jobs/:path*.json",
+      },
     ];
   },
 };

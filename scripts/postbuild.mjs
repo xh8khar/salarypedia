@@ -1,10 +1,12 @@
-import { readFileSync, writeFileSync, mkdirSync, readdirSync, rmSync, existsSync, statSync } from "fs";
+import { readFileSync, writeFileSync, mkdirSync, readdirSync, rmSync, existsSync } from "fs";
 import { resolve, dirname, join } from "path";
 import { fileURLToPath } from "url";
+import { generateJobFiles } from "./generate-job-files.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const dataDir = resolve(__dirname, "../src/data");
 const outDir = resolve(__dirname, "../out");
+const publicDir = resolve(__dirname, "../public");
 
 // Clean up Turbopack debug files (__next.*) and .txt files
 function cleanDir(dir) {
@@ -23,26 +25,12 @@ cleanDir(outDir);
 
 const countries = JSON.parse(readFileSync(resolve(dataDir, "countries.json"), "utf-8"));
 const categories = JSON.parse(readFileSync(resolve(dataDir, "categories.json"), "utf-8"));
-const allJobs = JSON.parse(readFileSync(resolve(dataDir, "all-jobs.json"), "utf-8"));
 const siteConfig = JSON.parse(readFileSync(resolve(dataDir, "site-config.json"), "utf-8"));
-
 const year = siteConfig.site.year;
 
-const codeToSlug = {};
-for (const c of countries) {
-  codeToSlug[c.code.toLowerCase()] = c.slug;
-}
-
-// Generate /api/jobs/{slug}.json for each country
-mkdirSync(resolve(outDir, "api/jobs"), { recursive: true });
-let jobCount = 0;
-for (const [code, data] of Object.entries(allJobs)) {
-  const slug = codeToSlug[code];
-  if (slug) {
-    writeFileSync(resolve(outDir, `api/jobs/${slug}.json`), JSON.stringify(data));
-    jobCount++;
-  }
-}
+// Generate API job JSON files to both out/ and public/ (for dev server)
+const jobCount = generateJobFiles(outDir);
+generateJobFiles(publicDir);
 console.log(`Generated ${jobCount} API job files`);
 
 // Remove Next.js-generated no-extension API route files (keep only .json)
@@ -86,7 +74,7 @@ const redirects = [
   // Rewrite /compare/:pair to compare index (client component reads pathname to extract pair)
   "/compare/* /compare/index.html 200",
   "",
-  // Serve JSON API files (used by compare page and calculators)
+  // Serve JSON API files through .json extension
   "/api/jobs/* /api/jobs/:splat.json 200",
   "",
   // WWW domain redirect
