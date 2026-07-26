@@ -36,7 +36,7 @@ export default function CountryCompare({
 
   useEffect(() => {
     const path = window.location.pathname.replace(/\/$/, "");
-    const match = path.match(/^\/compare\/(.+)-vs-(.+)/);
+    const match = path.match(/^\/compare\/(.+?)-vs-(.+)/);
     if (match) {
       const [, a, b] = match;
       const [s1, s2] = [a, b].sort();
