@@ -48,12 +48,22 @@ console.log(`Generated ${jobCount} API job files`);
 // Generate Cloudflare Pages _redirects
 // Redirects (301) from slash URLs to hyphen URLs, then rewrites (200) from hyphens to slash routes
 const redirects = [
+  // Index listing pages - serve normally (no redirect to hyphens)
+  "/cost-of-living/ /cost-of-living 200",
+  "/cost-of-living /cost-of-living 200",
+  "/take-home-pay/ /take-home-pay 200",
+  "/take-home-pay /take-home-pay 200",
+  "/part-time-jobs/ /part-time-jobs 200",
+  "/part-time-jobs /part-time-jobs 200",
+  "",
+  // Redirect country slash URLs to hyphen URLs
+  "/cost-of-living/* /cost-of-living-:splat 301",
   "/take-home-pay/* /take-home-pay-:splat 301",
   "/part-time-jobs-in/* /part-time-jobs-in-:splat 301",
-  "/cost-of-living/* /cost-of-living-:splat 301",
   "/best-paying-jobs-in/* /best-paying-jobs-in-:splat 301",
   "/salary-in/* /salary-in-:splat 301",
   "",
+  // Rewrite hyphen URLs to slash-based routes
   "/cost-of-living-* /cost-of-living/:splat 200",
   "/take-home-pay-* /take-home-pay/:splat 200",
   "/best-paying-jobs-in-* /best-paying-jobs-in/:splat 200",
