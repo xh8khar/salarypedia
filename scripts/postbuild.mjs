@@ -45,6 +45,14 @@ for (const [code, data] of Object.entries(allJobs)) {
 }
 console.log(`Generated ${jobCount} API job files`);
 
+// Remove Next.js-generated no-extension API route files (keep only .json)
+const apiJobsDir = resolve(outDir, "api/jobs");
+for (const entry of readdirSync(apiJobsDir, { withFileTypes: true })) {
+  if (entry.isFile() && !entry.name.endsWith(".json")) {
+    rmSync(join(apiJobsDir, entry.name));
+  }
+}
+
 // Generate Cloudflare Pages _redirects
 // Redirects (301) from slash URLs to hyphen URLs, then rewrites (200) from hyphens to slash routes
 const redirects = [

@@ -2,6 +2,14 @@ import { NextResponse } from "next/server";
 import countriesData from "@/data/countries.json";
 import allJobsData from "@/data/all-jobs.json";
 
+export const dynamic = "force-static";
+
+export function generateStaticParams() {
+  return (countriesData as Array<{ slug: string }>).map((c) => ({
+    slug: c.slug,
+  }));
+}
+
 export async function GET(
   _request: Request,
   { params }: { params: Promise<{ slug: string }> }
