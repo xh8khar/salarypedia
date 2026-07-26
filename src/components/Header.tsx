@@ -9,7 +9,6 @@ const links = [
   { href: "/take-home-pay", label: "Take-Home Pay" },
   { href: "/part-time-jobs", label: "Part-Time Jobs" },
   { href: "/calculator", label: "Calculators" },
-  { href: "/compare", label: "Compare" },
   { href: "/blog", label: "Blog" },
 ];
 

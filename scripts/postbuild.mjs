@@ -71,14 +71,6 @@ const redirects = [
   // Rewrite /category/:slug to /jobs/:slug
   "/category/* /jobs/:splat 200",
   "",
-  // Rewrite /compare/:pair to compare index (client component reads pathname to extract pair)
-  "/compare/ /compare/index.html 200",
-  "/compare /compare/index.html 200",
-  // Per-country prefix rules (195 rules) - match any compare URL by first country slug
-  ...countries.map((c) => `/compare/${c.slug}-* /compare/index.html 200`),
-  // Fallback wildcard for any unmatched compare paths
-  "/compare/* /compare/index.html 200",
-  "",
   // Serve JSON API files through .json extension
   "/api/jobs/* /api/jobs/:splat.json 200",
   "",
@@ -112,7 +104,6 @@ BestPayingJobs.net provides salary comparison data for every country in the worl
 - All Categories: https://www.bestpayingjobs.net/jobs
 - Global Ranking: https://www.bestpayingjobs.net/global-ranking
 - Calculators: https://www.bestpayingjobs.net/calculator
-- Compare: https://www.bestpayingjobs.net/compare
 - Blog: https://www.bestpayingjobs.net/blog
 - Salary Letters: https://www.bestpayingjobs.net/salary-increase-letter
 
