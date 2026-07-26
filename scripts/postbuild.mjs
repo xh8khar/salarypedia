@@ -54,12 +54,12 @@ const redirects = [
   "/part-time-jobs/ /part-time-jobs/index.html 200",
   "/part-time-jobs /part-time-jobs/index.html 200",
   "",
-  // Redirect country slash URLs to hyphen URLs
-  "/cost-of-living/* /cost-of-living-:splat 301",
-  "/take-home-pay/* /take-home-pay-:splat 301",
-  "/part-time-jobs-in/* /part-time-jobs-in-:splat 301",
-  "/best-paying-jobs-in/* /best-paying-jobs-in-:splat 301",
-  "/salary-in/* /salary-in-:splat 301",
+  // Redirect country slash URLs to hyphen URLs (per-country explicit rules to avoid wildcard matching listing pages)
+  ...countries.flatMap((c) => [`/cost-of-living/${c.slug} /cost-of-living-${c.slug} 301`, `/cost-of-living/${c.slug}/ /cost-of-living-${c.slug}/ 301`]),
+  ...countries.flatMap((c) => [`/take-home-pay/${c.slug} /take-home-pay-${c.slug} 301`, `/take-home-pay/${c.slug}/ /take-home-pay-${c.slug}/ 301`]),
+  ...countries.flatMap((c) => [`/part-time-jobs-in/${c.slug} /part-time-jobs-in-${c.slug} 301`, `/part-time-jobs-in/${c.slug}/ /part-time-jobs-in-${c.slug}/ 301`]),
+  ...countries.flatMap((c) => [`/best-paying-jobs-in/${c.slug} /best-paying-jobs-in-${c.slug} 301`, `/best-paying-jobs-in/${c.slug}/ /best-paying-jobs-in-${c.slug}/ 301`]),
+  ...countries.flatMap((c) => [`/salary-in/${c.slug} /salary-in-${c.slug} 301`, `/salary-in/${c.slug}/ /salary-in-${c.slug}/ 301`]),
   "",
   // Rewrite hyphen URLs to slash-based routes
   "/cost-of-living-* /cost-of-living/:splat 200",
