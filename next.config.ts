@@ -4,6 +4,35 @@ const nextConfig: NextConfig = {
   output: process.env.NODE_ENV === "development" ? undefined : "export",
   images: { unoptimized: true },
   trailingSlash: true,
+  async redirects() {
+    return [
+      {
+        source: "/best-paying-jobs-in/:slug",
+        destination: "/best-paying-jobs-in-:slug",
+        permanent: true,
+      },
+      {
+        source: "/salary-in/:slug",
+        destination: "/salary-in-:slug",
+        permanent: true,
+      },
+      {
+        source: "/part-time-jobs-in/:slug",
+        destination: "/part-time-jobs-in-:slug",
+        permanent: true,
+      },
+      {
+        source: "/cost-of-living/:slug",
+        destination: "/cost-of-living-:slug",
+        permanent: true,
+      },
+      {
+        source: "/take-home-pay/:slug",
+        destination: "/take-home-pay-:slug",
+        permanent: true,
+      },
+    ];
+  },
   async rewrites() {
     return [
       {

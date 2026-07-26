@@ -45,8 +45,15 @@ for (const [code, data] of Object.entries(allJobs)) {
 }
 console.log(`Generated ${jobCount} API job files`);
 
-// Generate Cloudflare Pages _redirects (rewrites keep hyphen URL in address bar)
+// Generate Cloudflare Pages _redirects
+// Redirects (301) from slash URLs to hyphen URLs, then rewrites (200) from hyphens to slash routes
 const redirects = [
+  "/take-home-pay/* /take-home-pay-:splat 301",
+  "/part-time-jobs-in/* /part-time-jobs-in-:splat 301",
+  "/cost-of-living/* /cost-of-living-:splat 301",
+  "/best-paying-jobs-in/* /best-paying-jobs-in-:splat 301",
+  "/salary-in/* /salary-in-:splat 301",
+  "",
   "/cost-of-living-* /cost-of-living/:splat 200",
   "/take-home-pay-* /take-home-pay/:splat 200",
   "/best-paying-jobs-in-* /best-paying-jobs-in/:splat 200",
