@@ -46,13 +46,13 @@ for (const entry of readdirSync(apiJobsDir, { withFileTypes: true })) {
 const redirects = [
   "/index.html  /",
   "",
-  // Index listing pages - serve normally (no redirect to hyphens)
-  "/cost-of-living/ /cost-of-living 200",
-  "/cost-of-living /cost-of-living 200",
-  "/take-home-pay/ /take-home-pay 200",
-  "/take-home-pay /take-home-pay 200",
-  "/part-time-jobs/ /part-time-jobs 200",
-  "/part-time-jobs /part-time-jobs 200",
+  // Index listing pages - serve from index.html directly (avoid trailing-slash redirect loop)
+  "/cost-of-living/ /cost-of-living/index.html 200",
+  "/cost-of-living /cost-of-living/index.html 200",
+  "/take-home-pay/ /take-home-pay/index.html 200",
+  "/take-home-pay /take-home-pay/index.html 200",
+  "/part-time-jobs/ /part-time-jobs/index.html 200",
+  "/part-time-jobs /part-time-jobs/index.html 200",
   "",
   // Redirect country slash URLs to hyphen URLs
   "/cost-of-living/* /cost-of-living-:splat 301",
