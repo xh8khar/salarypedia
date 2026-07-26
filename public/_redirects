@@ -23,10 +23,8 @@
 /part-time-jobs-in-* /part-time-jobs-in/:splat 200
 /category/* /jobs/:splat 200
 
-# Rewrite /compare/:pair to /compare?_pair=:pair (single page handles all pairs)
-/compare/ /compare 200
-/compare /compare 200
-/compare/* /compare?_pair=:splat 200
+# Rewrite /compare/:pair to compare page (client component reads pathname to extract pair)
+/compare/* /compare/index.html 200
 
 # API
 /api/jobs/* /api/jobs/:splat.json 200

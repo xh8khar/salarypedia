@@ -35,17 +35,15 @@ export default function CountryCompare({
   }
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const pair = params.get("pair");
-    if (pair) {
-      const parts = pair.split("-vs-");
-      if (parts.length === 2) {
-        const [a, b] = parts.sort();
-        setSlug1(a);
-        setSlug2(b);
-        loadCountry(a, setData1);
-        loadCountry(b, setData2);
-      }
+    const path = window.location.pathname.replace(/\/$/, "");
+    const match = path.match(/^\/compare\/(.+)-vs-(.+)/);
+    if (match) {
+      const [, a, b] = match;
+      const [s1, s2] = [a, b].sort();
+      setSlug1(s1);
+      setSlug2(s2);
+      loadCountry(s1, setData1);
+      loadCountry(s2, setData2);
     }
   }, []);
 

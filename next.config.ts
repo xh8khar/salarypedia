@@ -61,7 +61,7 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/compare/:slug",
-        destination: "/compare?pair=:slug",
+        destination: "/compare",
       },
     ];
   },
