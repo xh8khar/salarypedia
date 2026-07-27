@@ -299,7 +299,7 @@ export default async function CountryPage({ params }: Props) {
               {cities.map((city) => (
                 <Link
                   key={city.slug}
-                  href={`/salary-in-${city.slug}`}
+                  href={`/salary-in-${city.slug}/`}
                   className="group bg-white rounded-xl border border-gray-200 p-4 hover:border-emerald-300 hover:shadow-md transition-all"
                 >
                   <div className="flex items-center gap-3">

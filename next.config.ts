@@ -31,6 +31,11 @@ const nextConfig: NextConfig = {
         destination: "/take-home-pay-:slug",
         permanent: true,
       },
+      {
+        source: "/average-salary/:slug",
+        destination: "/average-salary-:slug",
+        permanent: true,
+      },
     ];
   },
   async rewrites() {
@@ -60,8 +65,16 @@ const nextConfig: NextConfig = {
         destination: "/take-home-pay/:slug",
       },
       {
+        source: "/average-salary-:slug",
+        destination: "/average-salary/:slug",
+      },
+      {
         source: "/api/jobs/:path*",
         destination: "/api/jobs/:path*.json",
+      },
+      {
+        source: "/api/average-salary/:path*",
+        destination: "/api/average-salary/:path*.json",
       },
     ];
   },

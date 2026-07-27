@@ -2,6 +2,7 @@ import { MetadataRoute } from "next";
 import { getCountries, getCategories } from "@/lib/db";
 import { getCities } from "@/lib/city";
 import { hasCountryJobs } from "@/lib/db";
+import { getAllCountrySlugs } from "@/lib/average-salary-data";
 import calculators from "@/data/calculators.json";
 import blogPosts from "@/data/blog-posts.json";
 import salaryLetters from "@/data/salary-letters.json";
@@ -19,6 +20,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: siteUrl, lastModified: new Date(), changeFrequency: "weekly", priority: 1 },
     { url: `${siteUrl}/jobs`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.9 },
     { url: `${siteUrl}/global-ranking`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.9 },
+    { url: `${siteUrl}/average-salary`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.9 },
     { url: `${siteUrl}/calculator`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },
     { url: `${siteUrl}/blog`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },
     { url: `${siteUrl}/salary-increase-letter`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.6 },
@@ -27,6 +29,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${siteUrl}/cost-of-living`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },
     { url: `${siteUrl}/take-home-pay`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },
   ];
+
+  const avgSalaryPages: MetadataRoute.Sitemap = getAllCountrySlugs().map((slug) => ({
+    url: `${siteUrl}/average-salary-${slug}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly" as const,
+    priority: 0.8,
+  }));
 
   const countryPages: MetadataRoute.Sitemap = countries.map((c) => ({
     url: `${siteUrl}/best-paying-jobs-in-${c.slug}`,
@@ -100,6 +109,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     ...staticPages,
     ...countryPages,
+    ...avgSalaryPages,
     ...partTimeCountryPages,
     ...colPages,
     ...takeHomePages,
