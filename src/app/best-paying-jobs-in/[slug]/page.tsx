@@ -227,20 +227,72 @@ export default async function CountryPage({ params }: Props) {
       ))}
       <Header />
 
-      <main className="flex-1 mx-auto w-full max-w-5xl px-4 py-10">
-        <div className="mb-2">
-          <div>
-            <h1 className="text-3xl font-bold tracking-tight sm:text-4xl text-gray-900">
-              Best Paying Jobs in {c.name} ({year})
+      <section className="relative isolate overflow-hidden bg-ink">
+        <div className="absolute inset-0 text-chalk/60 bg-grid mask-fade pointer-events-none" />
+        <div
+          className="absolute -top-32 left-1/4 w-[34rem] h-[34rem] rounded-full pointer-events-none"
+          style={{ background: "radial-gradient(circle, oklch(0.741 0.156 162 / 0.18), transparent 62%)" }}
+        />
+
+        <div className="relative mx-auto w-full max-w-5xl px-4 pt-8 pb-10">
+          <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs text-chalk/45 mb-7">
+            <Link href="/" className="hover:text-chalk transition-colors">Home</Link>
+            <span aria-hidden="true">/</span>
+            <span className="text-chalk/75">{c.name}</span>
+          </nav>
+
+          <div className="min-w-0">
+            <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-chalk leading-[1.1]">
+              Best Paying Jobs in {c.name}
             </h1>
-            <p className="text-gray-500 text-sm mt-1">
-              Currency: {data?.currency ?? c.currency} &middot; Updated for {year}
-            </p>
+            <div className="mt-4 flex flex-wrap items-center gap-2">
+              <span className="px-2.5 py-1 rounded-full bg-jade/15 text-jade text-xs font-bold">
+                {year}
+              </span>
+              <span className="px-2.5 py-1 rounded-full bg-chalk/10 text-chalk/70 text-xs font-medium">
+                Currency: {data?.currency ?? c.currency}
+              </span>
+              <span className="px-2.5 py-1 rounded-full bg-chalk/10 text-chalk/70 text-xs font-medium">
+                {categories.length} categories
+              </span>
+            </div>
           </div>
-          <div className="mt-4">
-            <ShareButtons title={`Best Paying Jobs in ${c.name} ${year}`} />
+
+          {top10.length > 0 && (
+            <dl className="mt-8 grid grid-cols-2 sm:grid-cols-3 gap-3">
+              <div className="rounded-xl bg-chalk/5 border border-chalk/10 px-4 py-3">
+                <dt className="text-[11px] font-medium uppercase tracking-wider text-chalk/45">
+                  Top paying role
+                </dt>
+                <dd className="mt-1 text-sm font-bold text-chalk truncate">{top10[0].title}</dd>
+              </div>
+              <div className="rounded-xl bg-chalk/5 border border-chalk/10 px-4 py-3">
+                <dt className="text-[11px] font-medium uppercase tracking-wider text-chalk/45">
+                  Highest salary
+                </dt>
+                <dd className="mt-1 numeric text-sm font-bold text-jade">
+                  {Intl.NumberFormat("en-US").format(top10[0].salaryMax)}{" "}
+                  {data?.currency ?? c.currency}
+                </dd>
+              </div>
+              <div className="col-span-2 sm:col-span-1 rounded-xl bg-chalk/5 border border-chalk/10 px-4 py-3">
+                <dt className="text-[11px] font-medium uppercase tracking-wider text-chalk/45">
+                  Roles tracked
+                </dt>
+                <dd className="mt-1 numeric text-sm font-bold text-chalk">
+                  {Object.values(data?.jobs ?? {}).flat().length.toLocaleString()}
+                </dd>
+              </div>
+            </dl>
+          )}
+
+          <div className="mt-7">
+            <ShareButtons title={`Best Paying Jobs in ${c.name} ${year}`} onDark />
           </div>
         </div>
+      </section>
+
+      <main className="flex-1 mx-auto w-full max-w-5xl px-4 py-10">
 
         {top10.length > 0 && (
           <section className="mt-10 mb-12">

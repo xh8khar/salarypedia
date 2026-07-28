@@ -3,9 +3,11 @@
 interface Props {
   url?: string;
   title?: string;
+  /** Set on dark backgrounds, where the black X button would otherwise disappear. */
+  onDark?: boolean;
 }
 
-export default function ShareButtons({ url, title }: Props) {
+export default function ShareButtons({ url, title, onDark = false }: Props) {
   const href = url || "";
   const text = title || "";
 
@@ -13,7 +15,7 @@ export default function ShareButtons({ url, title }: Props) {
     {
       name: "Twitter / X",
       href: `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(href)}`,
-      bg: "bg-black hover:bg-gray-800",
+      bg: "bg-[#111111] hover:bg-[#2a2a2a]",
       svg: <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />,
     },
     {
@@ -38,7 +40,9 @@ export default function ShareButtons({ url, title }: Props) {
 
   return (
     <div className="flex items-center gap-2">
-      <span className="text-sm text-gray-400 font-medium mr-1">Share:</span>
+      <span className={`text-sm font-medium mr-1 ${onDark ? "text-chalk/50" : "text-gray-400"}`}>
+        Share:
+      </span>
       {shareLinks.map((link) => (
         <a
           key={link.name}
@@ -46,7 +50,9 @@ export default function ShareButtons({ url, title }: Props) {
           target="_blank"
           rel="noopener noreferrer"
           title={`Share on ${link.name}`}
-          className={`w-8 h-8 rounded-lg ${link.bg} flex items-center justify-center text-white transition-all hover:scale-110 hover:shadow-md`}
+          className={`w-8 h-8 rounded-lg ${link.bg} ${
+            onDark ? "ring-1 ring-chalk/20" : ""
+          } flex items-center justify-center text-chalk transition-all hover:scale-110 hover:shadow-md`}
         >
           <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
             {link.svg}

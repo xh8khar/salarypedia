@@ -2,6 +2,45 @@ import Link from "next/link";
 import { getCountries, getCategories, getCurrentYear, getCountryJobs } from "@/lib/db";
 import { toUSD } from "@/lib/salary";
 import FlagImage from "@/components/FlagImage";
+import Logo from "@/components/Logo";
+
+const columns: { title: string; links: { href: string; label: string }[] }[] = [
+  {
+    title: "Salaries",
+    links: [
+      { href: "/jobs/", label: "All categories" },
+      { href: "/global-ranking/", label: "Global ranking" },
+      { href: "/average-salary/", label: "Average salary" },
+      { href: "/cost-of-living/", label: "Cost of living" },
+    ],
+  },
+  {
+    title: "Tools",
+    links: [
+      { href: "/calculator/", label: "Calculators" },
+      { href: "/take-home-pay/", label: "Take-home pay" },
+      { href: "/salary-increase-letter/", label: "Raise letters" },
+    ],
+  },
+  {
+    title: "Earn more",
+    links: [
+      { href: "/part-time-jobs/", label: "Part-time jobs" },
+      { href: "/earn-money-online/", label: "Earn online" },
+      { href: "/blog/", label: "Career blog" },
+    ],
+  },
+  {
+    title: "Company",
+    links: [
+      { href: "/about/", label: "About us" },
+      { href: "/contact/", label: "Contact" },
+      { href: "/privacy/", label: "Privacy policy" },
+      { href: "/terms/", label: "Terms of service" },
+      { href: "/disclaimer/", label: "Disclaimer" },
+    ],
+  },
+];
 
 export default function Footer() {
   const year = getCurrentYear();
@@ -18,54 +57,69 @@ export default function Footer() {
     })
     .filter((x): x is NonNullable<typeof x> => x !== null)
     .sort((a, b) => b.avgUSD - a.avgUSD)
-    .slice(0, 5);
+    .slice(0, 6);
 
   return (
-    <footer className="bg-white border-t border-gray-200 py-12">
-      <div className="mx-auto max-w-7xl px-6">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
-          <div className="col-span-2 md:col-span-1">
-            <Link href="/" className="flex items-center gap-2 mb-3">
-              <div className="w-7 h-7 rounded-md bg-emerald-600 flex items-center justify-center">
-                <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+    <footer className="relative isolate overflow-hidden bg-ink text-chalk/70">
+      <div className="absolute inset-0 text-chalk/40 bg-grid mask-fade pointer-events-none" />
+
+      <div className="relative mx-auto max-w-7xl px-6 py-14">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-x-6 gap-y-10">
+          <div className="col-span-2">
+            <Logo onDark />
+            <p className="mt-4 text-sm leading-relaxed max-w-xs text-chalk/55">
+              Salary data for {countries.length} countries across {categories.length} career
+              categories &mdash; free and updated for {year}.
+            </p>
+
+            <div className="mt-6">
+              <p className="text-[11px] font-bold uppercase tracking-wider text-chalk/40 mb-3">
+                Top paying countries
+              </p>
+              <div className="flex flex-wrap gap-1.5">
+                {topCountries.map((c) => (
+                  <Link
+                    key={c.code}
+                    href={`/best-paying-jobs-in-${c.slug}/`}
+                    title={`Best paying jobs in ${c.name}`}
+                    className="inline-flex items-center gap-1.5 pl-1.5 pr-2.5 py-1 rounded-full border border-chalk/12 text-xs text-chalk/70 hover:border-jade/50 hover:text-chalk transition-colors"
+                  >
+                    <FlagImage slug={c.slug} name={c.name} className="w-4 h-4 ring-1 ring-chalk/20" />
+                    {c.name}
+                  </Link>
+                ))}
               </div>
-              <span className="text-base font-bold text-gray-900">BestPayingJobs</span>
-            </Link>
-            <p className="text-sm text-gray-500 leading-relaxed">Salary comparison data for 195 countries across 31 career categories.</p>
+            </div>
           </div>
-          <div>
-            <h4 className="text-sm font-semibold text-gray-900 mb-4">Explore</h4>
-            <ul className="space-y-3">
-              <li><Link href="/" className="text-sm text-gray-500 hover:text-emerald-600 transition-colors">Home</Link></li>
-              <li><Link href="/jobs" className="text-sm text-gray-500 hover:text-emerald-600 transition-colors">Categories</Link></li>
-              <li><Link href="/salary-increase-letter" className="text-sm text-emerald-600 font-medium">Salary Letters</Link></li>
-              <li><Link href="/blog" className="text-sm text-gray-500 hover:text-emerald-600 transition-colors">Blog</Link></li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="text-sm font-semibold text-gray-900 mb-4">Top Countries</h4>
-            <ul className="space-y-3">
-              {topCountries.map((c) => (
-                <li key={c.code}><Link href={`/best-paying-jobs-in-${c.slug}`} className="text-sm text-gray-500 hover:text-emerald-600 transition-colors"><FlagImage slug={c.slug} name={c.name} className="w-5 h-5 inline-block rounded-sm mr-1.5 -mt-0.5" />{c.name}</Link></li>
-              ))}
-              <li><Link href="/" className="text-sm text-emerald-600 font-medium hover:underline">View all &rarr;</Link></li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="text-sm font-semibold text-gray-900 mb-4">Categories</h4>
-            <ul className="space-y-3">
-              {categories.slice(0, 5).map((cat) => (
-                <li key={cat.slug}><Link href={`/jobs/${cat.slug}`} className="text-sm text-gray-500 hover:text-emerald-600 transition-colors">{cat.name}</Link></li>
-              ))}
-              <li><Link href="/jobs" className="text-sm text-emerald-600 font-medium hover:underline">View all &rarr;</Link></li>
-            </ul>
-          </div>
+
+          {columns.map((col) => (
+            <nav key={col.title} aria-label={col.title}>
+              <h4 className="text-[11px] font-bold uppercase tracking-wider text-chalk/40 mb-4">
+                {col.title}
+              </h4>
+              <ul className="space-y-2.5">
+                {col.links.map((link) => (
+                  <li key={link.href}>
+                    <Link href={link.href} className="text-sm text-chalk/65 hover:text-jade transition-colors">
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          ))}
         </div>
-        <div className="border-t border-gray-100 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-gray-400">&copy; {year} BestPayingJobs.net &mdash; Best Paying Jobs in Every Country</p>
-          <div className="flex items-center gap-6 text-sm text-gray-400">
-            <Link href="/privacy" className="hover:text-gray-600 transition-colors">Privacy</Link>
-            <Link href="/terms" className="hover:text-gray-600 transition-colors">Terms</Link>
+
+        <div className="mt-12 pt-7 border-t border-chalk/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-xs text-chalk/45 text-center sm:text-left">
+            &copy; {year} BestPayingJobs.net &mdash; Best paying jobs in every country.
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs text-chalk/45">
+            <Link href="/about/" className="hover:text-chalk transition-colors">About</Link>
+            <Link href="/contact/" className="hover:text-chalk transition-colors">Contact</Link>
+            <Link href="/privacy/" className="hover:text-chalk transition-colors">Privacy</Link>
+            <Link href="/terms/" className="hover:text-chalk transition-colors">Terms</Link>
+            <Link href="/disclaimer/" className="hover:text-chalk transition-colors">Disclaimer</Link>
           </div>
         </div>
       </div>

@@ -1,26 +1,381 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* ==========================================================================
+   Design tokens
+
+   The brand ramp is published under Tailwind's `emerald-*` names and the
+   neutral ramp under `gray-*`. Existing pages already style with those
+   utilities, so redefining the ramps here restyles the whole site at once.
+   ========================================================================== */
+
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", sans-serif;
+  --font-display: var(--font-sora), var(--font-inter), ui-sans-serif, system-ui,
+    sans-serif;
+  --font-mono: var(--font-mono-num), ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* Brand: jade — money, growth, trust */
+  --color-emerald-50: oklch(0.972 0.021 165);
+  --color-emerald-100: oklch(0.941 0.045 165);
+  --color-emerald-200: oklch(0.884 0.081 164);
+  --color-emerald-300: oklch(0.806 0.119 163);
+  --color-emerald-400: oklch(0.724 0.152 162);
+  --color-emerald-500: oklch(0.646 0.161 162);
+  --color-emerald-600: oklch(0.552 0.145 162);
+  --color-emerald-700: oklch(0.462 0.119 163);
+  --color-emerald-800: oklch(0.382 0.094 164);
+  --color-emerald-900: oklch(0.312 0.074 166);
+  --color-emerald-950: oklch(0.201 0.049 168);
+
+  /* Neutrals: ink with a green undertone so it sits with the brand */
+  --color-gray-50: oklch(0.985 0.003 165);
+  --color-gray-100: oklch(0.967 0.005 165);
+  --color-gray-200: oklch(0.925 0.007 165);
+  --color-gray-300: oklch(0.869 0.009 166);
+  --color-gray-400: oklch(0.706 0.012 168);
+  --color-gray-500: oklch(0.573 0.014 170);
+  --color-gray-600: oklch(0.462 0.015 172);
+  --color-gray-700: oklch(0.371 0.014 174);
+  --color-gray-800: oklch(0.272 0.013 176);
+  --color-gray-900: oklch(0.193 0.012 178);
+  --color-gray-950: oklch(0.132 0.011 180);
+
+  /* Secondary accent: signal gold — top ranks, "premium" moments */
+  --color-gold-50: oklch(0.975 0.026 90);
+  --color-gold-100: oklch(0.946 0.058 92);
+  --color-gold-200: oklch(0.899 0.101 92);
+  --color-gold-300: oklch(0.849 0.135 89);
+  --color-gold-400: oklch(0.803 0.155 84);
+  --color-gold-500: oklch(0.759 0.152 79);
+  --color-gold-600: oklch(0.665 0.139 68);
+  --color-gold-700: oklch(0.545 0.118 59);
+  --color-gold-800: oklch(0.451 0.096 56);
+  --color-gold-900: oklch(0.386 0.078 55);
+
+  /* Stable tokens: these deliberately do NOT invert in dark mode, for bands
+     that are meant to read as dark in both themes (hero, CTA, footer). */
+  --color-ink: oklch(0.161 0.014 172);
+  --color-ink-2: oklch(0.212 0.017 171);
+  --color-ink-3: oklch(0.279 0.019 170);
+  --color-chalk: oklch(0.981 0.004 165);
+  --color-jade: oklch(0.741 0.156 162);
+
+  --radius-card: 1rem;
+
+  --animate-marquee: marquee 42s linear infinite;
+  --animate-rise: rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-shimmer: shimmer 2.6s linear infinite;
+  --animate-pulse-dot: pulse-dot 2.2s ease-in-out infinite;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Semantic surface tokens — these are what flip in dark mode */
+:root {
+  --surface: var(--color-white);
+  --surface-sunken: var(--color-gray-50);
+  --hairline: var(--color-gray-200);
+  --ink: var(--color-gray-900);
+  --ink-muted: var(--color-gray-500);
+  --glow: oklch(0.646 0.161 162 / 0.18);
+  color-scheme: light;
 }
+
+/* --------------------------------------------------------------------------
+   Dark mode
+
+   The ramps invert rather than being re-authored per component: `bg-white`,
+   `text-gray-900`, `border-gray-200` and friends all resolve through these
+   variables, so the pages that were only ever written for light mode follow
+   along without touching their markup.
+   -------------------------------------------------------------------------- */
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --color-white: oklch(0.168 0.012 178);
+  --color-black: oklch(0.995 0 0);
+
+  --color-gray-50: oklch(0.213 0.013 178);
+  --color-gray-100: oklch(0.245 0.014 178);
+  --color-gray-200: oklch(0.292 0.015 177);
+  --color-gray-300: oklch(0.352 0.016 176);
+  --color-gray-400: oklch(0.524 0.017 174);
+  --color-gray-500: oklch(0.665 0.016 172);
+  --color-gray-600: oklch(0.762 0.014 170);
+  --color-gray-700: oklch(0.842 0.012 168);
+  --color-gray-800: oklch(0.906 0.009 166);
+  --color-gray-900: oklch(0.958 0.006 165);
+  --color-gray-950: oklch(0.985 0.003 165);
+
+  --color-emerald-50: oklch(0.262 0.049 166);
+  --color-emerald-100: oklch(0.309 0.068 165);
+  --color-emerald-200: oklch(0.372 0.088 164);
+  --color-emerald-300: oklch(0.451 0.111 163);
+  --color-emerald-400: oklch(0.588 0.141 162);
+  --color-emerald-500: oklch(0.706 0.158 162);
+  --color-emerald-600: oklch(0.771 0.155 162);
+  --color-emerald-700: oklch(0.836 0.126 163);
+  --color-emerald-800: oklch(0.892 0.089 164);
+  --color-emerald-900: oklch(0.936 0.055 165);
+  --color-emerald-950: oklch(0.971 0.026 165);
+
+  --glow: oklch(0.706 0.158 162 / 0.22);
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-white);
+  color: var(--color-gray-900);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
-main {
-  padding-top: 4rem;
+h1,
+h2,
+h3,
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.023em;
 }
+
+h1 {
+  letter-spacing: -0.035em;
+}
+
+::selection {
+  background: var(--color-emerald-200);
+  color: var(--color-emerald-950);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-emerald-500);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Salary figures read as data, not prose: even-width, aligned digits. */
+.tnum {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1, "ss01" 1;
+}
+
+.numeric {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+/* ==========================================================================
+   Textures & surfaces
+   ========================================================================== */
+
+/* Blueprint grid — used behind hero/CTA bands */
+.bg-grid {
+  background-image: linear-gradient(
+      to right,
+      color-mix(in oklab, currentColor 9%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      color-mix(in oklab, currentColor 9%, transparent) 1px,
+      transparent 1px
+    );
+  background-size: 56px 56px;
+}
+
+.bg-dots {
+  background-image: radial-gradient(
+    color-mix(in oklab, currentColor 16%, transparent) 1px,
+    transparent 1px
+  );
+  background-size: 22px 22px;
+}
+
+/* Fades a texture out toward the edges so it never hard-stops */
+.mask-fade {
+  -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 40%, #000 30%, transparent 78%);
+  mask-image: radial-gradient(ellipse 75% 65% at 50% 40%, #000 30%, transparent 78%);
+}
+
+.mask-fade-x {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+}
+
+.glass {
+  background: color-mix(in oklab, var(--color-white) 78%, transparent);
+  backdrop-filter: saturate(180%) blur(14px);
+  -webkit-backdrop-filter: saturate(180%) blur(14px);
+}
+
+/* Card with a light-catching top rim */
+.card {
+  position: relative;
+  background: var(--color-white);
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-card);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.card-lift:hover {
+  transform: translateY(-3px);
+  border-color: var(--color-emerald-300);
+  box-shadow: 0 1px 2px oklch(0 0 0 / 0.04), 0 12px 28px -10px var(--glow);
+}
+
+.rim::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    160deg,
+    color-mix(in oklab, var(--color-emerald-400) 55%, transparent),
+    transparent 42%
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.text-gradient {
+  background: linear-gradient(
+    100deg,
+    var(--color-emerald-400),
+    var(--color-emerald-200) 55%,
+    var(--color-gold-300)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Horizontal bar showing a salary's share of the range on the page */
+.meter {
+  position: relative;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--color-gray-100);
+  overflow: hidden;
+}
+
+.meter > span {
+  position: absolute;
+  inset-block: 0;
+  left: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    90deg,
+    var(--color-emerald-500),
+    var(--color-emerald-400)
+  );
+}
+
+/* ==========================================================================
+   Motion
+   ========================================================================== */
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes shimmer {
+  from {
+    background-position: -160% 0;
+  }
+  to {
+    background-position: 260% 0;
+  }
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale(0.82);
+  }
+}
+
+.animate-rise {
+  animation: var(--animate-rise);
+}
+
+.marquee-track {
+  animation: var(--animate-marquee);
+  will-change: transform;
+}
+
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .card-lift:hover {
+    transform: none;
+  }
+}
+
+/* ==========================================================================
+   Scrollbar
+   ========================================================================== */
+
+@supports selector(::-webkit-scrollbar) {
+  ::-webkit-scrollbar {
+    width: 11px;
+    height: 11px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-gray-50);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-gray-300);
+    border-radius: 999px;
+    border: 3px solid var(--color-gray-50);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-gray-400);
+  }
+}
+
+/* ==========================================================================
+   Recharts
+   ========================================================================== */
 
 .recharts-wrapper,
 .recharts-wrapper *,
@@ -38,4 +393,12 @@ main {
 .recharts-sector:focus,
 .recharts-sector:focus-visible {
   outline: none !important;
+}
+
+.recharts-cartesian-grid line {
+  stroke: var(--color-gray-200);
+}
+
+.recharts-text {
+  fill: var(--color-gray-500);
 }

@@ -47,8 +47,15 @@ export interface CountryJobs {
 
 const allJobs = allJobsData as Record<string, CountryJobs>;
 
+// countries.json is only roughly alphabetical (both Congos sit under "C", for
+// example), so sort once here and every country list on the site inherits A-Z.
+// Pages that want a different order sort the mapped result themselves.
+const sortedCountries = [...(countriesData as Country[])].sort((a, b) =>
+  a.name.localeCompare(b.name, "en")
+);
+
 export function getCountries(): Country[] {
-  return countriesData as Country[];
+  return sortedCountries;
 }
 
 export function getCountryByCode(code: string): Country | undefined {

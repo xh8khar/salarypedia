@@ -5,7 +5,6 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FlagImage from "@/components/FlagImage";
 import emData from "@/data/earn-money-online.json";
-import { seededShuffle } from "@/lib/shuffle";
 
 const data = emData as unknown as { methods: { rank: number; title: string; category: string; difficulty: string }[] };
 
@@ -43,16 +42,9 @@ export const metadata: Metadata = {
   },
 };
 
-const difficultyBadge: Record<string, string> = {
-  "Easy": "bg-green-100 text-green-700",
-  "Medium": "bg-yellow-100 text-yellow-700",
-  "Hard": "bg-red-100 text-red-700",
-};
-
 export default function EarnMoneyOnlineIndex() {
   const year = getCurrentYear();
   const countries = getCountries();
-  const topMethods = data.methods.slice(0, 4);
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -70,44 +62,6 @@ export default function EarnMoneyOnlineIndex() {
             Discover {data.methods.length} proven ways to earn money online in {countries.length} countries.
             Compare earning potential in local currency, estimated time to first payout, and platforms to get started.
           </p>
-
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl mx-auto">
-            <div className="bg-white rounded-xl border border-gray-200 p-4">
-              <p className="text-2xl font-bold text-emerald-600">{data.methods.length}</p>
-              <p className="text-xs text-gray-400 mt-1">Proven Methods</p>
-            </div>
-
-            <div className="bg-white rounded-xl border border-gray-200 p-4">
-              <p className="text-2xl font-bold text-emerald-600">{countries.length}</p>
-              <p className="text-xs text-gray-400 mt-1">Countries</p>
-            </div>
-            <div className="bg-white rounded-xl border border-gray-200 p-4">
-              <p className="text-2xl font-bold text-emerald-600">{data.methods.filter((m) => m.difficulty === "Easy").length}</p>
-              <p className="text-xs text-gray-400 mt-1">Beginner Friendly</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="py-12 bg-white">
-        <div className="mx-auto max-w-5xl px-6">
-          <h2 className="text-xl font-bold text-gray-900 mb-6">Quick Overview</h2>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {topMethods.map((method) => (
-              <div key={method.rank} className="bg-white rounded-xl border border-gray-200 p-5 hover:border-emerald-200 hover:shadow-md transition-all">
-                <div className="flex items-center gap-2 mb-3">
-                  <span className="w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 text-xs font-bold flex items-center justify-center shrink-0">
-                    {method.rank}
-                  </span>
-                  <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${difficultyBadge[method.difficulty] || "bg-gray-100 text-gray-600"}`}>
-                    {method.difficulty}
-                  </span>
-                </div>
-                <h3 className="font-semibold text-gray-900 text-sm">{method.title}</h3>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
@@ -117,7 +71,7 @@ export default function EarnMoneyOnlineIndex() {
             Browse by Country
           </h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {seededShuffle(countries, "earn-money-online").map((c) => (
+            {countries.map((c) => (
               <Link
                 key={c.code}
                 href={`/earn-money-online-${c.slug}`}

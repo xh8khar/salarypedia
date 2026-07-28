@@ -1,6 +1,8 @@
 "use client";
 
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import { flagUrl } from "@/lib/flag";
 
 const countries = [
   { flag: "🇦🇫", name: "Afghanistan", slug: "afghanistan" },
@@ -200,22 +202,152 @@ const countries = [
   { flag: "🇿🇼", name: "Zimbabwe", slug: "zimbabwe" },
 ];
 
+const POPULAR = ["united-states", "united-kingdom", "canada", "australia", "germany", "india"];
+
 export default function CountrySearch() {
   const router = useRouter();
+  const [query, setQuery] = useState("");
+  const [open, setOpen] = useState(false);
+  const [active, setActive] = useState(0);
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const listRef = useRef<HTMLUListElement>(null);
+
+  const results = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    if (!q) {
+      return POPULAR.map((slug) => countries.find((c) => c.slug === slug)).filter(
+        (c): c is (typeof countries)[number] => Boolean(c)
+      );
+    }
+    // Names that start with the query are what people usually mean, so rank those first.
+    const starts: typeof countries = [];
+    const contains: typeof countries = [];
+    for (const c of countries) {
+      const name = c.name.toLowerCase();
+      if (name.startsWith(q)) starts.push(c);
+      else if (name.includes(q)) contains.push(c);
+    }
+    return [...starts, ...contains].slice(0, 8);
+  }, [query]);
+
+  // Reset the highlight when the query changes, adjusted during render rather
+  // than in an effect so there's no extra pass with a stale highlight.
+  const [lastQuery, setLastQuery] = useState(query);
+  if (lastQuery !== query) {
+    setLastQuery(query);
+    setActive(0);
+  }
+
+  useEffect(() => {
+    function onClickAway(e: MouseEvent) {
+      if (!wrapRef.current?.contains(e.target as Node)) setOpen(false);
+    }
+    document.addEventListener("mousedown", onClickAway);
+    return () => document.removeEventListener("mousedown", onClickAway);
+  }, []);
+
+  // Keep the highlighted row inside the scroll viewport during keyboard nav.
+  useEffect(() => {
+    listRef.current?.children[active]?.scrollIntoView({ block: "nearest" });
+  }, [active]);
+
+  function go(slug: string) {
+    router.push(`/best-paying-jobs-in-${slug}/`);
+  }
+
+  function onKeyDown(e: React.KeyboardEvent) {
+    if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+      e.preventDefault();
+      if (!open) return setOpen(true);
+      setActive((i) => {
+        const next = e.key === "ArrowDown" ? i + 1 : i - 1;
+        return (next + results.length) % results.length;
+      });
+    } else if (e.key === "Enter") {
+      if (open && results[active]) {
+        e.preventDefault();
+        go(results[active].slug);
+      }
+    } else if (e.key === "Escape") {
+      setOpen(false);
+    }
+  }
 
   return (
-    <div className="relative flex-1">
-      <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
-      <select
-        className="w-full pl-12 pr-4 py-3.5 rounded-xl border border-gray-200 bg-white text-gray-700 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-transparent appearance-none cursor-pointer"
-        onChange={(e) => { if (e.target.value) router.push(`/best-paying-jobs-in-${e.target.value}`); }}
-        defaultValue=""
-      >
-        <option value="" disabled>Search a country...</option>
-        {countries.map((c) => (
-          <option key={c.slug} value={c.slug}>{c.flag} {c.name}</option>
-        ))}
-      </select>
+    <div ref={wrapRef} className="relative flex-1">
+      <div className="relative">
+        <svg
+          className="absolute left-4 top-1/2 -translate-y-1/2 w-[18px] h-[18px] text-gray-400 pointer-events-none"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={2}
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+        <input
+          type="text"
+          role="combobox"
+          aria-expanded={open}
+          aria-controls="country-listbox"
+          aria-autocomplete="list"
+          aria-label="Search for a country"
+          placeholder="Search 195 countries…"
+          value={query}
+          onChange={(e) => {
+            setQuery(e.target.value);
+            setOpen(true);
+          }}
+          onFocus={() => setOpen(true)}
+          onKeyDown={onKeyDown}
+          className="w-full h-[52px] pl-12 pr-4 rounded-xl border border-gray-200 bg-white text-gray-900 text-[15px] placeholder:text-gray-400 focus:outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/15 transition-shadow"
+        />
+      </div>
+
+      {open && (
+        <div className="absolute z-30 mt-2 w-full card rounded-2xl shadow-xl shadow-gray-900/10 overflow-hidden">
+          {!query.trim() && (
+            <p className="px-4 pt-3 pb-1 text-[11px] font-bold uppercase tracking-wider text-gray-400">
+              Popular
+            </p>
+          )}
+          {results.length === 0 ? (
+            <p className="px-4 py-6 text-sm text-gray-500 text-center">
+              No country matches “{query}”.
+            </p>
+          ) : (
+            <ul ref={listRef} id="country-listbox" role="listbox" className="max-h-72 overflow-y-auto p-1.5">
+              {results.map((c, i) => (
+                <li key={c.slug} role="option" aria-selected={i === active}>
+                  <button
+                    type="button"
+                    onMouseEnter={() => setActive(i)}
+                    onClick={() => go(c.slug)}
+                    className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-left transition-colors ${
+                      i === active ? "bg-emerald-50" : ""
+                    }`}
+                  >
+                    <img
+                      src={flagUrl(c.slug)}
+                      alt=""
+                      loading="lazy"
+                      className="w-6 h-6 rounded-full object-cover shrink-0 ring-1 ring-gray-200"
+                    />
+                    <span className="text-sm font-medium text-gray-900 truncate">{c.name}</span>
+                    <span
+                      className={`ml-auto text-xs font-semibold text-emerald-600 shrink-0 transition-opacity ${
+                        i === active ? "opacity-100" : "opacity-0"
+                      }`}
+                    >
+                      View →
+                    </span>
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      )}
     </div>
   );
 }

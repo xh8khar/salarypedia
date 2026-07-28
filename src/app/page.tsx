@@ -4,6 +4,7 @@ import CountrySearch from "@/components/CountrySearch";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FlagImage from "@/components/FlagImage";
+import SalaryTicker from "@/components/SalaryTicker";
 import {
   getCountries,
   getCategories,
@@ -13,24 +14,8 @@ import {
   type CountryJobs,
 } from "@/lib/db";
 import { toUSD, formatAnnual } from "@/lib/salary";
+import { iconFor } from "@/lib/category-icons";
 import posts from "@/data/blog-posts.json";
-
-function formatSalary(n: number): string {
-  return new Intl.NumberFormat("en-US").format(n);
-}
-
-const categoryIcons: Record<string, string> = {
-  "ai-machine-learning": "M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z",
-  "finance-accounting": "M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z",
-  healthcare: "M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z",
-  engineering: "M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z",
-  technology: "M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5",
-  legal: "M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4",
-  marketing: "M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z",
-  education: "M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18",
-};
-
-const defaultIcon = "M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4";
 
 const homeTitle = `Best Paying Jobs in Every Country ${CURRENT_YEAR} | BestPayingJobs.net`;
 const homeTitleShort = `Best Paying Jobs in Every Country ${CURRENT_YEAR}`;
@@ -73,6 +58,13 @@ export const metadata: Metadata = {
   },
 };
 
+// Medal colours are literal on purpose — gold/silver/bronze shouldn't shift with the theme.
+const RANK_STYLES = [
+  "bg-gradient-to-br from-[#fcd34d] to-[#d9a406] text-[#4a3505]",
+  "bg-gradient-to-br from-[#eaeff4] to-[#aeb9c5] text-[#3d4752]",
+  "bg-gradient-to-br from-[#e3ac7f] to-[#a4632a] text-white",
+];
+
 export default function Home() {
   const year = getCurrentYear();
   const countries = getCountries();
@@ -86,21 +78,27 @@ export default function Home() {
     return sum + Object.values(data.jobs).flat().length;
   }, 0);
 
-  const catStats: Record<string, { countryCount: number; jobCount: number }> = {};
+  // Every category carries the same role count in every country, so a raw job
+  // count is identical across all 31 cards. The top salary actually varies.
+  const catStats: Record<string, { countryCount: number; jobCount: number; topUSD: number }> = {};
   for (const cat of categories) {
-    catStats[cat.slug] = { countryCount: 0, jobCount: 0 };
+    catStats[cat.slug] = { countryCount: 0, jobCount: 0, topUSD: 0 };
   }
   for (const { data } of countryJobs) {
     for (const [slug, jobs] of Object.entries(data.jobs)) {
-      if (catStats[slug]) {
-        catStats[slug].countryCount++;
-        catStats[slug].jobCount += jobs.length;
+      const stat = catStats[slug];
+      if (!stat) continue;
+      stat.countryCount++;
+      stat.jobCount += jobs.length;
+      for (const job of jobs) {
+        const usd = toUSD(job.salaryMax, data.currency);
+        if (usd > stat.topUSD) stat.topUSD = usd;
       }
     }
   }
 
   const titleMap: Record<string, { salaries: number[]; countryCount: number }> = {};
-  for (const { country, data } of countryJobs) {
+  for (const { data } of countryJobs) {
     for (const jobs of Object.values(data.jobs)) {
       for (const job of jobs) {
         const usd = toUSD(job.salaryMax, data.currency);
@@ -118,8 +116,24 @@ export default function Home() {
     .sort((a, b) => b.avgUSD - a.avgUSD)
     .slice(0, 12);
 
-  const globalTop6 = globalTopJobs.slice(0, 6);
-  const globalTopMore = globalTopJobs.slice(6, 12);
+  // Normalises the meter bars against the highest earner on the board.
+  const topAvg = globalTopJobs[0]?.avgUSD ?? 1;
+
+  const topCountries = countryJobs
+    .map(({ country, data }) => {
+      const salaries = Object.values(data.jobs).flat().map((j) => toUSD(j.salaryMax, data.currency));
+      return {
+        ...country,
+        avgUSD: Math.round(salaries.reduce((a, b) => a + b, 0) / (salaries.length || 1)),
+      };
+    })
+    .sort((a, b) => b.avgUSD - a.avgUSD)
+    .slice(0, 5);
+
+  const tickerItems = globalTopJobs.slice(0, 10).map((j) => ({
+    title: j.title,
+    value: formatAnnual(j.avgUSD),
+  }));
 
   const blogPosts = (posts as typeof posts).slice(0, 3);
 
@@ -156,113 +170,213 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-white">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(categoryListSchema) }} />
       <Header />
 
-      <section className="relative overflow-hidden bg-gradient-to-br from-emerald-50 via-white to-emerald-50">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-emerald-100/40 via-transparent to-transparent pointer-events-none" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-emerald-100/30 via-transparent to-transparent pointer-events-none" />
-        <div className="relative mx-auto max-w-7xl px-6 py-24 lg:py-32">
-          <div className="max-w-3xl mx-auto text-center">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-100/80 text-emerald-700 text-xs font-semibold mb-8 backdrop-blur-sm border border-emerald-200/50">
-              <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-              Updated {year} &middot; {countries.length} countries &middot; {categories.length} career categories
+      {/* ───────────────────────── Hero ───────────────────────── */}
+      <section className="relative isolate overflow-hidden bg-ink">
+        <div className="absolute inset-0 text-chalk/60 bg-grid mask-fade pointer-events-none" />
+        <div
+          className="absolute -top-40 left-1/2 -translate-x-1/2 w-[52rem] h-[52rem] rounded-full pointer-events-none opacity-70"
+          style={{
+            background:
+              "radial-gradient(circle, oklch(0.741 0.156 162 / 0.22), transparent 62%)",
+          }}
+        />
+
+        <div className="relative mx-auto max-w-7xl px-6 pt-20 pb-16 lg:pt-28 lg:pb-20">
+          <div className="max-w-3xl mx-auto text-center animate-rise">
+            <div className="inline-flex items-center gap-2.5 pl-2 pr-4 py-1.5 rounded-full bg-chalk/10 border border-chalk/15 backdrop-blur-sm">
+              <span className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-jade/20 text-jade text-[10px] font-bold uppercase tracking-wider">
+                <span className="w-1.5 h-1.5 rounded-full bg-jade animate-[pulse-dot_2.2s_ease-in-out_infinite]" />
+                Live
+              </span>
+              <span className="text-xs font-medium text-chalk/75">
+                {year} data · {countries.length} countries · {totalJobs.toLocaleString()} salaries
+              </span>
             </div>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900 leading-tight">
-              Best Paying Jobs in{' '}
-              <span className="text-emerald-600">Every Country</span>
+
+            <h1 className="mt-7 font-display text-[2.6rem] leading-[1.05] sm:text-6xl lg:text-[4.2rem] font-extrabold text-chalk">
+              Find what you&rsquo;re
+              <br className="hidden sm:block" />{" "}
+              <span className="relative inline-block">
+                <span className="text-gradient">actually worth</span>
+                <svg
+                  className="absolute -bottom-2 left-0 w-full h-3 text-jade/50"
+                  viewBox="0 0 200 12"
+                  fill="none"
+                  preserveAspectRatio="none"
+                  aria-hidden="true"
+                >
+                  <path d="M2 9C40 3 70 2.5 108 5.5C140 8 168 8.5 198 4" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
+                </svg>
+              </span>
             </h1>
-            <p className="mt-6 text-lg text-gray-500 max-w-2xl mx-auto leading-relaxed">
-              Compare salaries across {countries.length} countries and {categories.length} career categories.
-              Make data-driven career decisions with real compensation insights.
+
+            <p className="mt-8 text-lg text-chalk/65 max-w-xl mx-auto leading-relaxed">
+              Real salary ranges for {categories.length} career fields in {countries.length}{" "}
+              countries &mdash; so your next move is priced before you make it.
             </p>
-            <div className="mt-10 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 max-w-xl mx-auto">
+
+            <div className="mt-9 flex flex-col sm:flex-row items-stretch gap-3 max-w-xl mx-auto text-left">
               <CountrySearch />
-              <Link href="#countries" className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-emerald-600 text-white font-semibold text-sm hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-200/50 shrink-0">
-                Browse All Countries
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
+              <Link
+                href="#countries"
+                className="inline-flex items-center justify-center gap-2 h-[52px] px-6 rounded-xl bg-jade text-ink font-bold text-sm hover:brightness-110 transition-all shadow-lg shadow-jade/25 shrink-0"
+              >
+                Browse all
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
               </Link>
             </div>
-          </div>
-        </div>
-      </section>
 
-      <section className="py-24 bg-gray-50">
-        <div className="mx-auto max-w-7xl px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-900">Highest Paying Jobs Worldwide</h2>
-            <p className="mt-3 text-gray-500 max-w-2xl mx-auto">Top roles ranked by global average salary across all {countries.length} countries.</p>
-          </div>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            <div className="space-y-3">
-              {globalTop6.map((job, i) => (
-                <div key={job.title} className="group flex items-center gap-4 bg-white rounded-xl border border-gray-200 p-4 hover:border-emerald-200 hover:shadow-lg hover:shadow-emerald-100/30 transition-all duration-200">
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center shrink-0 shadow-sm">
-                    <span className="text-sm font-bold text-white">{i + 1}</span>
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <div className="text-sm font-semibold text-gray-900 truncate group-hover:text-emerald-600 transition-colors">{job.title}</div>
-                    <div className="text-xs text-gray-400 mt-0.5">
-                      Global avg: <span className="font-semibold text-emerald-600">{formatAnnual(job.avgUSD)}</span>
-                    </div>
-                  </div>
-                  <div className="text-right shrink-0">
-                    <div className="text-xs text-gray-400">up to</div>
-                    <div className="text-sm font-bold text-gray-900">{formatAnnual(job.maxUSD)}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-            <div className="space-y-3">
-              {globalTopMore.map((job, i) => (
-                <div key={job.title} className="group flex items-center gap-4 bg-white rounded-xl border border-gray-200 p-4 hover:border-emerald-200 hover:shadow-lg hover:shadow-emerald-100/30 transition-all duration-200">
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center shrink-0 shadow-sm">
-                    <span className="text-sm font-bold text-white">{i + 7}</span>
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <div className="text-sm font-semibold text-gray-900 truncate group-hover:text-emerald-600 transition-colors">{job.title}</div>
-                    <div className="text-xs text-gray-400 mt-0.5">
-                      Global avg: <span className="font-semibold text-emerald-600">{formatAnnual(job.avgUSD)}</span>
-                    </div>
-                  </div>
-                  <div className="text-right shrink-0">
-                    <div className="text-xs text-gray-400">up to</div>
-                    <div className="text-sm font-bold text-gray-900">{formatAnnual(job.maxUSD)}</div>
-                  </div>
-                </div>
+            <div className="mt-7 flex flex-wrap items-center justify-center gap-x-2 gap-y-2 text-xs text-chalk/45">
+              <span className="font-medium text-chalk/60">Trending:</span>
+              {topCountries.map((c) => (
+                <Link
+                  key={c.code}
+                  href={`/best-paying-jobs-in-${c.slug}/`}
+                  className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-chalk/12 hover:border-jade/50 hover:text-chalk transition-colors"
+                >
+                  <FlagImage slug={c.slug} name={c.name} className="w-3.5 h-3.5 ring-1 ring-chalk/25" />
+                  {c.name}
+                </Link>
               ))}
             </div>
           </div>
         </div>
+
+        <SalaryTicker items={tickerItems} />
       </section>
 
-      <section className="py-24 bg-white">
-        <div className="mx-auto max-w-7xl px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-900">Browse by Career Category</h2>
-            <p className="mt-3 text-gray-500 max-w-2xl mx-auto">Explore the highest paying jobs across {categories.length} career fields spanning all {countries.length} countries.</p>
+      {/* ──────────────── Highest paying jobs worldwide ──────────────── */}
+      <section className="py-20 lg:py-24 bg-white">
+        <div className="mx-auto max-w-6xl px-6">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-5 mb-10">
+            <div className="max-w-xl">
+              <span className="text-xs font-bold uppercase tracking-wider text-emerald-600">
+                The global leaderboard
+              </span>
+              <h2 className="mt-2.5 text-3xl sm:text-4xl font-bold text-gray-900">
+                Highest paying jobs worldwide
+              </h2>
+              <p className="mt-3 text-gray-500 leading-relaxed">
+                Ranked by average salary across all {countries.length} countries, converted to USD.
+              </p>
+            </div>
+            <Link
+              href="/global-ranking/"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-gray-900 hover:text-emerald-600 transition-colors shrink-0"
+            >
+              See full ranking
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </Link>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+
+          <div className="card rim overflow-hidden">
+            <div className="hidden sm:grid grid-cols-[3.5rem_1fr_9rem_7rem] gap-4 px-5 py-3 border-b border-gray-200 bg-gray-50 text-[11px] font-bold uppercase tracking-wider text-gray-400">
+              <span>Rank</span>
+              <span>Role</span>
+              <span className="text-right">Global average</span>
+              <span className="text-right">Top end</span>
+            </div>
+
+            <ol className="divide-y divide-gray-100">
+              {globalTopJobs.map((job, i) => (
+                <li
+                  key={job.title}
+                  className="group grid grid-cols-[2.5rem_1fr] sm:grid-cols-[3.5rem_1fr_9rem_7rem] items-center gap-x-4 gap-y-2 px-4 sm:px-5 py-3.5 hover:bg-emerald-50/50 transition-colors"
+                >
+                  <span
+                    className={`w-9 h-9 rounded-xl grid place-items-center text-[13px] font-extrabold shadow-sm ${
+                      RANK_STYLES[i] ?? "bg-gray-100 text-gray-500"
+                    }`}
+                  >
+                    {i + 1}
+                  </span>
+
+                  <div className="min-w-0">
+                    <p className="text-[15px] font-semibold text-gray-900 truncate group-hover:text-emerald-700 transition-colors">
+                      {job.title}
+                    </p>
+                    <div className="meter mt-2 max-w-xs">
+                      <span style={{ width: `${Math.round((job.avgUSD / topAvg) * 100)}%` }} />
+                    </div>
+                  </div>
+
+                  <div className="col-start-2 sm:col-start-3 flex items-baseline gap-2 sm:block sm:text-right">
+                    <span className="sm:hidden text-xs text-gray-400">Avg</span>
+                    <span className="numeric text-[15px] font-bold text-emerald-600">
+                      {formatAnnual(job.avgUSD)}
+                    </span>
+                  </div>
+
+                  <div className="col-start-2 sm:col-start-4 flex items-baseline gap-2 sm:block sm:text-right">
+                    <span className="sm:hidden text-xs text-gray-400">Top</span>
+                    <span className="numeric text-sm font-semibold text-gray-500">
+                      {formatAnnual(job.maxUSD)}
+                    </span>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      {/* ───────────────────── Categories ───────────────────── */}
+      <section className="py-20 lg:py-24 bg-gray-50 border-y border-gray-200">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="max-w-xl mb-10">
+            <span className="text-xs font-bold uppercase tracking-wider text-emerald-600">
+              {categories.length} career fields
+            </span>
+            <h2 className="mt-2.5 text-3xl sm:text-4xl font-bold text-gray-900">
+              Browse by category
+            </h2>
+            <p className="mt-3 text-gray-500 leading-relaxed">
+              From AI research to skilled trades &mdash; every field, priced in every country.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
             {categories.map((cat) => {
-              const stats = catStats[cat.slug];
-              const jobCount = stats?.jobCount ?? 0;
+              const topUSD = catStats[cat.slug]?.topUSD ?? 0;
               return (
                 <Link
                   key={cat.slug}
-                  href={`/jobs/${cat.slug}`}
-                  className="group rounded-xl border border-gray-200 bg-white p-5 hover:border-emerald-200 hover:shadow-lg transition-all duration-200"
+                  href={`/jobs/${cat.slug}/`}
+                  className="card card-lift group p-4 sm:p-5 flex flex-col"
                 >
-                  <div className="text-sm font-semibold text-gray-900 group-hover:text-emerald-600 transition-colors leading-snug">
+                  <span className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 grid place-items-center group-hover:bg-emerald-600 group-hover:text-white transition-colors duration-200">
+                    <svg
+                      className="w-[19px] h-[19px]"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth={1.7}
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                    >
+                      {iconFor(cat.slug).map((d) => (
+                        <path key={d} d={d} />
+                      ))}
+                    </svg>
+                  </span>
+
+                  <span className="mt-3.5 text-sm font-semibold text-gray-900 leading-snug group-hover:text-emerald-700 transition-colors">
                     {cat.name}
-                  </div>
-                  <div className="mt-2 text-xs text-gray-400 line-clamp-2 leading-relaxed">
-                    {cat.description.replace(/\{country\}/g, "your country")}
-                  </div>
-                  <div className="mt-3">
-                    <span className="text-[11px] font-medium text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">{jobCount} roles tracked</span>
-                  </div>
+                  </span>
+                  <span className="mt-auto pt-3 text-[11px] font-medium text-gray-400">
+                    up to{" "}
+                    <span className="numeric font-bold text-emerald-600">{formatAnnual(topUSD)}</span>
+                  </span>
                 </Link>
               );
             })}
@@ -270,25 +384,42 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="countries" className="py-24 bg-white">
+      {/* ───────────────────── Countries ───────────────────── */}
+      <section id="countries" className="py-20 lg:py-24 bg-white scroll-mt-16">
         <div className="mx-auto max-w-7xl px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-900">All Countries</h2>
-            <p className="mt-3 text-gray-500 max-w-2xl mx-auto">Select a country to view its highest paying jobs, salary ranges, and career opportunities.</p>
+          <div className="max-w-xl mb-10">
+            <span className="text-xs font-bold uppercase tracking-wider text-emerald-600">
+              Worldwide coverage
+            </span>
+            <h2 className="mt-2.5 text-3xl sm:text-4xl font-bold text-gray-900">
+              All {countries.length} countries
+            </h2>
+            <p className="mt-3 text-gray-500 leading-relaxed">
+              Pick a country for its highest paying roles, salary ranges and cost-of-living context.
+            </p>
           </div>
-          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-7 xl:grid-cols-9 gap-3">
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2.5">
             {countries.map((c) => {
               const cd = countryJobs.find((x) => x.country.code === c.code);
               const jobCount = cd ? Object.values(cd.data.jobs).flat().length : 0;
               return (
                 <Link
                   key={c.code}
-                  href={`/best-paying-jobs-in-${c.slug}`}
-                  className="group flex flex-col items-center gap-1.5 rounded-xl border border-gray-200 bg-white px-3 py-4 hover:border-emerald-200 hover:shadow-lg hover:shadow-emerald-100/20 hover:-translate-y-1 transition-all duration-200"
+                  href={`/best-paying-jobs-in-${c.slug}/`}
+                  className="card card-lift group flex items-center gap-3 px-3 py-3"
                 >
-                  <FlagImage slug={c.slug} name={c.name} className="w-7 h-7 group-hover:scale-110 transition-transform duration-200 rounded-sm" />
-                  <span className="text-xs font-medium text-gray-700 text-center leading-tight line-clamp-2 group-hover:text-emerald-600 transition-colors">{c.name}</span>
-                  <span className="text-[10px] text-gray-400">{jobCount} jobs</span>
+                  <FlagImage
+                    slug={c.slug}
+                    name={c.name}
+                    className="w-8 h-8 shrink-0 ring-1 ring-gray-200 group-hover:ring-emerald-300 transition-all"
+                  />
+                  <span className="min-w-0">
+                    <span className="block text-[13px] font-semibold text-gray-900 truncate group-hover:text-emerald-700 transition-colors">
+                      {c.name}
+                    </span>
+                    <span className="block numeric text-[11px] text-gray-400">{jobCount} jobs</span>
+                  </span>
                 </Link>
               );
             })}
@@ -296,87 +427,113 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-24 bg-gray-50">
-        <div className="mx-auto max-w-7xl px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-900">From Our Blog</h2>
-            <p className="mt-3 text-gray-500 max-w-2xl mx-auto">Career advice, salary guides, and expert tips to boost your earning potential.</p>
+      {/* ───────────────────── Blog ───────────────────── */}
+      <section className="py-20 lg:py-24 bg-gray-50 border-y border-gray-200">
+        <div className="mx-auto max-w-6xl px-6">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-5 mb-10">
+            <div className="max-w-xl">
+              <span className="text-xs font-bold uppercase tracking-wider text-emerald-600">
+                Career guides
+              </span>
+              <h2 className="mt-2.5 text-3xl sm:text-4xl font-bold text-gray-900">
+                Get paid more, sooner
+              </h2>
+            </div>
+            <Link
+              href="/blog/"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-gray-900 hover:text-emerald-600 transition-colors shrink-0"
+            >
+              All articles
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </Link>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {blogPosts.map((post, i) => (
-              <Link
-                key={post.id}
-                href={`/blog/${post.id}`}
-                className="group block rounded-xl border border-gray-200 bg-white p-6 hover:border-emerald-200 hover:shadow-xl hover:shadow-emerald-100/20 transition-all duration-200"
-              >
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {blogPosts.map((post) => (
+              <Link key={post.id} href={`/blog/${post.id}/`} className="card card-lift group p-6 flex flex-col">
                 <div className="flex items-center gap-2 mb-4">
-                  <span className="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full">{post.category}</span>
-                  <span className="text-xs text-gray-400">{post.readTime}</span>
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-600">
+                    {post.category}
+                  </span>
+                  <span className="w-1 h-1 rounded-full bg-gray-300" />
+                  <span className="text-[11px] text-gray-400">{post.readTime}</span>
                 </div>
-                <h3 className="text-lg font-bold text-gray-900 group-hover:text-emerald-600 transition-colors mb-2 leading-snug">{post.title}</h3>
-                <p className="text-sm text-gray-500 leading-relaxed line-clamp-2">{post.summary}</p>
+                <h3 className="text-[17px] font-bold text-gray-900 leading-snug group-hover:text-emerald-700 transition-colors">
+                  {post.title}
+                </h3>
+                <p className="mt-2.5 text-sm text-gray-500 leading-relaxed line-clamp-3">{post.summary}</p>
+                <span className="mt-5 pt-4 border-t border-gray-100 text-xs font-semibold text-gray-900 group-hover:text-emerald-600 transition-colors">
+                  Read guide &rarr;
+                </span>
               </Link>
             ))}
           </div>
-          <div className="text-center mt-12">
-            <Link href="/blog" className="inline-flex items-center gap-2 text-sm font-semibold text-emerald-600 hover:text-emerald-700 transition-colors">
-              View All Articles
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
-            </Link>
-          </div>
         </div>
       </section>
 
-      <section className="relative overflow-hidden py-24 bg-gradient-to-br from-emerald-600 to-emerald-700">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-emerald-400/20 via-transparent to-transparent pointer-events-none" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-emerald-300/20 via-transparent to-transparent pointer-events-none" />
-        <div className="relative mx-auto max-w-7xl px-6 text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold text-white">Know Your Worth, Anywhere in the World</h2>
-          <p className="mt-4 text-emerald-100 max-w-2xl mx-auto text-lg">
-            Access salary data for {countries.length} countries across {categories.length} career categories.
-            Make informed career decisions with real compensation insights.
+      {/* ───────────────────── CTA + stats ───────────────────── */}
+      <section className="relative isolate overflow-hidden bg-ink">
+        <div className="absolute inset-0 text-chalk/50 bg-dots mask-fade pointer-events-none" />
+        <div
+          className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[46rem] h-[26rem] pointer-events-none"
+          style={{ background: "radial-gradient(ellipse, oklch(0.741 0.156 162 / 0.18), transparent 65%)" }}
+        />
+
+        <div className="relative mx-auto max-w-6xl px-6 py-20 lg:py-24 text-center">
+          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-chalk leading-tight">
+            Know your worth,
+            <br className="hidden sm:block" /> anywhere in the world
+          </h2>
+          <p className="mt-5 text-chalk/60 max-w-lg mx-auto leading-relaxed">
+            Free, no sign-up, and updated for {year}. Start with your country or compare a role globally.
           </p>
-          <div className="mt-10 flex flex-wrap justify-center gap-4">
-            <Link href="#countries" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-emerald-700 font-semibold text-sm hover:bg-emerald-50 transition-all shadow-lg shadow-black/10">
-              Explore Countries
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
+
+          <div className="mt-9 flex flex-wrap justify-center gap-3">
+            <Link
+              href="#countries"
+              className="inline-flex items-center gap-2 h-12 px-6 rounded-xl bg-jade text-ink font-bold text-sm hover:brightness-110 transition-all shadow-lg shadow-jade/20"
+            >
+              Explore countries
             </Link>
-            <Link href="/jobs" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border-2 border-white/30 text-white font-semibold text-sm hover:bg-white/10 transition-all">
-              View Categories
-            </Link>
-            <Link href="/global-ranking" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border-2 border-white/30 text-white font-semibold text-sm hover:bg-white/10 transition-all">
-              Global Ranking
+            <Link
+              href="/calculator/"
+              className="inline-flex items-center gap-2 h-12 px-6 rounded-xl border border-chalk/20 text-chalk font-semibold text-sm hover:bg-chalk/10 transition-colors"
+            >
+              Salary calculators
             </Link>
           </div>
-          <div className="mt-16 pt-10 border-t border-emerald-500/30">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-              {[
-                { label: "Countries", value: countries.length, icon: "M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" },
-                { label: "Categories", value: categories.length, icon: "M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" },
-                { label: "Data Points", value: `${totalJobs.toLocaleString()}+`, icon: "M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" },
-                { label: "Updated", value: year, icon: "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" },
-              ].map((s) => (
-                <div key={s.label} className="text-center">
-                  <div className="w-10 h-10 rounded-xl bg-emerald-500/30 flex items-center justify-center mx-auto mb-3">
-                    <svg className="w-5 h-5 text-emerald-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path d={s.icon} /></svg>
-                  </div>
-                  <div className="text-2xl font-bold text-white">{s.value}</div>
-                  <div className="mt-1 text-sm text-emerald-200">{s.label}</div>
-                </div>
-              ))}
-            </div>
-          </div>
+
+          <dl className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-y-8 pt-10 border-t border-chalk/10">
+            {[
+              { label: "Countries", value: countries.length.toString() },
+              { label: "Career fields", value: categories.length.toString() },
+              { label: "Salary data points", value: `${totalJobs.toLocaleString()}+` },
+              { label: "Last updated", value: year.toString() },
+            ].map((s) => (
+              <div key={s.label}>
+                <dt className="sr-only">{s.label}</dt>
+                <dd className="numeric text-3xl lg:text-4xl font-bold text-chalk">{s.value}</dd>
+                <p className="mt-1.5 text-xs font-medium uppercase tracking-wider text-chalk/45">{s.label}</p>
+              </div>
+            ))}
+          </dl>
         </div>
       </section>
 
-      <section className="bg-gray-50 border-t border-gray-100 py-6">
-        <div className="mx-auto max-w-5xl px-4 text-center">
+      <section className="bg-white py-8">
+        <div className="mx-auto max-w-3xl px-6 text-center">
           <p className="text-xs text-gray-400 leading-relaxed">
-            Salary data on this page is based on research from the{" "}
-            <a href="https://www.erieri.com" target="_blank" rel="noopener noreferrer" className="text-emerald-600 hover:underline">Economic Research Institute (ERI)</a>{" "}
+            Salary data is based on research from the{" "}
+            <a href="https://www.erieri.com" target="_blank" rel="noopener noreferrer" className="text-emerald-600 hover:underline">
+              Economic Research Institute (ERI)
+            </a>{" "}
             and{" "}
-            <a href="https://www.salaryexpert.com" target="_blank" rel="noopener noreferrer" className="text-emerald-600 hover:underline">SalaryExpert</a>.{" "}
-            Figures are estimates and may vary based on experience, location, and industry.
+            <a href="https://www.salaryexpert.com" target="_blank" rel="noopener noreferrer" className="text-emerald-600 hover:underline">
+              SalaryExpert
+            </a>
+            . Figures are estimates and vary with experience, location and industry.
           </p>
         </div>
       </section>

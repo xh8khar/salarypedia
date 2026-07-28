@@ -23,15 +23,24 @@ export default function CategoryAccordion({
 
   if (jobs.length === 0) return null;
 
+  const maxSalary = Math.max(...jobs.map((j) => j.salaryMax));
+
   return (
-    <section id={category.slug} className="border border-gray-200 rounded-lg overflow-hidden">
-      <div className="px-5 py-4 bg-gradient-to-r from-emerald-600 to-emerald-700">
-        <span className="text-sm font-bold text-white">Highest Paying Jobs in {category.name} in {countryName} {year}</span>
+    <section id={category.slug} className="card overflow-hidden scroll-mt-20">
+      <div className="flex items-center gap-3 px-5 py-4 bg-gradient-to-r from-emerald-600 to-emerald-700">
+        <span className="grid place-items-center w-7 h-7 rounded-lg bg-white/15 shrink-0">
+          <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+          </svg>
+        </span>
+        <h2 className="text-sm font-bold text-white">
+          Highest Paying Jobs in {category.name} in {countryName} {year}
+        </h2>
       </div>
       <div className="border-t border-gray-200">
         <ul className="divide-y divide-gray-100">
           {jobs.map((job) => (
-            <JobCard key={`${category.slug}-${job.rank}`} job={job} currency={currency} />
+            <JobCard key={`${category.slug}-${job.rank}`} job={job} currency={currency} max={maxSalary} />
           ))}
         </ul>
       </div>

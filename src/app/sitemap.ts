@@ -29,6 +29,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${siteUrl}/cost-of-living`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },
     { url: `${siteUrl}/take-home-pay`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },
     { url: `${siteUrl}/earn-money-online`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },
+    { url: `${siteUrl}/about`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.5 },
+    { url: `${siteUrl}/contact`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.5 },
+    { url: `${siteUrl}/privacy`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.3 },
+    { url: `${siteUrl}/terms`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.3 },
+    { url: `${siteUrl}/disclaimer`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.3 },
   ];
 
   const avgSalaryPages: MetadataRoute.Sitemap = getAllCountrySlugs().map((slug) => ({
