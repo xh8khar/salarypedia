@@ -1,14 +1,17 @@
 import type { Metadata } from "next";
-import { getCountries, getCategories, getCountryJobs, getCurrentYear } from "@/lib/db";
+import { getCountries, getCategories, getCountryJobs, getCurrentYear, CURRENT_YEAR } from "@/lib/db";
 import { toUSD, formatAnnual, adjustedSalary } from "@/lib/salary";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GlobalRankingClient from "@/components/GlobalRanking";
 
+const grTitle = `Highest Paying Jobs in the World ${CURRENT_YEAR} — Top 100 Global Careers`;
+const grTitleShort = `Highest Paying Jobs in the World ${CURRENT_YEAR}`;
+
 export const metadata: Metadata = {
-  title: "Highest Paying Jobs in the World 2026 — Top 100 Global Careers",
+  title: grTitle,
   description:
-    "Discover the top 100 highest paying jobs in the world for 2026. Compare global salary averages across 195 countries. See which careers pay the most.",
+    `Discover the top 100 highest paying jobs in the world for ${CURRENT_YEAR}. Compare global salary averages across 195 countries. See which careers pay the most.`,
   keywords: [
     "highest paying jobs in the world",
     "top 100 highest paying jobs",
@@ -20,9 +23,9 @@ export const metadata: Metadata = {
     canonical: "https://www.bestpayingjobs.net/global-ranking",
   },
   openGraph: {
-    title: "Highest Paying Jobs in the World 2026",
+    title: grTitleShort,
     description:
-      "Discover the top 100 highest paying jobs in the world for 2026.",
+      `Discover the top 100 highest paying jobs in the world for ${CURRENT_YEAR}.`,
     images: [
       {
         url: "/og/default.webp",
@@ -34,9 +37,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Highest Paying Jobs in the World 2026",
+    title: grTitleShort,
     description:
-      "Discover the top 100 highest paying jobs in the world for 2026.",
+      `Discover the top 100 highest paying jobs in the world for ${CURRENT_YEAR}.`,
     images: ["/og/default.webp"],
   },
 };

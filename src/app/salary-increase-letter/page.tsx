@@ -1,12 +1,15 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { getCountries, getCategories, getCurrentYear } from "@/lib/db";
+import { getCountries, getCategories, getCurrentYear, CURRENT_YEAR } from "@/lib/db";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import letters from "@/data/salary-letters.json";
 
+const silTitle = `Salary Increase Letter Templates ${CURRENT_YEAR} | BestPayingJobs.net`;
+const silTitleShort = `Salary Increase Letter Templates ${CURRENT_YEAR}`;
+
 export const metadata: Metadata = {
-  title: "Salary Increase Letter Templates 2026 | BestPayingJobs.net",
+  title: silTitle,
   description: "24 professionally crafted salary increase letter templates for every situation. Copy, customize, and send. Get the raise you deserve.",
   keywords: [
     "salary increase letter",
@@ -19,7 +22,7 @@ export const metadata: Metadata = {
     canonical: "https://www.bestpayingjobs.net/salary-increase-letter",
   },
   openGraph: {
-    title: "Salary Increase Letter Templates 2026",
+    title: silTitleShort,
     description: "24 professionally crafted salary increase letter templates for every situation. Copy, customize, and send.",
     images: [
       {
@@ -32,7 +35,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Salary Increase Letter Templates 2026",
+    title: silTitleShort,
     description: "24 professionally crafted salary increase letter templates for every situation.",
     images: ["/og/default.webp"],
   },

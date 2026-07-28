@@ -4,6 +4,7 @@ import { useRef, useCallback } from "react";
 import { toPng } from "html-to-image";
 import CountrySalaryChart from "./CountrySalaryChart";
 import ShareButtons from "./ShareButtons";
+import { CURRENT_YEAR } from "@/lib/db";
 
 interface JobData {
   rank: number;
@@ -42,7 +43,7 @@ export default function ChartSection({
   }, [countrySlug]);
 
   const shareUrl = `https://www.bestpayingjobs.net/best-paying-jobs-in-${countrySlug}`;
-  const shareTitle = `Top 10 Highest Paying Jobs in ${countryName} 2026 | BestPayingJobs.net`;
+  const shareTitle = `Top 10 Highest Paying Jobs in ${countryName} ${CURRENT_YEAR} | BestPayingJobs.net`;
 
   return (
     <section className="mb-12">

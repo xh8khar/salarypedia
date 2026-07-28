@@ -1,13 +1,15 @@
 import Link from "next/link";
-import { getCountries, getCategories, getCurrentYear } from "@/lib/db";
+import { getCountries, getCategories, getCurrentYear, CURRENT_YEAR } from "@/lib/db";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { getCategorySalaries } from "@/lib/category-stats";
 import { formatAnnual } from "@/lib/salary";
 import type { Metadata } from "next";
 
+const jobsMetaTitle = `Best Paying Jobs by Career Category ${CURRENT_YEAR}`;
+
 export const metadata: Metadata = {
-  title: "Best Paying Jobs by Career Category 2026",
+  title: jobsMetaTitle,
   description:
     "Browse the highest paying jobs across 31 career categories in 195 countries. Compare salaries in Finance, AI, Healthcare, Engineering, and more.",
   keywords: [
@@ -21,7 +23,7 @@ export const metadata: Metadata = {
     canonical: "https://www.bestpayingjobs.net/jobs",
   },
   openGraph: {
-    title: "Best Paying Jobs by Career Category 2026",
+    title: jobsMetaTitle,
     description:
       "Browse the highest paying jobs across 31 career categories in 195 countries.",
     images: [
@@ -35,7 +37,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Best Paying Jobs by Career Category 2026",
+    title: jobsMetaTitle,
     description:
       "Browse the highest paying jobs across 31 career categories in 195 countries.",
     images: ["/og/default.webp"],

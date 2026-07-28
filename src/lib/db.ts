@@ -69,6 +69,8 @@ export function getCategoryBySlug(slug: string): Category | undefined {
   return getCategories().find((c) => c.slug === slug);
 }
 
+export const CURRENT_YEAR = config.site.year;
+
 export function getCurrentYear(): number {
   return config.site.year;
 }

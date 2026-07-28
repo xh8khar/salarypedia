@@ -21,11 +21,13 @@
     "enableCalculators": true,
     "enableBlog": true,
     "enableSalaryLetters": true,
-    "enableCompare": true
+    "enableCompare": true,
+    "enableEarnMoneyOnline": true
   },
   "navigation": {
-    "showInHeader": ["categories", "globalRanking", "partTimeJobs", "calculators", "compare", "salaryLetters", "blog"],
-    "partTimeJobsLabel": "Part-Time Jobs"
+    "showInHeader": ["categories", "globalRanking", "partTimeJobs", "earnMoneyOnline", "calculators", "compare", "salaryLetters", "blog"],
+    "partTimeJobsLabel": "Part-Time Jobs",
+    "earnMoneyOnlineLabel": "Earn Online"
   },
   "homepage": {
     "heroTitle": "Best Paying Jobs in {country}",

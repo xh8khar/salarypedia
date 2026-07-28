@@ -28,6 +28,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${siteUrl}/part-time-jobs`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
     { url: `${siteUrl}/cost-of-living`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },
     { url: `${siteUrl}/take-home-pay`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },
+    { url: `${siteUrl}/earn-money-online`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },
   ];
 
   const avgSalaryPages: MetadataRoute.Sitemap = getAllCountrySlugs().map((slug) => ({
@@ -66,6 +67,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     .filter((c) => hasCountryJobs(c.code))
     .map((c) => ({
       url: `${siteUrl}/take-home-pay-${c.slug}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    }));
+
+  const earnOnlinePages: MetadataRoute.Sitemap = countries
+    .filter((c) => hasCountryJobs(c.code))
+    .map((c) => ({
+      url: `${siteUrl}/earn-money-online-${c.slug}`,
       lastModified: new Date(),
       changeFrequency: "monthly" as const,
       priority: 0.7,
@@ -113,6 +123,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...partTimeCountryPages,
     ...colPages,
     ...takeHomePages,
+    ...earnOnlinePages,
     ...cityPages,
     ...categoryPages,
     ...calculatorPages,

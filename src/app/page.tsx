@@ -8,6 +8,7 @@ import {
   getCountries,
   getCategories,
   getCurrentYear,
+  CURRENT_YEAR,
   getCountryJobs,
   type CountryJobs,
 } from "@/lib/db";
@@ -31,10 +32,14 @@ const categoryIcons: Record<string, string> = {
 
 const defaultIcon = "M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4";
 
+const homeTitle = `Best Paying Jobs in Every Country ${CURRENT_YEAR} | BestPayingJobs.net`;
+const homeTitleShort = `Best Paying Jobs in Every Country ${CURRENT_YEAR}`;
+const homeDesc = `Discover the highest paying jobs in every country. Compare salaries across 30+ career categories including AI, Finance, IT, Healthcare, Engineering and more. Updated for ${CURRENT_YEAR}.`;
+const homeDescShort = `Discover the highest paying jobs in every country. Compare salaries across 30+ career categories. Updated for ${CURRENT_YEAR}.`;
+
 export const metadata: Metadata = {
-  title: "Best Paying Jobs in Every Country 2026 | BestPayingJobs.net",
-  description:
-    "Discover the highest paying jobs in every country. Compare salaries across 30+ career categories including AI, Finance, IT, Healthcare, Engineering and more. Updated for 2026.",
+  title: homeTitle,
+  description: homeDesc,
   keywords: [
     "best paying jobs",
     "highest salary jobs",
@@ -48,9 +53,8 @@ export const metadata: Metadata = {
     canonical: "https://www.bestpayingjobs.net",
   },
   openGraph: {
-    title: "Best Paying Jobs in Every Country (2026)",
-    description:
-      "Discover the highest paying jobs in every country. Compare salaries across 30+ career categories including AI, Finance, IT, Healthcare, Engineering and more. Updated for 2026.",
+    title: homeTitleShort,
+    description: homeDesc,
     url: "https://www.bestpayingjobs.net",
     images: [
       {
@@ -63,9 +67,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Best Paying Jobs in Every Country (2026)",
-    description:
-      "Discover the highest paying jobs in every country. Compare salaries across 30+ career categories. Updated for 2026.",
+    title: homeTitleShort,
+    description: homeDescShort,
     images: ["/og/default.webp"],
   },
 };
@@ -125,7 +128,7 @@ export default function Home() {
   const collectionSchema = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    name: `Best Paying Jobs in Every Country (${year})`,
+    name: `Best Paying Jobs in Every Country ${year}`,
     description: `Discover the highest paying careers in ${countries.length} countries across ${categories.length} career categories.`,
     url: siteUrl,
     mainEntity: {

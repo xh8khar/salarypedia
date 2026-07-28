@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { CURRENT_YEAR } from "@/lib/db";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -14,6 +15,11 @@ const geistMono = Geist_Mono({
 
 const siteUrl = "https://www.bestpayingjobs.net";
 
+const layoutTitleDefault = `Best Paying Jobs in Every Country ${CURRENT_YEAR} | BestPayingJobs.net`;
+const layoutTitleShort = `Best Paying Jobs in Every Country ${CURRENT_YEAR}`;
+const layoutDesc = `Discover the highest paying jobs in every country. Compare salaries across 30+ career categories including AI, Finance, IT, Healthcare, Engineering and more. Updated for ${CURRENT_YEAR}.`;
+const layoutDescShort = `Discover the highest paying jobs in every country. Compare salaries across 30+ career categories. Updated for ${CURRENT_YEAR}.`;
+
 export const metadata: Metadata = {
   icons: {
     icon: [
@@ -25,11 +31,10 @@ export const metadata: Metadata = {
     ],
   },
   title: {
-    default: "Best Paying Jobs in Every Country 2026 | BestPayingJobs.net",
+    default: layoutTitleDefault,
     template: "%s | BestPayingJobs.net",
   },
-  description:
-    "Discover the highest paying jobs in every country. Compare salaries across 30+ career categories including AI, Finance, IT, Healthcare, Engineering and more. Updated for 2026.",
+  description: layoutDesc,
   keywords: [
     "best paying jobs",
     "highest salary jobs",
@@ -37,7 +42,7 @@ export const metadata: Metadata = {
     "salary comparison",
     "jobs by country",
     "high salary careers",
-    "best paying jobs 2026",
+    `best paying jobs ${CURRENT_YEAR}`,
     "AI jobs salary",
     "highest paying professions",
     "salary by country",
@@ -50,9 +55,8 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   openGraph: {
-    title: "Best Paying Jobs in Every Country (2026)",
-    description:
-      "Discover the highest paying jobs in every country. Compare salaries across 30+ career categories. Updated for 2026.",
+    title: layoutTitleShort,
+    description: layoutDescShort,
     url: siteUrl,
     siteName: "BestPayingJobs.net",
     locale: "en_US",
@@ -68,9 +72,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Best Paying Jobs in Every Country (2026)",
-    description:
-      "Discover the highest paying jobs in every country. Compare salaries across 30+ career categories. Updated for 2026.",
+    title: layoutTitleShort,
+    description: layoutDescShort,
     images: ["/og/default.webp"],
   },
   robots: {

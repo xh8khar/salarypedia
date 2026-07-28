@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { getCountries, getCountryJobs, getCurrentYear } from "@/lib/db";
+import { getCountries, getCountryJobs, getCurrentYear, CURRENT_YEAR } from "@/lib/db";
 import { toUSD } from "@/lib/salary";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -8,8 +8,10 @@ import FlagImage from "@/components/FlagImage";
 
 const siteUrl = "https://www.bestpayingjobs.net";
 
+const thpTitle = `Take-Home Pay by Country ${CURRENT_YEAR} | BestPayingJobs.net`;
+
 export const metadata: Metadata = {
-  title: "Take-Home Pay by Country 2026 | BestPayingJobs.net",
+  title: thpTitle,
   description: "Compare estimated take-home pay after taxes across 195 countries. See salary after tax and net pay for every country worldwide.",
   keywords: [
     "take home pay by country",
@@ -22,7 +24,7 @@ export const metadata: Metadata = {
     canonical: `${siteUrl}/take-home-pay`,
   },
   openGraph: {
-    title: "Take-Home Pay by Country 2026 | BestPayingJobs.net",
+    title: thpTitle,
     description: "Compare estimated take-home pay after taxes across 195 countries.",
     images: [
       {
@@ -35,7 +37,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Take-Home Pay by Country 2026 | BestPayingJobs.net",
+    title: thpTitle,
     description: "Compare estimated take-home pay after taxes across 195 countries.",
     images: ["/og/default.webp"],
   },
@@ -66,7 +68,7 @@ export default function TakeHomePayIndex() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "CollectionPage",
-            name: `Take-Home Pay by Country (${year})`,
+            name: `Take-Home Pay by Country ${year}`,
             description: `Compare estimated take-home pay after taxes across ${countries.length} countries.`,
             url: `${siteUrl}/take-home-pay`,
           }),

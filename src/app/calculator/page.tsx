@@ -1,11 +1,14 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { CURRENT_YEAR } from "@/lib/db";
 import calculators from "@/data/calculators.json";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
+const calcTitle = `Free Salary Calculators ${CURRENT_YEAR}`;
+
 export const metadata: Metadata = {
-  title: "Free Salary Calculators 2026",
+  title: calcTitle,
   description: "Use our free salary calculators: hourly rate, take-home pay, after-tax, raise, overtime, bonus, commission, affordability, FIRE, and more.",
   keywords: [
     "salary calculator",
@@ -18,7 +21,7 @@ export const metadata: Metadata = {
     canonical: "https://www.bestpayingjobs.net/calculator",
   },
   openGraph: {
-    title: "Free Salary Calculators 2026",
+    title: calcTitle,
     description: "Use our free salary calculators: hourly rate, take-home pay, after-tax, raise, overtime, bonus, commission, and more.",
     images: [
       {
@@ -31,7 +34,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Free Salary Calculators 2026",
+    title: calcTitle,
     description: "Use our free salary calculators: hourly rate, take-home pay, after-tax, raise, overtime, bonus, commission, and more.",
     images: ["/og/default.webp"],
   },

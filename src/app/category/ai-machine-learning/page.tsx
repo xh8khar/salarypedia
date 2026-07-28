@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getCountries, getCategories, getCountryJobs, getCurrentYear } from "@/lib/db";
+import { getCountries, getCategories, getCountryJobs, getCurrentYear, CURRENT_YEAR } from "@/lib/db";
 import { getCategorySalaries } from "@/lib/category-stats";
 import { toUSD, formatAnnual, formatMonthly } from "@/lib/salary";
 import CategorySalaryChart from "@/components/CategorySalaryChart";
@@ -10,10 +10,13 @@ import FlagImage from "@/components/FlagImage";
 import posts from "@/data/blog-posts.json";
 import type { Metadata } from "next";
 
+const aiCatTitle = `Highest Paying AI Jobs ${CURRENT_YEAR} — AI & Machine Learning Salaries by Country`;
+const aiCatDesc = `Discover the highest paying AI and machine learning jobs across 195 countries in ${CURRENT_YEAR}. Compare AI engineer salaries, data scientist pay, and machine learning engineer compensation worldwide.`;
+const aiCatDescShort = `Compare AI engineer, ML engineer, and data scientist salaries across 195 countries. Find where AI skills pay the most in ${CURRENT_YEAR}.`;
+
 export const metadata: Metadata = {
-  title: "Highest Paying AI Jobs 2026 — AI & Machine Learning Salaries by Country",
-  description:
-    "Discover the highest paying AI and machine learning jobs across 195 countries in 2026. Compare AI engineer salaries, data scientist pay, and machine learning engineer compensation worldwide.",
+  title: aiCatTitle,
+  description: aiCatDesc,
   keywords: [
     "AI jobs",
     "machine learning jobs",
@@ -30,9 +33,8 @@ export const metadata: Metadata = {
     follow: true,
   },
   openGraph: {
-    title: "Highest Paying AI Jobs 2026 — AI & Machine Learning Salaries by Country",
-    description:
-      "Compare AI engineer, ML engineer, and data scientist salaries across 195 countries. Find where AI skills pay the most in 2026.",
+    title: aiCatTitle,
+    description: aiCatDescShort,
     images: [
       {
         url: "/og/default.webp",
@@ -44,9 +46,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Highest Paying AI Jobs 2026 — AI & Machine Learning Salaries by Country",
-    description:
-      "Compare AI engineer, ML engineer, and data scientist salaries across 195 countries. Find where AI skills pay the most in 2026.",
+    title: aiCatTitle,
+    description: aiCatDescShort,
     images: ["/og/default.webp"],
   },
 };
@@ -114,7 +115,7 @@ export default function AiMachineLearningPage() {
     mainEntity: [
       {
         "@type": "Question",
-        name: "What is the highest paying AI job in 2026?",
+        name: `What is the highest paying AI job in ${CURRENT_YEAR}?`,
         acceptedAnswer: {
           "@type": "Answer",
           text: "AI Research Scientist is the highest paying AI job globally, with salaries reaching up to $200,000+ annually in top markets like the United States and Switzerland. Machine Learning Engineer and Deep Learning Engineer follow closely.",
@@ -130,7 +131,7 @@ export default function AiMachineLearningPage() {
       },
       {
         "@type": "Question",
-        name: "How much do machine learning engineers make in 2026?",
+        name: `How much do machine learning engineers make in ${CURRENT_YEAR}?`,
         acceptedAnswer: {
           "@type": "Answer",
           text: "Machine Learning Engineers earn between $80,000 and $180,000 annually depending on location. The global average salary for ML engineers is approximately $95,000 per year.",
@@ -141,15 +142,15 @@ export default function AiMachineLearningPage() {
         name: "Do AI jobs require a degree?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "While many AI roles prefer a master's or PhD, the field increasingly values practical skills. Bootcamp graduates and self-taught professionals with strong portfolios can land AI engineering roles, especially in machine learning operations and data science.",
+          text: "While many AI roles prefer advanced degrees, the field increasingly values practical skills. Bootcamp graduates and self-taught professionals with strong portfolios can land AI engineering roles, especially in machine learning operations and data science.",
         },
       },
       {
         "@type": "Question",
-        name: "Is AI a good career in 2026?",
+        name: `Is AI a good career in ${CURRENT_YEAR}?`,
         acceptedAnswer: {
           "@type": "Answer",
-          text: "AI is one of the fastest growing career fields in 2026. AI-related skills command 30-50% salary premiums over non-AI roles, and demand continues to outpace supply across all 195 countries in our database.",
+          text: `AI is one of the fastest growing career fields in ${CURRENT_YEAR}. AI-related skills command 30-50% salary premiums over non-AI roles, and demand continues to outpace supply across all 195 countries in our database.`,
         },
       },
     ],
@@ -174,11 +175,11 @@ export default function AiMachineLearningPage() {
       <section className="bg-gradient-to-br from-emerald-50 via-white to-emerald-50 py-16 lg:py-20">
         <div className="mx-auto max-w-5xl px-6">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-100 text-emerald-700 text-xs font-semibold mb-6">
-            2026 Differentiator &middot; Fastest Growing Category
+            {CURRENT_YEAR} Differentiator &middot; Fastest Growing Category
           </div>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900 leading-tight mb-6">
             Highest Paying{' '}
-            <span className="text-emerald-600">AI Jobs</span> in 2026
+            <span className="text-emerald-600">AI Jobs</span> in {CURRENT_YEAR}
           </h1>
           <p className="text-lg sm:text-xl text-gray-500 max-w-3xl leading-relaxed mb-8">
             AI and machine learning careers offer the fastest salary growth across all industries.
@@ -219,7 +220,7 @@ export default function AiMachineLearningPage() {
       <section className="py-12 bg-white">
         <div className="mx-auto max-w-5xl px-6">
           <h2 className="text-2xl font-bold text-gray-900 mb-2">AI Salaries by Country</h2>
-          <p className="text-sm text-gray-500 mb-6">Which countries pay AI professionals the most in 2026? The chart below shows average AI job salaries across the top 15 markets.</p>
+          <p className="text-sm text-gray-500 mb-6">Which countries pay AI professionals the most in {CURRENT_YEAR}? The chart below shows average AI job salaries across the top 15 markets.</p>
           <div className="bg-gray-50 rounded-xl p-6 border border-gray-100">
             <CategorySalaryChart data={chartData} />
             <noscript>
@@ -257,7 +258,7 @@ export default function AiMachineLearningPage() {
 
       <section className="py-12 bg-white">
         <div className="mx-auto max-w-5xl px-6">
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">Why AI Careers Pay More in 2026</h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-2">Why AI Careers Pay More in {CURRENT_YEAR}</h2>
           <p className="text-sm text-gray-500 mb-8">AI skills command significant salary premiums. Here is what is driving compensation higher.</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
@@ -359,11 +360,11 @@ export default function AiMachineLearningPage() {
       <section className="py-12 bg-white">
         <div className="mx-auto max-w-5xl px-6">
           <h2 className="text-2xl font-bold text-gray-900 mb-2">Frequently Asked Questions</h2>
-          <p className="text-sm text-gray-500 mb-8">Common questions about AI careers and salaries in 2026.</p>
+          <p className="text-sm text-gray-500 mb-8">Common questions about AI careers and salaries in {CURRENT_YEAR}.</p>
           <div className="grid gap-4">
             {[
               {
-                q: "What is the highest paying AI job in 2026?",
+                q: `What is the highest paying AI job in ${CURRENT_YEAR}?`,
                 a: "AI Research Scientist is the highest paying AI job globally, with salaries reaching up to $200,000+ annually in top markets like the United States and Switzerland.",
               },
               {
@@ -371,7 +372,7 @@ export default function AiMachineLearningPage() {
                 a: "The United States, Switzerland, Denmark, and Australia consistently offer the highest AI salaries. US AI engineers earn $120,000-$200,000+ annually.",
               },
               {
-                q: "How much do machine learning engineers make in 2026?",
+                q: `How much do machine learning engineers make in ${CURRENT_YEAR}?`,
                 a: "Machine Learning Engineers earn between $80,000 and $180,000 annually depending on location. The global average salary for ML engineers is approximately $95,000 per year.",
               },
               {
@@ -379,8 +380,8 @@ export default function AiMachineLearningPage() {
                 a: "While many AI roles prefer advanced degrees, the field increasingly values practical skills. Bootcamp graduates and self-taught professionals with strong portfolios can land AI roles.",
               },
               {
-                q: "Is AI a good career in 2026?",
-                a: "AI is one of the fastest growing career fields. AI-related skills command 30-50% salary premiums and demand continues to outpace supply across all 195 countries.",
+                q: `Is AI a good career in ${CURRENT_YEAR}?`,
+                a: `AI is one of the fastest growing career fields. AI-related skills command 30-50% salary premiums and demand continues to outpace supply across all 195 countries.`,
               },
             ].map((faq, i) => (
               <details key={i} className="group rounded-xl border border-gray-200 bg-white [&[open]]:border-emerald-200">

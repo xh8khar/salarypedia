@@ -10,6 +10,7 @@ import {
 } from "@/lib/db";
 import { toUSD, adjustedSalary } from "@/lib/salary";
 import colIndex from "@/data/col-index.json";
+import fxRatesData from "@/data/fx-rates.json";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ShareButtons from "@/components/ShareButtons";
@@ -45,8 +46,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 
   return {
-    title: `Cost of Living in ${c.name} (${year}) | COL Index & Adjusted Salaries | BestPayingJobs.net`,
-    description: `Cost of living in ${c.name} is ${index}% of the US national average (${year}). See how far your salary goes, compare purchasing power across categories.`,
+    title: `Cost of Living in ${c.name} ${year} | COL Index & Adjusted Salaries | BestPayingJobs.net`,
+    description: `Cost of living in ${c.name} is ${index}% of the US national average in ${year}. See how far your salary goes, compare purchasing power across categories.`,
     keywords: [
       `cost of living in ${c.name}`,
       `${c.name} COL index`,
@@ -59,13 +60,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       canonical: `https://www.bestpayingjobs.net/cost-of-living-${c.slug}`,
     },
     openGraph: {
-      title: `Cost of Living in ${c.name} (${year}) | BestPayingJobs.net`,
+      title: `Cost of Living in ${c.name} ${year} | BestPayingJobs.net`,
       description: `COL index for ${c.name} is ${index}%. Compare adjusted salaries and purchasing power for ${year}.`,
       url: `https://www.bestpayingjobs.net/cost-of-living-${c.slug}`,
       images: [metaImage],
     },
     twitter: {
-      title: `Cost of Living in ${c.name} (${year}) | BestPayingJobs.net`,
+      title: `Cost of Living in ${c.name} ${year} | BestPayingJobs.net`,
       description: `COL index for ${c.name} is ${index}%. Compare adjusted salaries and purchasing power for ${year}.`,
       card: "summary_large_image",
       images: [metaImage],
@@ -111,6 +112,7 @@ export default async function CostOfLivingPage({ params }: Props) {
 
   const siteUrl = "https://www.bestpayingjobs.net";
   const pageUrl = `${siteUrl}/cost-of-living-${c.slug}`;
+  const fxRate = (fxRatesData as Record<string, number>)[data?.currency ?? "USD"] ?? 1;
 
   const top10 = (data?.top10 ?? []).map((j) => ({
     ...j,
@@ -118,6 +120,8 @@ export default async function CostOfLivingPage({ params }: Props) {
     salaryMaxUSD: toUSD(j.salaryMax, data?.currency ?? "USD"),
     colSalaryMin: adjustedSalary(toUSD(j.salaryMin, data?.currency ?? "USD"), c.code),
     colSalaryMax: adjustedSalary(toUSD(j.salaryMax, data?.currency ?? "USD"), c.code),
+    colSalaryMinLocal: Math.round(adjustedSalary(toUSD(j.salaryMin, data?.currency ?? "USD"), c.code) * fxRate),
+    colSalaryMaxLocal: Math.round(adjustedSalary(toUSD(j.salaryMax, data?.currency ?? "USD"), c.code) * fxRate),
   }));
 
   const breadcrumbSchema = {
@@ -205,7 +209,7 @@ export default async function CostOfLivingPage({ params }: Props) {
                     <th className="text-left py-3 px-4 font-semibold text-gray-700">Job Title</th>
                     <th className="text-right py-3 px-4 font-semibold text-gray-700">Local Salary</th>
                     <th className="text-right py-3 px-4 font-semibold text-gray-700">USD Equivalent</th>
-                    <th className="text-right py-3 px-4 font-semibold text-gray-700">COL-Adjusted Salary</th>
+                    <th className="text-right py-3 px-4 font-semibold text-gray-700">COL-Adjusted ({data!.currency})</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -220,7 +224,7 @@ export default async function CostOfLivingPage({ params }: Props) {
                         ${Intl.NumberFormat("en-US").format(job.salaryMinUSD)}–${Intl.NumberFormat("en-US").format(job.salaryMaxUSD)}
                       </td>
                       <td className="py-3 px-4 text-right font-semibold text-emerald-600">
-                        ${Intl.NumberFormat("en-US").format(job.colSalaryMin)}–${Intl.NumberFormat("en-US").format(job.colSalaryMax)}
+                        {Intl.NumberFormat("en-US").format(job.colSalaryMinLocal)}–{Intl.NumberFormat("en-US").format(job.colSalaryMaxLocal)} {data!.currency}
                       </td>
                     </tr>
                   ))}
@@ -228,7 +232,7 @@ export default async function CostOfLivingPage({ params }: Props) {
               </table>
             </div>
             <p className="text-xs text-gray-400 mt-2">
-              * COL-adjusted salary shows the equivalent U.S. salary needed to maintain the same purchasing power in {c.name}.
+              * COL-adjusted salary shown in {data!.currency} at the equivalent purchasing power of U.S. dollars.
             </p>
           </section>
         )}
@@ -245,7 +249,7 @@ export default async function CostOfLivingPage({ params }: Props) {
                     <th className="text-left py-3 px-4 font-semibold text-gray-700">Category</th>
                     <th className="text-right py-3 px-4 font-semibold text-gray-700">Avg. Salary (Local)</th>
                     <th className="text-right py-3 px-4 font-semibold text-gray-700">Avg. Salary (USD)</th>
-                    <th className="text-right py-3 px-4 font-semibold text-gray-700">COL-Adjusted (USD)</th>
+                    <th className="text-right py-3 px-4 font-semibold text-gray-700">COL-Adjusted ({data.currency})</th>
                     <th className="text-right py-3 px-4 font-semibold text-gray-700">Purchasing Power</th>
                   </tr>
                 </thead>
@@ -255,6 +259,7 @@ export default async function CostOfLivingPage({ params }: Props) {
                     const avgLocal = jobs.reduce((s, j) => s + (j.salaryMin + j.salaryMax) / 2, 0) / jobs.length;
                     const avgUSD = toUSD(avgLocal, data.currency);
                     const avgCOL = adjustedSalary(avgUSD, c.code);
+                    const avgCOLLocal = Math.round(avgCOL * fxRate);
                     const diff = ((avgCOL - avgUSD) / avgUSD * 100);
                     return (
                       <tr key={cat.slug} className="border-b border-gray-100 hover:bg-gray-50">
@@ -266,7 +271,7 @@ export default async function CostOfLivingPage({ params }: Props) {
                           ${Intl.NumberFormat("en-US").format(Math.round(avgUSD))}
                         </td>
                         <td className="py-3 px-4 text-right font-semibold text-emerald-600">
-                          ${Intl.NumberFormat("en-US").format(Math.round(avgCOL))}
+                          {Intl.NumberFormat("en-US").format(avgCOLLocal)} {data.currency}
                         </td>
                         <td className="py-3 px-4 text-right">
                           <span className={`text-xs font-semibold ${diff > 0 ? "text-emerald-600" : "text-red-500"}`}>
@@ -296,7 +301,7 @@ export default async function CostOfLivingPage({ params }: Props) {
           <h3 className="text-lg font-semibold text-gray-900 mt-6">Purchasing Power in {c.name}</h3>
           <p>
             If you earn $100,000 USD in the United States, you would need to earn approximately{" "}
-            <strong>${Intl.NumberFormat("en-US").format(adjustedSalary(100000, c.code))} USD</strong>{" "}
+            <strong>{Intl.NumberFormat("en-US").format(Math.round(adjustedSalary(100000, c.code) * fxRate))} {c.currency}</strong>{" "}
             in {c.name} to maintain the same standard of living.
             {index < 80 ? " This means your money goes further in " + c.name + ", making it an attractive destination for remote workers and expats." : index > 120 ? " This means goods and services in " + c.name + " are more expensive, so you need a higher salary to maintain the same lifestyle." : ""}
           </p>
@@ -376,7 +381,7 @@ export default async function CostOfLivingPage({ params }: Props) {
             </details>
             <details className="rounded-xl border border-gray-200 bg-white overflow-hidden group">
               <summary className="px-5 py-4 font-semibold text-gray-900 cursor-pointer hover:bg-gray-50 transition-colors">What salary do I need to live comfortably in {c.name}?</summary>
-              <div className="px-5 pb-4 text-sm text-gray-500">Salaries in {c.name} should be adjusted by the COL index to maintain equivalent purchasing power compared to the U.S. average. A $100,000 USD salary would need to be adjusted to ${Intl.NumberFormat("en-US").format(adjustedSalary(100000, c.code))} USD to maintain the same lifestyle in {c.name}.</div>
+              <div className="px-5 pb-4 text-sm text-gray-500">Salaries in {c.name} should be adjusted by the COL index to maintain equivalent purchasing power compared to the U.S. average. A $100,000 USD salary would need to be adjusted to {Intl.NumberFormat("en-US").format(Math.round(adjustedSalary(100000, c.code) * fxRate))} {c.currency} to maintain the same lifestyle in {c.name}.</div>
             </details>
           </div>
         </section>

@@ -105,7 +105,7 @@ export default async function CountryPage({ params }: Props) {
   const collectionSchema = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    name: `Best Paying Jobs in ${c.name} (${year})`,
+    name: `Best Paying Jobs in ${c.name} ${year}`,
     description: `Discover the highest paying jobs in ${c.name} for ${year}. Compare salaries across 30+ career categories in ${c.name}.`,
     url: pageUrl,
     breadcrumb: { "@id": `${pageUrl}#breadcrumb` },
@@ -156,7 +156,7 @@ export default async function CountryPage({ params }: Props) {
     .map((cat) => ({
       "@context": "https://schema.org",
       "@type": "ItemList",
-      name: `Highest Paying Jobs in ${cat.name} in ${c.name} (${year})`,
+      name: `Highest Paying Jobs in ${cat.name} in ${c.name} ${year}`,
       description: cat.description,
       url: `${pageUrl}#${cat.slug}`,
       itemListElement: data!.jobs[cat.slug].map((job) => ({
@@ -341,17 +341,17 @@ export default async function CountryPage({ params }: Props) {
 
         <section className="mb-12 rounded-xl border border-gray-200 bg-white px-6 py-8 text-center">
           <h2 className="text-xl font-bold text-gray-900 mb-2">
-            Cost of Living & Take-Home Pay in {c.name}
+            More Resources for {c.name}
           </h2>
           <p className="text-sm text-gray-500 mb-6">
-            See how far your salary goes in {c.name} and estimate your take-home pay after taxes.
+            Explore cost of living, take-home pay, and ways to earn money online in {c.name}.
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             <Link
               href={`/cost-of-living-${c.slug}`}
               className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-emerald-700 transition-colors"
             >
-              Cost of Living in {c.name}
+              Cost of Living
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
               </svg>
@@ -360,7 +360,16 @@ export default async function CountryPage({ params }: Props) {
               href={`/take-home-pay-${c.slug}`}
               className="inline-flex items-center gap-2 rounded-lg border border-emerald-600 bg-white px-5 py-2.5 text-sm font-semibold text-emerald-600 hover:bg-emerald-50 transition-colors"
             >
-              Take-Home Pay in {c.name}
+              Take-Home Pay
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </Link>
+            <Link
+              href={`/earn-money-online-${c.slug}`}
+              className="inline-flex items-center gap-2 rounded-lg border border-emerald-600 bg-white px-5 py-2.5 text-sm font-semibold text-emerald-600 hover:bg-emerald-50 transition-colors"
+            >
+              Earn Online
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
               </svg>

@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const cat = getCategoryBySlug(slug);
   if (!cat) return {};
   return {
-    title: `Best Paying Jobs in ${cat.name} (${getCurrentYear()}) in Every Country | BestPayingJobs.net`,
+    title: `Best Paying Jobs in ${cat.name} ${getCurrentYear()} in Every Country | BestPayingJobs.net`,
     description: `Discover the highest paying ${cat.name.toLowerCase()} jobs in 195 countries. Compare salaries, find top careers, and make data-driven career decisions.`,
     keywords: [
       `${cat.name.toLowerCase()} jobs`,
@@ -38,7 +38,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       canonical: `https://www.bestpayingjobs.net/jobs/${slug}`,
     },
     openGraph: {
-      title: `Best Paying Jobs in ${cat.name} (${getCurrentYear()})`,
+      title: `Best Paying Jobs in ${cat.name} ${getCurrentYear()}`,
       description: `Discover the highest paying ${cat.name.toLowerCase()} jobs across 195 countries.`,
       images: [
         {
@@ -51,7 +51,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
     twitter: {
       card: "summary_large_image",
-      title: `Best Paying Jobs in ${cat.name} (${getCurrentYear()})`,
+      title: `Best Paying Jobs in ${cat.name} ${getCurrentYear()}`,
       description: `Discover the highest paying ${cat.name.toLowerCase()} jobs across 195 countries.`,
       images: ["/og/default.webp"],
     },

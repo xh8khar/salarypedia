@@ -9,6 +9,7 @@ const links = [
   { href: "/cost-of-living", label: "Cost of Living" },
   { href: "/take-home-pay", label: "Take-Home Pay" },
   { href: "/part-time-jobs", label: "Part-Time Jobs" },
+  { href: "/earn-money-online", label: "Earn Online" },
   { href: "/calculator", label: "Calculators" },
   { href: "/blog", label: "Blog" },
 ];

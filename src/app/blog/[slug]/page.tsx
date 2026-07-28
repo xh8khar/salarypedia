@@ -67,7 +67,7 @@ export default async function BlogPost({ params }: Props) {
   const siteUrl = "https://www.bestpayingjobs.net";
 
   const postIndex = posts.findIndex((p) => p.id === slug);
-  const pubDate = new Date(2026, 0, 1 + postIndex);
+  const pubDate = new Date(year, 0, 1 + postIndex);
   const datePublished = pubDate.toISOString().split("T")[0];
   const dateModified = datePublished;
 

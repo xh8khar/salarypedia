@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { getCountries, getCurrentYear } from "@/lib/db";
+import { getCountries, getCurrentYear, CURRENT_YEAR } from "@/lib/db";
 import { getAverageSalaryData } from "@/lib/average-salary-data";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -8,8 +8,10 @@ import FlagImage from "@/components/FlagImage";
 
 const siteUrl = "https://www.bestpayingjobs.net";
 
+const avgSalTitle = `Average Salary by Country ${CURRENT_YEAR} | BestPayingJobs.net`;
+
 export const metadata: Metadata = {
-  title: "Average Salary by Country 2026 | BestPayingJobs.net",
+  title: avgSalTitle,
   description: "Compare average salaries across 195 countries. See annual and monthly salaries, salary distributions, and cost of living data for every country.",
   keywords: [
     "average salary by country",
@@ -22,7 +24,7 @@ export const metadata: Metadata = {
     canonical: `${siteUrl}/average-salary`,
   },
   openGraph: {
-    title: "Average Salary by Country 2026 | BestPayingJobs.net",
+    title: avgSalTitle,
     description: "Compare average salaries across 195 countries.",
     images: [
       {
@@ -35,7 +37,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Average Salary by Country 2026 | BestPayingJobs.net",
+    title: avgSalTitle,
     description: "Compare average salaries across 195 countries.",
     images: ["/og/default.webp"],
   },
@@ -66,7 +68,7 @@ export default function AverageSalaryIndex() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "CollectionPage",
-            name: `Average Salary by Country (${year})`,
+            name: `Average Salary by Country ${year}`,
             description: `Compare average salaries across ${countries.length} countries.`,
             url: `${siteUrl}/average-salary`,
           }),

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { getCountries, getCurrentYear } from "@/lib/db";
+import { getCountries, getCurrentYear, CURRENT_YEAR } from "@/lib/db";
 import colData from "@/data/col-index.json";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -10,8 +10,10 @@ const colIndex = colData as Record<string, number>;
 
 const siteUrl = "https://www.bestpayingjobs.net";
 
+const colTitle = `Cost of Living by Country ${CURRENT_YEAR} | BestPayingJobs.net`;
+
 export const metadata: Metadata = {
-  title: "Cost of Living by Country 2026 | BestPayingJobs.net",
+  title: colTitle,
   description: "Compare cost of living indexes across 195 countries. See how salaries and purchasing power compare in every country worldwide.",
   keywords: [
     "cost of living index",
@@ -24,7 +26,7 @@ export const metadata: Metadata = {
     canonical: `${siteUrl}/cost-of-living`,
   },
   openGraph: {
-    title: "Cost of Living by Country 2026 | BestPayingJobs.net",
+    title: colTitle,
     description: "Compare cost of living indexes across 195 countries.",
     images: [
       {
@@ -37,7 +39,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Cost of Living by Country 2026 | BestPayingJobs.net",
+    title: colTitle,
     description: "Compare cost of living indexes across 195 countries.",
     images: ["/og/default.webp"],
   },
@@ -68,7 +70,7 @@ export default function CostOfLivingIndex() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "CollectionPage",
-            name: `Cost of Living by Country (${year})`,
+            name: `Cost of Living by Country ${year}`,
             description: `Compare cost of living indexes across ${countries.length} countries.`,
             url: `${siteUrl}/cost-of-living`,
           }),

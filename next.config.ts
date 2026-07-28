@@ -36,6 +36,11 @@ const nextConfig: NextConfig = {
         destination: "/average-salary-:slug",
         permanent: true,
       },
+      {
+        source: "/earn-money-online/:slug",
+        destination: "/earn-money-online-:slug",
+        permanent: true,
+      },
     ];
   },
   async rewrites() {
@@ -71,6 +76,10 @@ const nextConfig: NextConfig = {
       {
         source: "/api/jobs/:path*",
         destination: "/api/jobs/:path*.json",
+      },
+      {
+        source: "/earn-money-online-:slug",
+        destination: "/earn-money-online/:slug",
       },
       {
         source: "/api/average-salary/:path*",
