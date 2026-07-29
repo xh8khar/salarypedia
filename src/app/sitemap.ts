@@ -29,6 +29,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${siteUrl}/cost-of-living`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },
     { url: `${siteUrl}/take-home-pay`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },
     { url: `${siteUrl}/earn-money-online`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },
+    // Only the tool itself — country pairs are handled client-side via query
+    // params, so there are no per-pair URLs to list.
+    { url: `${siteUrl}/compare`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
     { url: `${siteUrl}/about`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.5 },
     { url: `${siteUrl}/contact`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.5 },
     { url: `${siteUrl}/privacy`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.3 },

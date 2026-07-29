@@ -17,6 +17,7 @@ const columns: { title: string; links: { href: string; label: string }[] }[] = [
   {
     title: "Tools",
     links: [
+      { href: "/compare/", label: "Compare countries" },
       { href: "/calculator/", label: "Calculators" },
       { href: "/take-home-pay/", label: "Take-home pay" },
       { href: "/salary-increase-letter/", label: "Raise letters" },

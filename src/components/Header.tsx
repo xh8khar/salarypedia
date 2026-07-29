@@ -20,6 +20,7 @@ const groups: { label: string; links: NavLink[] }[] = [
   {
     label: "Tools",
     links: [
+      { href: "/compare", label: "Compare Countries", desc: "See which of two countries pays more" },
       { href: "/calculator", label: "Calculators", desc: "20 salary and money calculators" },
       { href: "/take-home-pay", label: "Take-Home Pay", desc: "Salary after tax by country" },
       { href: "/salary-increase-letter", label: "Raise Letters", desc: "Templates that get answered" },
