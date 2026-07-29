@@ -7,6 +7,8 @@ import Footer from "@/components/Footer";
 import ShareButtons from "@/components/ShareButtons";
 import { posts, getPost, paragraphs, readingTime } from "@/lib/blog";
 import { blogKeywords } from "@/lib/keywords";
+import { getAuthor, authorSchema, reviewPolicy, lastReviewed } from "@/lib/authors";
+import { AuthorByline, AuthorCard } from "@/components/AuthorByline";
 import type { Metadata } from "next";
 
 interface Props {
@@ -79,8 +81,11 @@ export default async function BlogPost({ params }: Props) {
   const postIndex = posts.findIndex((p) => p.id === slug);
   const pubDate = new Date(year, 0, 1 + postIndex);
   const datePublished = pubDate.toISOString().split("T")[0];
-  const dateModified = datePublished;
+  // The articles were last rewritten and checked against source data on the
+  // editorial review date, which is what dateModified should reflect.
+  const dateModified = lastReviewed > datePublished ? lastReviewed : datePublished;
 
+  const author = getAuthor();
   const readTime = readingTime(post);
   const related = posts.filter((p) => p.id !== post.id && p.category === post.category).slice(0, 3);
 
@@ -100,10 +105,7 @@ export default async function BlogPost({ params }: Props) {
     headline: post.title,
     description: post.summary,
     articleSection: post.category,
-    author: {
-      "@type": "Organization",
-      name: "BestPayingJobs.net",
-    },
+    author: authorSchema(author, siteUrl),
     publisher: {
       "@type": "Organization",
       name: "BestPayingJobs.net",
@@ -155,7 +157,6 @@ export default async function BlogPost({ params }: Props) {
             <span className="px-2.5 py-1 rounded-full bg-jade/15 text-jade text-[11px] font-bold uppercase tracking-wider">
               {post.category}
             </span>
-            <span className="text-xs text-chalk/45">{readTime}</span>
           </div>
 
           <h1 className="font-display text-3xl sm:text-4xl lg:text-[2.75rem] font-extrabold text-chalk leading-[1.12]">
@@ -163,7 +164,17 @@ export default async function BlogPost({ params }: Props) {
           </h1>
           <p className="mt-5 text-lg text-chalk/60 leading-relaxed">{post.summary}</p>
 
-          <div className="mt-7">
+          <div className="mt-7 pt-6 border-t border-chalk/10">
+            <AuthorByline
+              author={author}
+              published={datePublished}
+              updated={dateModified}
+              readTime={readTime}
+              onDark
+            />
+          </div>
+
+          <div className="mt-6">
             <ShareButtons title={post.title} onDark />
           </div>
         </div>
@@ -296,6 +307,8 @@ export default async function BlogPost({ params }: Props) {
 
         {/* Footer of article */}
         <div className="mt-12 pt-8 border-t border-gray-200 space-y-8">
+          <AuthorCard author={author} policy={reviewPolicy} />
+
           <ShareButtons title={post.title} />
 
           {related.length > 0 && (
