@@ -19,6 +19,7 @@ import ChartSection from "@/components/ChartSection";
 import CategoryAccordion from "@/components/CategoryAccordion";
 import { seededShuffle } from "@/lib/shuffle";
 import posts from "@/data/blog-posts.json";
+import { costOfLivingKeywords } from "@/lib/keywords";
 
 const colData = colIndex as Record<string, number>;
 
@@ -48,14 +49,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `Cost of Living in ${c.name} ${year} | COL Index & Adjusted Salaries | BestPayingJobs.net`,
     description: `Cost of living in ${c.name} is ${index}% of the US national average in ${year}. See how far your salary goes, compare purchasing power across categories.`,
-    keywords: [
-      `cost of living in ${c.name}`,
-      `${c.name} COL index`,
-      `${c.name} living expenses`,
-      `${c.name} purchasing power`,
-      `${c.name} cost of living comparison`,
-      `living in ${c.name} cost`,
-    ],
+    keywords: costOfLivingKeywords({ country: c.name, year: getCurrentYear() }),
     alternates: {
       canonical: `https://www.bestpayingjobs.net/cost-of-living-${c.slug}`,
     },
@@ -218,10 +212,10 @@ export default async function CostOfLivingPage({ params }: Props) {
                       <td className="py-3 px-4 text-gray-400 font-medium">{job.rank}</td>
                       <td className="py-3 px-4 font-medium text-gray-900">{job.title}</td>
                       <td className="py-3 px-4 text-right text-gray-700">
-                        {Intl.NumberFormat("en-US").format(job.salaryMin)}–{Intl.NumberFormat("en-US").format(job.salaryMax)} {data!.currency}
+                        {Intl.NumberFormat("en-US").format(job.salaryMin)}–{Intl.NumberFormat("en-US").format(job.salaryMax)} {data!.currency}/mo
                       </td>
                       <td className="py-3 px-4 text-right text-gray-700">
-                        ${Intl.NumberFormat("en-US").format(job.salaryMinUSD)}–${Intl.NumberFormat("en-US").format(job.salaryMaxUSD)}
+                        ${Intl.NumberFormat("en-US").format(job.salaryMinUSD)}–${Intl.NumberFormat("en-US").format(job.salaryMaxUSD)}/mo
                       </td>
                       <td className="py-3 px-4 text-right font-semibold text-emerald-600">
                         {Intl.NumberFormat("en-US").format(job.colSalaryMinLocal)}–{Intl.NumberFormat("en-US").format(job.colSalaryMaxLocal)} {data!.currency}

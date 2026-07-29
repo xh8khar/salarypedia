@@ -19,6 +19,7 @@ import posts from "@/data/blog-posts.json";
 import { getCitiesByCountry } from "@/lib/city";
 import { seededShuffle } from "@/lib/shuffle";
 import { occupationListSchema, occupationSchema, faqPageSchema } from "@/lib/schema";
+import { countryKeywords } from "@/lib/keywords";
 
 export async function generateStaticParams() {
   const countries = getCountries();
@@ -47,15 +48,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `Best Paying Jobs in ${c.name} ${year} | BestPayingJobs.net`,
     description: `Discover the highest paying jobs in ${c.name} for ${year}. Top careers include ${top3}. Compare salaries across 30+ career categories in ${c.name}.`,
-    keywords: [
-      `best paying jobs in ${c.name}`,
-      `highest paying jobs ${c.name}`,
-      `${c.name} salary data`,
-      `top careers in ${c.name}`,
-      `${c.name} job market`,
-      `${c.name} employment`,
-      `salary in ${c.name}`,
-    ],
+    keywords: countryKeywords({
+      country: c.name,
+      year,
+      currency: data?.currency ?? c.currency,
+      topJobs: data?.top10?.slice(0, 3).map((j) => j.title) ?? [],
+      categories: getCategories()
+        .filter((cat) => (data?.jobs[cat.slug]?.length ?? 0) > 0)
+        .slice(0, 2)
+        .map((cat) => cat.name),
+    }),
     alternates: {
       canonical: `https://www.bestpayingjobs.net/best-paying-jobs-in-${c.slug}`,
     },
@@ -156,7 +158,7 @@ export default async function CountryPage({ params }: Props) {
     {
       q: `What is the highest paying job in ${c.name}?`,
       a: top10[0]
-        ? `The highest paying job in ${c.name} is ${top10[0].title}, with a salary range of ${fmt(top10[0].salaryMin)} to ${fmt(top10[0].salaryMax)} ${currency} per year. It is followed by ${top10[1]?.title ?? "other senior professional roles"}${top10[2] ? ` and ${top10[2].title}` : ""}.`
+        ? `The highest paying job in ${c.name} is ${top10[0].title}, with a salary range of ${fmt(top10[0].salaryMin)} to ${fmt(top10[0].salaryMax)} ${currency} per month. It is followed by ${top10[1]?.title ?? "other senior professional roles"}${top10[2] ? ` and ${top10[2].title}` : ""}.`
         : `Salary data for ${c.name} covers multiple career categories. Browse the sections above to find specific job salaries.`,
     },
     {
@@ -178,7 +180,7 @@ export default async function CountryPage({ params }: Props) {
   // A short, self-contained answer near the top of the page is the format
   // Google most often lifts for a featured snippet.
   const snippetAnswer = top10[0]
-    ? `The highest paying job in ${c.name} is ${top10[0].title}, earning between ${fmt(top10[0].salaryMin)} and ${fmt(top10[0].salaryMax)} ${currency} per year. Other top-paying roles include ${top10
+    ? `The highest paying job in ${c.name} is ${top10[0].title}, earning between ${fmt(top10[0].salaryMin)} and ${fmt(top10[0].salaryMax)} ${currency} per month. Other top-paying roles include ${top10
         .slice(1, 4)
         .map((j) => j.title)
         .join(", ")}. Salaries below cover ${trackedCategories} career categories in ${c.name}, updated for ${year}.`
@@ -260,7 +262,7 @@ export default async function CountryPage({ params }: Props) {
               </div>
               <div className="rounded-xl bg-chalk/5 border border-chalk/10 px-4 py-3">
                 <dt className="text-[11px] font-medium uppercase tracking-wider text-chalk/45">
-                  Highest salary
+                  Highest salary / month
                 </dt>
                 <dd className="mt-1 numeric text-sm font-bold text-jade">
                   {Intl.NumberFormat("en-US").format(top10[0].salaryMax)}{" "}
@@ -298,35 +300,6 @@ export default async function CountryPage({ params }: Props) {
               Top 10 Highest Paying Jobs in {c.name}
             </h2>
 
-            {/* Table markup gives Google a structure it can lift directly into a
-                snippet; the detailed cards below carry the descriptions. */}
-            <div className="mb-8 card overflow-x-auto">
-              <table className="w-full text-left border-collapse">
-                <caption className="sr-only">
-                  Highest paying jobs in {c.name} in {year} with annual salary ranges in{" "}
-                  {currency}
-                </caption>
-                <thead>
-                  <tr className="bg-gray-50 border-b border-gray-200">
-                    <th scope="col" className="px-4 py-3 text-[11px] font-bold uppercase tracking-wider text-gray-400 w-14">#</th>
-                    <th scope="col" className="px-4 py-3 text-[11px] font-bold uppercase tracking-wider text-gray-400">Job title</th>
-                    <th scope="col" className="px-4 py-3 text-[11px] font-bold uppercase tracking-wider text-gray-400 text-right whitespace-nowrap">Salary range ({currency})</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-gray-100">
-                  {top10.map((job) => (
-                    <tr key={job.rank} className="hover:bg-emerald-50/40 transition-colors">
-                      <td className="px-4 py-3 numeric text-sm text-gray-400">{job.rank}</td>
-                      <td className="px-4 py-3 text-sm font-semibold text-gray-900">{job.title}</td>
-                      <td className="px-4 py-3 numeric text-sm text-emerald-600 font-semibold text-right whitespace-nowrap">
-                        {fmt(job.salaryMin)} &ndash; {fmt(job.salaryMax)}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-
             {/* Ordered list so the ranking is machine-readable, not just visual. */}
             <ol className="space-y-4">
               {top10.map((job) => (
@@ -341,7 +314,7 @@ export default async function CountryPage({ params }: Props) {
                     <h3 className="font-bold text-gray-900">{job.title}</h3>
                   </div>
                   <p className="text-sm font-semibold text-emerald-600 ml-10 mb-2">
-                    Salary Range: from {fmt(job.salaryMin)} {currency} to {fmt(job.salaryMax)} {currency}
+                    Monthly salary: {fmt(job.salaryMin)} to {fmt(job.salaryMax)} {currency} per month
                   </p>
                   <p className="text-sm text-gray-500 ml-10">
                     {job.description}

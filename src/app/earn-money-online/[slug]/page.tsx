@@ -17,6 +17,7 @@ import Footer from "@/components/Footer";
 import ShareButtons from "@/components/ShareButtons";
 import FlagImage from "@/components/FlagImage";
 import posts from "@/data/blog-posts.json";
+import { earnOnlineKeywords } from "@/lib/keywords";
 
 export async function generateStaticParams() {
   const countries = getCountries();
@@ -46,14 +47,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: resolve(cfg.metaTitle),
     description: resolve(cfg.metaDescription),
-    keywords: [
-      `earn money online ${c.name}`,
-      `work from home ${c.name}`,
-      `online income ${c.name}`,
-      `freelance ${c.name}`,
-      `remote jobs ${c.name}`,
-      `make money online in ${c.name}`,
-    ],
+    keywords: earnOnlineKeywords({ country: c.name, year: getCurrentYear() }),
     alternates: {
       canonical: `https://www.bestpayingjobs.net/earn-money-online-${c.slug}`,
     },

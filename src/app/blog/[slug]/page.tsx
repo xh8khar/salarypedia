@@ -6,6 +6,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ShareButtons from "@/components/ShareButtons";
 import { posts, getPost, paragraphs, readingTime } from "@/lib/blog";
+import { blogKeywords } from "@/lib/keywords";
 import type { Metadata } from "next";
 
 interface Props {
@@ -31,13 +32,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${post.title} | BestPayingJobs.net`,
     description: post.summary,
-    keywords: [
-      post.title.toLowerCase(),
-      `salary guide`,
-      `career advice`,
-      `job search tips`,
-      `salary negotiation`,
-    ],
+    keywords: blogKeywords({
+      title: post.title,
+      category: post.category,
+      year: getCurrentYear(),
+      // Section headings are the article's own topic terms — better signals
+      // than a generic list repeated across all 57 posts.
+      terms: post.sections.slice(0, 4).map((s) => s.h.replace(/^\d+\.\s*/, "").toLowerCase()),
+    }),
     alternates: {
       canonical: `https://www.bestpayingjobs.net/blog/${slug}`,
     },

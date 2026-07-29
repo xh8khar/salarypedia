@@ -6,6 +6,7 @@ import { getCityBySlug, cityMultiplier } from "@/lib/city";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ShareButtons from "@/components/ShareButtons";
+import { cityKeywords } from "@/lib/keywords";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -24,13 +25,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `Best Paying Jobs in ${city.name}, ${city.countryName} ${year}`,
     description: `Discover the highest paying jobs in ${city.name}, ${city.countryName} for ${year}. Compare salaries across 30+ career categories.`,
-    keywords: [
-      `${city.name} salary`,
-      `${city.name} average salary`,
-      `${city.name} jobs`,
-      `${city.name} income`,
-      `${city.name} ${city.countryName} salary`,
-    ],
+    keywords: cityKeywords({
+      city: city.name,
+      country: city.countryName,
+      year: getCurrentYear(),
+    }),
     alternates: {
       canonical: `https://www.bestpayingjobs.net/salary-in-${slug}`,
     },
@@ -124,7 +123,7 @@ export default async function CityPage({ params }: Props) {
                     <h3 className="font-bold text-gray-900">{job.title}</h3>
                   </div>
                   <p className="text-sm font-semibold text-emerald-600 ml-10 mb-2">
-                    Salary Range: from {Intl.NumberFormat("en-US").format(job.salaryMin)} {data.currency} to {Intl.NumberFormat("en-US").format(job.salaryMax)} {data.currency}
+                    Monthly salary: {Intl.NumberFormat("en-US").format(job.salaryMin)} to {Intl.NumberFormat("en-US").format(job.salaryMax)} {data.currency} per month
                   </p>
                   <p className="text-sm text-gray-500 ml-10">{job.description}</p>
                 </div>
@@ -202,7 +201,7 @@ export default async function CityPage({ params }: Props) {
                             <span className="text-sm text-gray-700">{job.title}</span>
                           </div>
                           <span className="text-sm font-semibold text-gray-900 shrink-0 ml-3">
-                            {data.currency} {Intl.NumberFormat("en-US").format(job.salaryMin)} – {Intl.NumberFormat("en-US").format(job.salaryMax)}
+                            {data.currency} {Intl.NumberFormat("en-US").format(job.salaryMin)} – {Intl.NumberFormat("en-US").format(job.salaryMax)}/mo
                           </span>
                         </li>
                       ))}

@@ -38,8 +38,10 @@ export default function JobCard({
         )}
       </span>
 
+      {/* Stored figures are monthly — see lib/schema.ts for why this matters. */}
       <span className="numeric text-sm font-bold text-emerald-600 shrink-0 whitespace-nowrap">
         {currency} {formatSalary(job.salaryMax)}
+        <span className="text-gray-400 font-medium">/mo</span>
       </span>
     </li>
   );

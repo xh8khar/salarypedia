@@ -21,6 +21,7 @@ import ChartSection from "@/components/ChartSection";
 import CategoryAccordion from "@/components/CategoryAccordion";
 import { seededShuffle } from "@/lib/shuffle";
 import posts from "@/data/blog-posts.json";
+import { takeHomePayKeywords } from "@/lib/keywords";
 
 const colData = colIndex as Record<string, number>;
 
@@ -49,14 +50,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `Take-Home Pay in ${c.name} ${year} | After-Tax Salary Calculator | BestPayingJobs.net`,
     description: `Calculate take-home pay in ${c.name} for ${year}. See gross-to-net salary breakdowns, tax rates, and how much you keep after deductions.`,
-    keywords: [
-      `take home pay ${c.name}`,
-      `salary after tax ${c.name}`,
-      `net salary ${c.name}`,
-      `${c.name} tax rates`,
-      `${c.name} income tax calculator`,
-      `${c.name} salary deduction`,
-    ],
+    keywords: takeHomePayKeywords({
+      country: c.name,
+      year: getCurrentYear(),
+      currency: c.currency,
+    }),
     alternates: {
       canonical: `https://www.bestpayingjobs.net/take-home-pay-${c.slug}`,
     },

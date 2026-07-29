@@ -7,6 +7,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ShareButtons from "@/components/ShareButtons";
 import { BarChart, DistributionChart, GenderChart } from "@/components/SalaryChart";
+import { averageSalaryKeywords } from "@/lib/keywords";
 const siteUrl = "https://www.bestpayingjobs.net";
 
 export async function generateStaticParams() {
@@ -24,11 +25,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `Average Salary in ${country.name} ${d.year} | BestPayingJobs.net`,
     description: `The average salary in ${country.name} is ${f(d.averageSalary.annual)} ${country.currency} per year (${f(d.averageSalary.monthly)} ${country.currency} per month). Salary range: ${f(d.salaryDistribution.minimum)} - ${f(d.salaryDistribution.maximum)} ${country.currency}.`,
-    keywords: [
-      `average salary in ${country.name}`, `${country.name} salary`,
-      `${country.name} average income`, `salary in ${country.name}`,
-      `${country.name} median salary`,
-    ],
+    keywords: averageSalaryKeywords({
+      country: country.name,
+      year: d.year,
+      currency: country.currency,
+    }),
     alternates: { canonical: `${siteUrl}/average-salary-${country.slug}` },
     openGraph: {
       title: `Average Salary in ${country.name} ${d.year} | BestPayingJobs.net`,

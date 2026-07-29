@@ -15,6 +15,7 @@ import PartTimeJobs from "@/components/PartTimeJobs";
 import ShareButtons from "@/components/ShareButtons";
 import { getCitiesByCountry } from "@/lib/city";
 import posts from "@/data/blog-posts.json";
+import { partTimeKeywords } from "@/lib/keywords";
 
 export async function generateStaticParams() {
   const countries = getCountries();
@@ -51,13 +52,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: resolve(cfg.metaTitle),
     description: resolve(cfg.metaDescription),
-    keywords: [
-      `part time jobs ${c.name}`,
-      `${c.name} student jobs`,
-      `hourly jobs in ${c.name}`,
-      `freelance work ${c.name}`,
-      `${c.name} international student work`,
-    ],
+    keywords: partTimeKeywords({ country: c.name, year: getCurrentYear() }),
     alternates: {
       canonical: `https://www.bestpayingjobs.net/part-time-jobs-in-${c.slug}`,
     },

@@ -18,15 +18,18 @@ export interface OccupationInput {
 }
 
 /**
- * `unitText` follows what the page states visibly. If the stored figures are
- * ever reinterpreted (see formatAnnual in lib/salary), this must move with them
- * — structured data that contradicts the visible page is a guidelines breach.
+ * Stored salary figures are MONTHLY. The generator scales every country from
+ * Nepal's baseline, whose own average is monthly USD (see
+ * scripts/regenerate-realistic.mjs and real-average-salaries.json), and
+ * lib/salary's formatAnnual multiplies by 12 to present an annual figure.
+ * `unitText` must therefore stay MONTH unless the underlying data changes —
+ * structured data that contradicts the source is a guidelines breach.
  */
 export function occupationSchema(
   job: OccupationInput,
   currency: string,
   countryName: string,
-  unitText: "YEAR" | "MONTH" = "YEAR"
+  unitText: "YEAR" | "MONTH" = "MONTH"
 ) {
   return {
     "@type": "Occupation",
@@ -54,7 +57,7 @@ export function occupationListSchema(
   jobs: (OccupationInput & { rank?: number })[],
   currency: string,
   countryName: string,
-  unitText: "YEAR" | "MONTH" = "YEAR"
+  unitText: "YEAR" | "MONTH" = "MONTH"
 ) {
   return {
     "@type": "ItemList",
