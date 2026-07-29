@@ -1,4 +1,4 @@
-import { getCountries, getCountryJobs } from "@/lib/db";
+import { getCountries, getCountryJobs, getCategories } from "@/lib/db";
 import colData from "@/data/col-index.json";
 import avgData from "@/data/real-average-salaries.json";
 import fxData from "@/data/fx-rates.json";
@@ -35,9 +35,29 @@ export interface CompareCountry {
   j: [number, number][];
 }
 
+export interface CompareCategory {
+  slug: string;
+  name: string;
+}
+
 export interface ComparePayload {
   titles: string[];
   countries: CompareCountry[];
+  categories: CompareCategory[];
+}
+
+/**
+ * Shape of /api/jobs/{slug}.json, fetched on demand by the comparison tool.
+ * The full per-country job set is 310 roles across 31 categories; embedding
+ * that for all 195 countries would be roughly a megabyte, so the client pulls
+ * only the two countries actually being compared.
+ */
+export interface CountryJobsApi {
+  currency: string;
+  jobs: Record<
+    string,
+    { rank: number; title: string; salaryMin: number; salaryMax: number }[]
+  >;
 }
 
 export function buildComparePayload(): ComparePayload {
@@ -64,5 +84,9 @@ export function buildComparePayload(): ComparePayload {
     });
   }
 
-  return { titles, countries: rows };
+  return {
+    titles,
+    countries: rows,
+    categories: getCategories().map((c) => ({ slug: c.slug, name: c.name })),
+  };
 }

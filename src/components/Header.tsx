@@ -57,11 +57,12 @@ export default function Header() {
   }, [open]);
 
   return (
-    <header
-      className={`sticky top-0 z-50 glass transition-shadow duration-300 ${
-        scrolled ? "border-b border-gray-200 shadow-sm shadow-gray-900/5" : "border-b border-transparent"
-      }`}
-    >
+    <>
+      <header
+        className={`sticky top-0 z-50 glass transition-shadow duration-300 ${
+          scrolled ? "border-b border-gray-200 shadow-sm shadow-gray-900/5" : "border-b border-transparent"
+        }`}
+      >
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="flex h-16 items-center justify-between gap-4">
           <Logo />
@@ -124,10 +125,18 @@ export default function Header() {
           </div>
         </div>
       </div>
+      </header>
 
+      {/* Rendered as a sibling of <header>, never inside it. The header carries
+          `backdrop-filter`, which makes it the containing block and a stacking
+          context for fixed descendants — in WebKit that stops a nested fixed
+          drawer painting at all, so the menu silently does nothing on iOS.
+          Height uses dvh so the iOS toolbar cannot cut off the last items. */}
       {open && (
-        <div className="lg:hidden fixed inset-x-0 top-16 bottom-0 bg-white border-t border-gray-200 overflow-y-auto overscroll-contain">
-          <nav className="px-4 py-5 space-y-6">
+        <div
+          className="lg:hidden fixed inset-x-0 top-16 z-40 bg-white border-t border-gray-200 overflow-y-auto overscroll-contain h-[calc(100vh-4rem)] h-[calc(100dvh-4rem)]"
+        >
+          <nav className="px-4 py-5 space-y-6 pb-24">
             {groups.map((group) => (
               <div key={group.label}>
                 <p className="px-3 text-[11px] font-bold uppercase tracking-wider text-gray-400 mb-1.5">
@@ -172,7 +181,7 @@ export default function Header() {
           </nav>
         </div>
       )}
-    </header>
+    </>
   );
 }
 

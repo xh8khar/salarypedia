@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "reac
 import Link from "next/link";
 import { flagUrl } from "@/lib/flag";
 import type { ComparePayload, CompareCountry } from "@/lib/compare";
+import CategoryComparison from "@/components/CategoryComparison";
 
 /* ------------------------------------------------------------------ picker */
 
@@ -187,7 +188,7 @@ function setPairInUrl(aSlug: string, bSlug: string) {
 }
 
 export default function SalaryCompare({ payload }: { payload: ComparePayload }) {
-  const { titles, countries } = payload;
+  const { titles, countries, categories } = payload;
 
   const byCode = useMemo(() => new Map(countries.map((c) => [c.c, c])), [countries]);
   const bySlug = useMemo(() => new Map(countries.map((c) => [c.s, c])), [countries]);
@@ -368,6 +369,19 @@ export default function SalaryCompare({ payload }: { payload: ComparePayload }) 
         comparable by eye &mdash; the percentages above handle that conversion. Salary figures are
         monthly estimates.
       </p>
+
+      {/* Full 310-role breakdown, loaded on demand for the selected pair. */}
+      <section className="mt-14">
+        <h2 className="font-display text-2xl font-bold text-gray-900">
+          Every job category compared
+        </h2>
+        <p className="mt-2 mb-6 text-gray-500 leading-relaxed">
+          All {categories.length} career categories and 310 roles in {a.n} and {b.n}, side by side.
+          The <span className="font-semibold text-emerald-600">highlighted</span> figure in each row
+          is the higher of the two once converted to a common basis.
+        </p>
+        <CategoryComparison a={a} b={b} categories={categories} />
+      </section>
 
       <div className="mt-6 flex flex-wrap gap-2">
         <Link href={`/cost-of-living-${a.s}/`} className="text-xs bg-gray-100 hover:bg-emerald-100 hover:text-emerald-700 px-3 py-1.5 rounded-full transition-colors">
