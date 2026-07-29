@@ -5,7 +5,6 @@ import { getCategorySalaries } from "@/lib/category-stats";
 import { toUSD, formatAnnual, formatMonthly } from "@/lib/salary";
 import { seededShuffle } from "@/lib/shuffle";
 import CategorySalaryChart from "@/components/CategorySalaryChart";
-import StaticSalaryChart from "@/components/StaticSalaryChart";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FlagImage from "@/components/FlagImage";
@@ -158,11 +157,6 @@ export default async function JobsByCategoryPage({ params }: Props) {
           <h2 className="text-2xl font-bold text-gray-900 mb-6">Highest Paying Countries</h2>
           <div className="bg-gray-50 rounded-xl p-6 border border-gray-100">
             <CategorySalaryChart data={chartData} />
-            <noscript>
-              <div className="mt-4">
-                <StaticSalaryChart data={chartData} category={cat.name} />
-              </div>
-            </noscript>
           </div>
         </div>
       </section>

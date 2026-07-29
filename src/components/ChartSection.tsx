@@ -53,7 +53,7 @@ export default function ChartSection({
             Salary Overview — Top 10 Jobs
           </h2>
           <p className="text-sm text-gray-400 mt-0.5">
-            Monthly salary in {currency} &middot; BestPayingJobs.net
+            Monthly salary in {currency}{" "}&middot; BestPayingJobs.net
           </p>
         </div>
         <div className="flex items-center gap-2">
@@ -71,14 +71,14 @@ export default function ChartSection({
         </div>
       </div>
 
-      <div
-        ref={chartRef}
-        className="bg-white rounded-xl border border-gray-200 p-3 sm:p-4 relative"
-      >
-        <div className="absolute top-2 right-2 sm:top-3 sm:right-3 text-[9px] text-gray-300 font-medium tracking-wider select-none pointer-events-none">
-          BestPayingJobs.net
-        </div>
+      {/* The credit sits after the chart rather than floating in the corner:
+          the bars now start at the very top of the card, so an absolutely
+          positioned watermark landed on top of the first row's figure. */}
+      <div className="bg-white rounded-xl border border-gray-200 p-4 sm:p-5" ref={chartRef}>
         <CountrySalaryChart jobs={jobs} currency={currency} />
+        <p className="text-right text-[10px] text-gray-400 italic mt-3 select-none">
+          BestPayingJobs.net
+        </p>
       </div>
     </section>
   );

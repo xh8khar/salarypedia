@@ -374,31 +374,58 @@ h1 {
 }
 
 /* ==========================================================================
-   Recharts
+   Bar charts
+
+   Drawn with DOM elements instead of a plotting library, so every figure is
+   real selectable text, the charts render with JavaScript off, and they inherit
+   the theme rather than carrying their own hard-coded palette.
    ========================================================================== */
 
-.recharts-wrapper,
-.recharts-wrapper *,
-.recharts-surface,
-.recharts-surface * {
-  outline: none !important;
+.bar-track {
+  display: block;
+  border-radius: 999px;
+  background: var(--color-gray-100);
+  overflow: hidden;
 }
 
-.recharts-bar-rectangle:focus,
-.recharts-bar-rectangle:focus-visible,
-.recharts-bar-rectangle:focus-within {
-  outline: none !important;
+/* `--t` is the value's share of the largest in the set, 0–1, and intensity
+   climbs with it: the longest bar has to be the strongest one, since a pale
+   fill on the biggest number reads as a rendering fault. The flat background
+   colour is what engines without color-mix() fall back to. */
+.bar-fill {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background-color: var(--color-emerald-500);
+  background-image: linear-gradient(
+    90deg,
+    color-mix(
+      in oklab,
+      var(--color-emerald-700) calc(26% + var(--t, 1) * 74%),
+      var(--color-emerald-200)
+    ),
+    color-mix(
+      in oklab,
+      var(--color-emerald-500) calc(26% + var(--t, 1) * 74%),
+      var(--color-emerald-200)
+    )
+  );
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.22);
 }
 
-.recharts-sector:focus,
-.recharts-sector:focus-visible {
-  outline: none !important;
+/* Vertical variant. The fill is a flex child aligned to the end of a column,
+   so it always grows up from the baseline. */
+.col-track {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  border-radius: 0.5rem 0.5rem 0 0;
+  background: var(--color-gray-100);
+  overflow: hidden;
 }
 
-.recharts-cartesian-grid line {
-  stroke: var(--color-gray-200);
-}
-
-.recharts-text {
-  fill: var(--color-gray-500);
+.col-fill {
+  width: 100%;
+  border-radius: 0.5rem 0.5rem 0 0;
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.25);
 }

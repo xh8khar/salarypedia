@@ -2,15 +2,8 @@
 
 import { useState, useRef, useCallback } from "react";
 import { toPng } from "html-to-image";
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  Tooltip,
-  ResponsiveContainer,
-} from "recharts";
 import type { PartTimeJob } from "@/lib/part-time";
+import RankedBarChart from "./RankedBarChart";
 import ShareButtons from "./ShareButtons";
 
 const fmt = (v: number) => {
@@ -19,32 +12,7 @@ const fmt = (v: number) => {
   return v.toLocaleString();
 };
 
-const ChartTooltip = ({
-  active,
-  payload,
-}: {
-  active?: boolean;
-  payload?: any[];
-}) => {
-  if (!active || !payload?.length) return null;
-  const d = payload[0].payload;
-  return (
-    <div className="bg-white px-3 py-2.5 rounded-xl border border-gray-200 shadow-lg text-xs">
-      <p className="font-semibold text-gray-900 mb-1">{d.title}</p>
-      <div className="space-y-0.5 text-gray-600">
-        <p className="flex justify-between gap-4">
-          <span>Hourly</span>
-          <span className="font-medium text-emerald-600">{fmt(d.hourlyRate)}/hr</span>
-        </p>
-        <p className="flex justify-between gap-4">
-          <span>Monthly</span>
-          <span className="font-medium text-gray-900">{fmt(d.monthlySalary)}</span>
-        </p>
-        <p className="text-[10px] text-gray-400">{d.weeklyHours} hrs/week</p>
-      </div>
-    </div>
-  );
-};
+const group = (v: number) => new Intl.NumberFormat("en-US").format(Math.round(v));
 
 export default function PartTimeJobs({
   jobs,
@@ -61,11 +29,6 @@ export default function PartTimeJobs({
 }) {
   const [copied, setCopied] = useState(false);
   const chartRef = useRef<HTMLDivElement>(null);
-
-  if (jobs.length === 0) return null;
-
-  const chartData = [...jobs].sort((a, b) => b.monthlySalary - a.monthlySalary);
-  const maxSalary = chartData[0]?.monthlySalary ?? 1;
 
   const handleDownload = useCallback(async () => {
     if (!chartRef.current) return;
@@ -97,6 +60,12 @@ export default function PartTimeJobs({
     setTimeout(() => setCopied(false), 2000);
   }, [jobs, currency, countryName, year]);
 
+  // Placed after the hooks: an early return above them would make the hook
+  // order depend on the data, which React does not allow.
+  if (jobs.length === 0) return null;
+
+  const chartData = [...jobs].sort((a, b) => b.monthlySalary - a.monthlySalary);
+
   const shareUrl = `https://www.bestpayingjobs.net/part-time-jobs-in-${countrySlug}`;
   const shareTitle = `Part-Time Jobs in ${countryName} for International Students ${year} | BestPayingJobs.net`;
 
@@ -108,7 +77,7 @@ export default function PartTimeJobs({
             10 Highest Paying Part-time Jobs in {countryName} for International Students ({year})
           </h2>
           <p className="text-sm text-gray-400 mt-0.5">
-            {jobs[0]?.weeklyHours ?? 20} hours per week &middot; Monthly salary in {currency} &middot; BestPayingJobs.net
+            {jobs[0]?.weeklyHours ?? 20} hours per week &middot; Monthly salary in {currency}{" "}&middot; BestPayingJobs.net
           </p>
         </div>
         <div className="flex items-center gap-2">
@@ -138,49 +107,20 @@ export default function PartTimeJobs({
 
       <div
         ref={chartRef}
-        className="bg-white rounded-xl border border-gray-200 p-3 sm:p-4 mb-5 relative"
+        className="bg-white rounded-xl border border-gray-200 p-4 sm:p-5 mb-5"
       >
-        <div className="absolute top-2 right-2 sm:top-3 sm:right-3 text-[9px] text-gray-300 font-medium tracking-wider select-none pointer-events-none">
+        <RankedBarChart
+          caption={`Monthly pay in ${currency} for the ten highest paying part-time jobs, highest first.`}
+          items={chartData.map((j) => ({
+            label: j.title,
+            value: j.monthlySalary,
+            valueLabel: `${group(j.monthlySalary)} ${currency}`,
+            meta: `${group(j.hourlyRate)} ${currency}/hr · ${j.weeklyHours} hrs/week`,
+          }))}
+        />
+        <p className="text-right text-[10px] text-gray-400 italic mt-3 select-none">
           BestPayingJobs.net
-        </div>
-        <div className="w-full h-[400px] sm:h-[420px]">
-          <ResponsiveContainer width="100%" height="100%">
-            <BarChart
-              data={chartData}
-              layout="vertical"
-              margin={{ top: 6, right: 10, left: 6, bottom: 6 }}
-              barSize={20}
-            >
-              <XAxis
-                type="number"
-                domain={[0, maxSalary * 1.2]}
-                tick={{ fontSize: 10, fill: "#9ca3af" }}
-                tickFormatter={(v: number) => {
-                  if (v >= 1_000_000) return `${(v / 1_000_000).toFixed(1)}M`;
-                  if (v >= 1_000) return `${(v / 1_000).toFixed(0)}K`;
-                  return v.toLocaleString();
-                }}
-                axisLine={{ stroke: "#e5e7eb" }}
-                tickLine={false}
-              />
-              <YAxis
-                type="category"
-                dataKey="title"
-                tick={{ fontSize: 11, fill: "#374151", fontWeight: 500 }}
-                width={150}
-                axisLine={false}
-                tickLine={false}
-              />
-              <Tooltip content={<ChartTooltip />} cursor={{ fill: "#f0fdf4" }} />
-              <Bar
-                dataKey="monthlySalary"
-                fill="#059669"
-                radius={[0, 6, 6, 0]}
-                animationDuration={600}
-              />
-            </BarChart>
-          </ResponsiveContainer>
-        </div>
+        </p>
       </div>
     </section>
   );

@@ -3,7 +3,6 @@ import { getCountries, getCategories, getCountryJobs, getCurrentYear, CURRENT_YE
 import { getCategorySalaries } from "@/lib/category-stats";
 import { toUSD, formatAnnual, formatMonthly } from "@/lib/salary";
 import CategorySalaryChart from "@/components/CategorySalaryChart";
-import StaticSalaryChart from "@/components/StaticSalaryChart";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FlagImage from "@/components/FlagImage";
@@ -218,11 +217,6 @@ export default function AiMachineLearningJobsPage() {
           <p className="text-sm text-gray-500 mb-6">Which countries pay AI professionals the most in {CURRENT_YEAR}? The chart below shows average AI job salaries across the top 15 markets.</p>
           <div className="bg-gray-50 rounded-xl p-6 border border-gray-100">
             <CategorySalaryChart data={chartData} />
-            <noscript>
-              <div className="mt-4">
-                <StaticSalaryChart data={chartData} category="AI & Machine Learning" />
-              </div>
-            </noscript>
           </div>
         </div>
       </section>
