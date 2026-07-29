@@ -15,6 +15,7 @@ import {
 } from "@/lib/db";
 import { toUSD, formatAnnual } from "@/lib/salary";
 import { iconFor } from "@/lib/category-icons";
+import { faqPageSchema } from "@/lib/schema";
 import posts from "@/data/blog-posts.json";
 
 const homeTitle = `Best Paying Jobs in Every Country ${CURRENT_YEAR} | BestPayingJobs.net`;
@@ -156,6 +157,37 @@ export default function Home() {
     },
   };
 
+  const topJob = globalTopJobs[0];
+  const homeFaqs = [
+    {
+      q: "What is the highest paying job in the world?",
+      a: topJob
+        ? `Based on salary data from ${countries.length} countries, ${topJob.title} is the highest paying job worldwide, with a global average of ${formatAnnual(topJob.avgUSD)}. Specialist surgeons, senior executives and quantitative finance roles consistently occupy the top of the distribution.`
+        : "Specialist medical, senior executive and quantitative finance roles consistently occupy the top of the global salary distribution.",
+    },
+    {
+      q: "Which country pays the highest salaries?",
+      a: `${topCountries[0]?.name ?? "Switzerland"} leads on average pay across the roles we track, followed by ${topCountries
+        .slice(1, 4)
+        .map((c) => c.name)
+        .join(", ")}. Small, wealthy economies with concentrated high-value industries typically rank highest, though living costs there are also among the world's steepest.`,
+    },
+    {
+      q: "How do I compare salaries between two countries?",
+      a: "Compare take-home pay after local income tax and social contributions, then subtract realistic housing costs for the specific city rather than the national average. Finally, add the value of anything the state provides that you would otherwise buy privately, such as healthcare or childcare. Gross salaries alone are a poor guide.",
+    },
+    {
+      q: "Where does this salary data come from?",
+      a: "Figures are based on published research from the Economic Research Institute (ERI) and SalaryExpert, combined with cost-of-living indices and currency exchange rates. All numbers are estimates and vary with experience, employer, sector and location.",
+    },
+    {
+      q: "Is BestPayingJobs.net free to use?",
+      a: `Yes. Every page, including all ${countries.length} country guides and the salary calculators, is free and requires no account. The site is supported by advertising.`,
+    },
+  ];
+
+  const faqSchema = faqPageSchema(homeFaqs);
+
   const categoryListSchema = {
     "@context": "https://schema.org",
     "@type": "ItemList",
@@ -173,6 +205,7 @@ export default function Home() {
     <div className="flex flex-col min-h-screen bg-white">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(categoryListSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <Header />
 
       {/* ───────────────────────── Hero ───────────────────────── */}
@@ -522,7 +555,35 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-white py-8">
+      {/* ───────────────────── FAQ ───────────────────── */}
+      <section className="py-20 lg:py-24 bg-white">
+        <div className="mx-auto max-w-3xl px-6">
+          <div className="mb-10">
+            <span className="text-xs font-bold uppercase tracking-wider text-emerald-600">
+              Common questions
+            </span>
+            <h2 className="mt-2.5 text-3xl sm:text-4xl font-bold text-gray-900">
+              Salary questions, answered
+            </h2>
+          </div>
+
+          <div className="space-y-3">
+            {homeFaqs.map((f) => (
+              <details key={f.q} className="group card p-5 open:bg-emerald-50/30">
+                <summary className="flex items-center justify-between gap-4 cursor-pointer list-none text-[16px] font-semibold text-gray-900">
+                  {f.q}
+                  <svg className="w-4 h-4 text-gray-400 shrink-0 group-open:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.4}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </summary>
+                <p className="mt-3 text-[15px] text-gray-600 leading-relaxed">{f.a}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white py-8 border-t border-gray-100">
         <div className="mx-auto max-w-3xl px-6 text-center">
           <p className="text-xs text-gray-400 leading-relaxed">
             Salary data is based on research from the{" "}

@@ -124,18 +124,18 @@ export default async function PartTimeJobsPage({ params }: Props) {
         "@type": "ListItem",
         position: job.rank,
         item: {
-          "@type": "JobPosting",
-          title: job.title,
+          "@type": "Occupation",
+          name: job.title,
           description: job.description,
-          employmentType: "PART_TIME",
+          occupationLocation: { "@type": "Country", name: c.name },
           estimatedSalary: {
             "@type": "MonetaryAmount",
             currency: c.currency,
-            value: job.monthlySalary,
-          },
-          jobLocation: {
-            "@type": "Place",
-            address: { "@type": "PostalAddress", addressCountry: c.name },
+            value: {
+              "@type": "QuantitativeValue",
+              value: job.monthlySalary,
+              unitText: "MONTH",
+            },
           },
         },
       })),

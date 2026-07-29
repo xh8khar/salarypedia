@@ -18,6 +18,7 @@ import ShareButtons from "@/components/ShareButtons";
 import posts from "@/data/blog-posts.json";
 import { getCitiesByCountry } from "@/lib/city";
 import { seededShuffle } from "@/lib/shuffle";
+import { occupationListSchema, occupationSchema, faqPageSchema } from "@/lib/schema";
 
 export async function generateStaticParams() {
   const countries = getCountries();
@@ -109,30 +110,7 @@ export default async function CountryPage({ params }: Props) {
     description: `Discover the highest paying jobs in ${c.name} for ${year}. Compare salaries across 30+ career categories in ${c.name}.`,
     url: pageUrl,
     breadcrumb: { "@id": `${pageUrl}#breadcrumb` },
-    mainEntity: {
-      "@type": "ItemList",
-      name: `Top 10 Highest Paying Jobs in ${c.name}`,
-      itemListElement: top10.map((job) => ({
-        "@type": "ListItem",
-        position: job.rank,
-        item: {
-          "@type": "JobPosting",
-          title: job.title,
-          description: job.description,
-          employmentType: "FULL_TIME",
-          estimatedSalary: {
-            "@type": "MonetaryAmount",
-            currency: data?.currency ?? c.currency,
-            minValue: job.salaryMin,
-            maxValue: job.salaryMax,
-          },
-          jobLocation: {
-            "@type": "Place",
-            address: { "@type": "PostalAddress", addressCountry: c.name },
-          },
-        },
-      })),
-    },
+    mainEntity: occupationListSchema(top10, data?.currency ?? c.currency, c.name),
   };
 
   const imageSchema = {
@@ -162,35 +140,49 @@ export default async function CountryPage({ params }: Props) {
       itemListElement: data!.jobs[cat.slug].map((job) => ({
         "@type": "ListItem",
         position: job.rank,
-        item: {
-          "@type": "JobPosting",
-          title: job.title,
-          employmentType: "FULL_TIME",
-          estimatedSalary: {
-            "@type": "MonetaryAmount",
-            currency: data!.currency,
-            minValue: job.salaryMin,
-            maxValue: job.salaryMax,
-          },
-          jobLocation: {
-            "@type": "Place",
-            address: { "@type": "PostalAddress", addressCountry: c.name },
-          },
-        },
+        item: occupationSchema(job, data!.currency, c.name),
       })),
     }));
 
   const cities = getCitiesByCountry(c.code);
 
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: [
-      { "@type": "Question", name: `What is the highest paying job in ${c.name}?`, acceptedAnswer: { "@type": "Answer", text: top10[0] ? `The highest paying job in ${c.name} is ${top10[0].title} with a salary range of ${Intl.NumberFormat("en-US").format(top10[0].salaryMin)} to ${Intl.NumberFormat("en-US").format(top10[0].salaryMax)} ${data?.currency ?? c.currency} per year.` : "" } },
-      { "@type": "Question", name: `How many jobs are tracked in ${c.name}?`, acceptedAnswer: { "@type": "Answer", text: `We track salaries across ${categories.filter((cat) => (data?.jobs[cat.slug]?.length ?? 0) > 0).length} career categories in ${c.name}, covering hundreds of individual job titles.` } },
-      { "@type": "Question", name: `What is the average salary in ${c.name}?`, acceptedAnswer: { "@type": "Answer", text: `Average salaries in ${c.name} vary by industry. You can compare salaries across ${categories.length}+ categories to find the right career path.` } },
-    ],
-  };
+  const currency = data?.currency ?? c.currency;
+  const fmt = (n: number) => Intl.NumberFormat("en-US").format(n);
+  const trackedCategories = categories.filter((cat) => (data?.jobs[cat.slug]?.length ?? 0) > 0).length;
+
+  // One source for both the rendered FAQ and the FAQPage markup — Google
+  // requires the structured data to match what the visitor can actually see.
+  const faqs = [
+    {
+      q: `What is the highest paying job in ${c.name}?`,
+      a: top10[0]
+        ? `The highest paying job in ${c.name} is ${top10[0].title}, with a salary range of ${fmt(top10[0].salaryMin)} to ${fmt(top10[0].salaryMax)} ${currency} per year. It is followed by ${top10[1]?.title ?? "other senior professional roles"}${top10[2] ? ` and ${top10[2].title}` : ""}.`
+        : `Salary data for ${c.name} covers multiple career categories. Browse the sections above to find specific job salaries.`,
+    },
+    {
+      q: `How many jobs are tracked in ${c.name}?`,
+      a: `We track salaries across ${trackedCategories} career categories in ${c.name}, covering hundreds of individual job titles across every major industry.`,
+    },
+    {
+      q: `What is the average salary in ${c.name}?`,
+      a: `Average salaries in ${c.name} vary widely by industry and experience level. Professional and specialist roles typically pay several times the national average, while entry-level positions start considerably lower. Compare across ${categories.length} categories to see where a specific role sits.`,
+    },
+    {
+      q: "How are these salary estimates calculated?",
+      a: `Salary data on this page is based on research from the Economic Research Institute (ERI) and SalaryExpert. Figures are estimates and vary with experience, location and industry. Data is reviewed annually to reflect current market conditions.`,
+    },
+  ];
+
+  const faqSchema = faqPageSchema(faqs);
+
+  // A short, self-contained answer near the top of the page is the format
+  // Google most often lifts for a featured snippet.
+  const snippetAnswer = top10[0]
+    ? `The highest paying job in ${c.name} is ${top10[0].title}, earning between ${fmt(top10[0].salaryMin)} and ${fmt(top10[0].salaryMax)} ${currency} per year. Other top-paying roles include ${top10
+        .slice(1, 4)
+        .map((j) => j.title)
+        .join(", ")}. Salaries below cover ${trackedCategories} career categories in ${c.name}, updated for ${year}.`
+    : "";
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -294,14 +286,51 @@ export default async function CountryPage({ params }: Props) {
 
       <main className="flex-1 mx-auto w-full max-w-5xl px-4 py-10">
 
+        {snippetAnswer && (
+          <p className="text-[17px] leading-relaxed text-gray-700 mb-10 border-l-2 border-emerald-500 pl-5">
+            {snippetAnswer}
+          </p>
+        )}
+
         {top10.length > 0 && (
-          <section className="mt-10 mb-12">
+          <section className="mb-12">
             <h2 className="text-xl font-semibold text-gray-900 mb-4">
               Top 10 Highest Paying Jobs in {c.name}
             </h2>
-            <div className="space-y-4">
+
+            {/* Table markup gives Google a structure it can lift directly into a
+                snippet; the detailed cards below carry the descriptions. */}
+            <div className="mb-8 card overflow-x-auto">
+              <table className="w-full text-left border-collapse">
+                <caption className="sr-only">
+                  Highest paying jobs in {c.name} in {year} with annual salary ranges in{" "}
+                  {currency}
+                </caption>
+                <thead>
+                  <tr className="bg-gray-50 border-b border-gray-200">
+                    <th scope="col" className="px-4 py-3 text-[11px] font-bold uppercase tracking-wider text-gray-400 w-14">#</th>
+                    <th scope="col" className="px-4 py-3 text-[11px] font-bold uppercase tracking-wider text-gray-400">Job title</th>
+                    <th scope="col" className="px-4 py-3 text-[11px] font-bold uppercase tracking-wider text-gray-400 text-right whitespace-nowrap">Salary range ({currency})</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-100">
+                  {top10.map((job) => (
+                    <tr key={job.rank} className="hover:bg-emerald-50/40 transition-colors">
+                      <td className="px-4 py-3 numeric text-sm text-gray-400">{job.rank}</td>
+                      <td className="px-4 py-3 text-sm font-semibold text-gray-900">{job.title}</td>
+                      <td className="px-4 py-3 numeric text-sm text-emerald-600 font-semibold text-right whitespace-nowrap">
+                        {fmt(job.salaryMin)} &ndash; {fmt(job.salaryMax)}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            {/* Ordered list so the ranking is machine-readable, not just visual. */}
+            <ol className="space-y-4">
               {top10.map((job) => (
-                <div
+                <li
                   key={job.rank}
                   className="bg-gradient-to-br from-emerald-50 to-white rounded-xl border border-emerald-100 p-5"
                 >
@@ -312,14 +341,14 @@ export default async function CountryPage({ params }: Props) {
                     <h3 className="font-bold text-gray-900">{job.title}</h3>
                   </div>
                   <p className="text-sm font-semibold text-emerald-600 ml-10 mb-2">
-                    Salary Range: from {Intl.NumberFormat("en-US").format(job.salaryMin)} {data!.currency} to {Intl.NumberFormat("en-US").format(job.salaryMax)} {data!.currency}
+                    Salary Range: from {fmt(job.salaryMin)} {currency} to {fmt(job.salaryMax)} {currency}
                   </p>
                   <p className="text-sm text-gray-500 ml-10">
                     {job.description}
                   </p>
-                </div>
+                </li>
               ))}
-            </div>
+            </ol>
           </section>
         )}
 
@@ -452,19 +481,18 @@ export default async function CountryPage({ params }: Props) {
           <h2 className="text-xl font-semibold text-gray-900 mb-4">
             Frequently Asked Questions
           </h2>
-          <div className="space-y-4">
-            <details className="rounded-xl border border-gray-200 bg-white overflow-hidden group">
-              <summary className="px-5 py-4 font-semibold text-gray-900 cursor-pointer hover:bg-gray-50 transition-colors">What is the highest paying job in {c.name}?</summary>
-              <div className="px-5 pb-4 text-sm text-gray-500">{top10[0] ? `The highest paying job in ${c.name} is ${top10[0].title} with a salary range of ${Intl.NumberFormat("en-US").format(top10[0].salaryMin)} to ${Intl.NumberFormat("en-US").format(top10[0].salaryMax)} ${data?.currency ?? c.currency} per year.` : `Salary data for ${c.name} covers multiple career categories. Browse the sections above to find specific job salaries.`}</div>
-            </details>
-            <details className="rounded-xl border border-gray-200 bg-white overflow-hidden group">
-              <summary className="px-5 py-4 font-semibold text-gray-900 cursor-pointer hover:bg-gray-50 transition-colors">How many jobs are tracked in {c.name}?</summary>
-              <div className="px-5 pb-4 text-sm text-gray-500">We track salaries across {categories.filter((cat) => (data?.jobs[cat.slug]?.length ?? 0) > 0).length} career categories in {c.name}, covering hundreds of individual job titles across every major industry.</div>
-            </details>
-            <details className="rounded-xl border border-gray-200 bg-white overflow-hidden group">
-              <summary className="px-5 py-4 font-semibold text-gray-900 cursor-pointer hover:bg-gray-50 transition-colors">How are these salary estimates calculated?</summary>
-              <div className="px-5 pb-4 text-sm text-gray-500">Salary data on this page is based on research from the Economic Research Institute (ERI) and SalaryExpert. Figures are estimates and may vary based on experience, location, and industry. We update our data annually to reflect current market conditions.</div>
-            </details>
+          <div className="space-y-3">
+            {faqs.map((f) => (
+              <details key={f.q} className="card overflow-hidden group open:bg-emerald-50/30">
+                <summary className="flex items-center justify-between gap-4 px-5 py-4 font-semibold text-gray-900 cursor-pointer list-none hover:bg-gray-50 transition-colors">
+                  {f.q}
+                  <svg className="w-4 h-4 text-gray-400 shrink-0 group-open:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.4}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </summary>
+                <div className="px-5 pb-4 text-sm text-gray-500 leading-relaxed">{f.a}</div>
+              </details>
+            ))}
           </div>
         </section>
       </main>
