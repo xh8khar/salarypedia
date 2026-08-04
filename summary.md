@@ -1,5 +1,5 @@
 ## Objective
-- Build a "Best Paying Jobs in Every Country" website (bestpayingjobs.net) with 195 countries, 31 career categories, SEO-friendly URLs, OG images, salary comparison tools, and blog content.
+- Build a "Best Paying Jobs in Every Country" website (singhyogendra.com.np) with 195 countries, 31 career categories, SEO-friendly URLs, OG images, salary comparison tools, and blog content.
 
 ## Important Details
 - Salaries stored as **monthly** figures in each country's local currency (Nepal reference data in NPR, scaled to other countries via `target_avg_salary / nepal_avg_salary` then converted through USD to local currency using real exchange rates)
