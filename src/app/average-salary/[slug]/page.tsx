@@ -8,7 +8,7 @@ import Footer from "@/components/Footer";
 import ShareButtons from "@/components/ShareButtons";
 import { BarChart, DistributionChart, GenderChart } from "@/components/SalaryChart";
 import { averageSalaryKeywords } from "@/lib/keywords";
-const siteUrl = "https://www.bestpayingjobs.net";
+const siteUrl = "https://www.singhyogendra.com.np";
 
 export async function generateStaticParams() {
   return getAllCountrySlugs().map((slug) => ({ slug }));
@@ -23,8 +23,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { country, data: d } = data;
   const f = (n: number) => new Intl.NumberFormat("en-US").format(n);
   return {
-    title: `Average Salary in ${country.name} ${d.year} | BestPayingJobs.net`,
-    description: `The average salary in ${country.name} is ${f(d.averageSalary.annual)} ${country.currency} per year (${f(d.averageSalary.monthly)} ${country.currency} per month). Salary range: ${f(d.salaryDistribution.minimum)} - ${f(d.salaryDistribution.maximum)} ${country.currency}.`,
+    title: `Average Salary in ${country.name} ${d.year}`,
+    description: `SalaryPedia by Singh Yogendra – The average salary in ${country.name} is ${f(d.averageSalary.annual)} ${country.currency} per year (${f(d.averageSalary.monthly)} ${country.currency} per month). Salary range: ${f(d.salaryDistribution.minimum)} - ${f(d.salaryDistribution.maximum)} ${country.currency}.`,
     keywords: averageSalaryKeywords({
       country: country.name,
       year: d.year,
@@ -32,13 +32,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     }),
     alternates: { canonical: `${siteUrl}/average-salary-${country.slug}` },
     openGraph: {
-      title: `Average Salary in ${country.name} ${d.year} | BestPayingJobs.net`,
+      title: `Average Salary in ${country.name} ${d.year} | SalaryPedia by Singh Yogendra`,
       description: `The average salary in ${country.name} is ${f(d.averageSalary.annual)} ${country.currency} per year.`,
       images: [{ url: "/og/default.webp", width: 1200, height: 750, alt: `Average Salary in ${country.name}` }],
     },
     twitter: {
       card: "summary_large_image",
-      title: `Average Salary in ${country.name} ${d.year} | BestPayingJobs.net`,
+      title: `Average Salary in ${country.name} ${d.year} | SalaryPedia by Singh Yogendra`,
       description: `The average salary in ${country.name} is ${f(d.averageSalary.annual)} ${country.currency} per year.`,
       images: ["/og/default.webp"],
     },

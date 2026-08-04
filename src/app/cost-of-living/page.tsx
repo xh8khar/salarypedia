@@ -8,14 +8,16 @@ import FlagImage from "@/components/FlagImage";
 
 const colIndex = colData as Record<string, number>;
 
-const siteUrl = "https://www.bestpayingjobs.net";
+const siteUrl = "https://www.singhyogendra.com.np";
 
-const colTitle = `Cost of Living by Country ${CURRENT_YEAR} | BestPayingJobs.net`;
+const colTitle = `Cost of Living by Country ${CURRENT_YEAR}`;
 
 export const metadata: Metadata = {
   title: colTitle,
   description: "Compare cost of living indexes across 195 countries. See how salaries and purchasing power compare in every country worldwide.",
   keywords: [
+    "Singh Yogendra",
+    "SalaryPedia by Singh Yogendra",
     "cost of living index",
     "cost of living by country",
     "COL index comparison",

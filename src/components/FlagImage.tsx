@@ -26,7 +26,7 @@ export default function FlagImage({
   return (
     <img
       src={flagUrl(slug)}
-      alt={`${name} flag`}
+      alt={`${name} flag | SalaryPedia by Singh Yogendra`}
       title={`Flag of ${name}`}
       className={classes}
       loading="lazy"

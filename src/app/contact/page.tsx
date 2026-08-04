@@ -6,13 +6,13 @@ const UPDATED = "July 29, 2026";
 
 // Update this if you prefer a different inbox — it is the address shown publicly
 // and the one AdSense reviewers will use to reach the site owner.
-const CONTACT_EMAIL = "contact@bestpayingjobs.net";
+const CONTACT_EMAIL = "contact@singhyogendra.com.np";
 
 export const metadata: Metadata = {
   title: "Contact Us",
   description:
-    "Get in touch with BestPayingJobs.net about data corrections, partnership enquiries, privacy requests or general questions.",
-  alternates: { canonical: "https://www.bestpayingjobs.net/contact" },
+    "Get in touch with SalaryPedia by Singh Yogendra about data corrections, partnership enquiries, privacy requests or general questions.",
+  alternates: { canonical: "https://www.singhyogendra.com.np/contact" },
   robots: { index: true, follow: true },
 };
 

@@ -9,9 +9,11 @@ import emData from "@/data/earn-money-online.json";
 const data = emData as unknown as { methods: { rank: number; title: string; category: string; difficulty: string }[] };
 
 export const metadata: Metadata = {
-  title: `Earn Money Online — ${data.methods.length} Ways in ${getCountries().length} Countries | BestPayingJobs`,
+  title: `Earn Money Online — ${data.methods.length} Ways in ${getCountries().length} Countries`,
   description: `Discover ${data.methods.length} proven ways to earn money online in ${getCountries().length} countries. Compare earning potential, timeframes, platforms, and local currency estimates worldwide.`,
   keywords: [
+    "Singh Yogendra",
+    "SalaryPedia by Singh Yogendra",
     "earn money online",
     "work from home",
     "online income",
@@ -20,7 +22,7 @@ export const metadata: Metadata = {
     "make money online",
   ],
   alternates: {
-    canonical: "https://www.bestpayingjobs.net/earn-money-online",
+    canonical: "https://www.singhyogendra.com.np/earn-money-online",
   },
   openGraph: {
     title: `Earn Money Online — ${data.methods.length} Ways in ${getCountries().length} Countries`,

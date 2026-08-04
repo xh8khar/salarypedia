@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://www.bestpayingjobs.net/sitemap.xml
+Sitemap: https://www.singhyogendra.com.np/sitemap.xml

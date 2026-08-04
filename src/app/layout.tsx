@@ -23,12 +23,12 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
-const siteUrl = "https://www.bestpayingjobs.net";
+const siteUrl = "https://www.singhyogendra.com.np";
 
-const layoutTitleDefault = `Best Paying Jobs in Every Country ${CURRENT_YEAR} | BestPayingJobs.net`;
-const layoutTitleShort = `Best Paying Jobs in Every Country ${CURRENT_YEAR}`;
-const layoutDesc = `Discover the highest paying jobs in every country. Compare salaries across 30+ career categories including AI, Finance, IT, Healthcare, Engineering and more. Updated for ${CURRENT_YEAR}.`;
-const layoutDescShort = `Discover the highest paying jobs in every country. Compare salaries across 30+ career categories. Updated for ${CURRENT_YEAR}.`;
+const layoutTitleDefault = `SalaryPedia by Singh Yogendra – Average Salaries, Highest Paying Jobs & Career Guides`;
+const layoutTitleShort = `SalaryPedia by Singh Yogendra – Average Salaries, Highest Paying Jobs & Career Guides`;
+const layoutDesc = `SalaryPedia by Singh Yogendra – Discover average salaries and the highest paying jobs in every country. Compare salaries across 30+ career categories including AI, Finance, IT, Healthcare, Engineering and more. Updated for ${CURRENT_YEAR}.`;
+const layoutDescShort = `SalaryPedia by Singh Yogendra – Discover average salaries and the highest paying jobs in every country. Compare salaries across 30+ career categories. Updated for ${CURRENT_YEAR}.`;
 
 export const metadata: Metadata = {
   icons: {
@@ -42,10 +42,13 @@ export const metadata: Metadata = {
   },
   title: {
     default: layoutTitleDefault,
-    template: "%s | BestPayingJobs.net",
+    template: "%s | SalaryPedia by Singh Yogendra",
   },
   description: layoutDesc,
   keywords: [
+    "Singh Yogendra",
+    "SalaryPedia",
+    "SalaryPedia by Singh Yogendra",
     "best paying jobs",
     "highest salary jobs",
     "top paying careers",
@@ -68,7 +71,7 @@ export const metadata: Metadata = {
     title: layoutTitleShort,
     description: layoutDescShort,
     url: siteUrl,
-    siteName: "BestPayingJobs.net",
+    siteName: "SalaryPedia by Singh Yogendra – Average Salaries, Highest Paying Jobs & Career Guides",
     locale: "en_US",
     type: "website",
     images: [
@@ -107,10 +110,10 @@ export default function RootLayout({
   const webSiteSchema = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: "BestPayingJobs.net",
+    name: "SalaryPedia by Singh Yogendra – Average Salaries, Highest Paying Jobs & Career Guides",
     url: siteUrl,
     description:
-      "Discover the highest paying jobs in every country. Compare salaries across 30+ career categories.",
+      "Discover the highest paying jobs in every country by Singh Yogendra. Compare salaries across 30+ career categories.",
     potentialAction: {
       "@type": "SearchAction",
       target: {
@@ -124,9 +127,15 @@ export default function RootLayout({
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "BestPayingJobs.net",
+    name: "SalaryPedia by Singh Yogendra – Average Salaries, Highest Paying Jobs & Career Guides",
     url: siteUrl,
-    description: "Best Paying Jobs in Every Country",
+    description:
+      "SalaryPedia by Singh Yogendra – average salaries and highest paying jobs in every country",
+    founder: {
+      "@type": "Person",
+      name: "Singh Yogendra",
+      url: `${siteUrl}/about`,
+    },
   };
 
   // Applies the saved/system theme before first paint so the page never

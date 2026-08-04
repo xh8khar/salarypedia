@@ -6,14 +6,16 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FlagImage from "@/components/FlagImage";
 
-const siteUrl = "https://www.bestpayingjobs.net";
+const siteUrl = "https://www.singhyogendra.com.np";
 
-const avgSalTitle = `Average Salary by Country ${CURRENT_YEAR} | BestPayingJobs.net`;
+const avgSalTitle = `Average Salary by Country ${CURRENT_YEAR}`;
 
 export const metadata: Metadata = {
   title: avgSalTitle,
   description: "Compare average salaries across 195 countries. See annual and monthly salaries, salary distributions, and cost of living data for every country.",
   keywords: [
+    "Singh Yogendra",
+    "SalaryPedia by Singh Yogendra",
     "average salary by country",
     "average income by country",
     "salary comparison",

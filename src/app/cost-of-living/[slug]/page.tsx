@@ -40,27 +40,27 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const index = colData[c.code];
 
   const metaImage = {
-    url: `https://www.bestpayingjobs.net/og/${c.slug}.webp`,
+    url: `https://www.singhyogendra.com.np/og/${c.slug}.webp`,
     width: 1200,
     height: 750,
     alt: `Cost of living in ${c.name} — COL index and salary adjustment data`,
   };
 
   return {
-    title: `Cost of Living in ${c.name} ${year} | COL Index & Adjusted Salaries | BestPayingJobs.net`,
-    description: `Cost of living in ${c.name} is ${index}% of the US national average in ${year}. See how far your salary goes, compare purchasing power across categories.`,
+    title: `Cost of Living in ${c.name} ${year} | COL Index & Adjusted Salaries`,
+    description: `SalaryPedia by Singh Yogendra – Cost of living in ${c.name} is ${index}% of the US national average in ${year}. See how far your salary goes, compare purchasing power across categories.`,
     keywords: costOfLivingKeywords({ country: c.name, year: getCurrentYear() }),
     alternates: {
-      canonical: `https://www.bestpayingjobs.net/cost-of-living-${c.slug}`,
+      canonical: `https://www.singhyogendra.com.np/cost-of-living-${c.slug}`,
     },
     openGraph: {
-      title: `Cost of Living in ${c.name} ${year} | BestPayingJobs.net`,
+      title: `Cost of Living in ${c.name} ${year} | SalaryPedia by Singh Yogendra`,
       description: `COL index for ${c.name} is ${index}%. Compare adjusted salaries and purchasing power for ${year}.`,
-      url: `https://www.bestpayingjobs.net/cost-of-living-${c.slug}`,
+      url: `https://www.singhyogendra.com.np/cost-of-living-${c.slug}`,
       images: [metaImage],
     },
     twitter: {
-      title: `Cost of Living in ${c.name} ${year} | BestPayingJobs.net`,
+      title: `Cost of Living in ${c.name} ${year} | SalaryPedia by Singh Yogendra`,
       description: `COL index for ${c.name} is ${index}%. Compare adjusted salaries and purchasing power for ${year}.`,
       card: "summary_large_image",
       images: [metaImage],
@@ -104,7 +104,7 @@ export default async function CostOfLivingPage({ params }: Props) {
   const categories = getCategories();
   const countries = getCountries();
 
-  const siteUrl = "https://www.bestpayingjobs.net";
+  const siteUrl = "https://www.singhyogendra.com.np";
   const pageUrl = `${siteUrl}/cost-of-living-${c.slug}`;
   const fxRate = (fxRatesData as Record<string, number>)[data?.currency ?? "USD"] ?? 1;
 
@@ -129,14 +129,14 @@ export default async function CostOfLivingPage({ params }: Props) {
   const imageSchema = {
     "@context": "https://schema.org",
     "@type": "ImageObject",
-    contentUrl: `https://www.bestpayingjobs.net/og/${c.slug}.webp`,
-    url: `https://www.bestpayingjobs.net/og/${c.slug}.webp`,
+    contentUrl: `https://www.singhyogendra.com.np/og/${c.slug}.webp`,
+    url: `https://www.singhyogendra.com.np/og/${c.slug}.webp`,
     name: `Cost of Living in ${c.name}`,
     description: `Cost of living comparison chart for ${c.name} showing the COL index and salary adjustments for ${year}.`,
     representativeOfPage: true,
     thumbnail: {
       "@type": "ImageObject",
-      contentUrl: `https://www.bestpayingjobs.net/og/${c.slug}.webp`,
+      contentUrl: `https://www.singhyogendra.com.np/og/${c.slug}.webp`,
       width: 1200,
       height: 750,
     },

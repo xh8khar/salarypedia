@@ -13,9 +13,13 @@
  * titles, headings and opening paragraphs should use, and those do rank.
  */
 
+const BRAND_KEYWORDS = ["SalaryPedia", "SalaryPedia by Singh Yogendra", "Singh Yogendra salary"];
+
 const dedupe = (list: string[]) => [
   ...new Set(
-    list.map((k) => k.replace(/\s+/g, " ").trim().toLowerCase()).filter(Boolean)
+    [...BRAND_KEYWORDS, ...list]
+      .map((k) => k.replace(/\s+/g, " ").trim().toLowerCase())
+      .filter(Boolean)
   ),
 ];
 

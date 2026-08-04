@@ -8,10 +8,12 @@ import posts from "@/data/blog-posts.json";
 const categories = [...new Set(posts.map((p) => p.category))];
 
 export const metadata: Metadata = {
-  title: "Career Blog — Salary Guides & Career Advice | BestPayingJobs.net",
+  title: "Career Blog — Salary Guides & Career Advice",
   description:
     "Career advice, salary guides, job search tips, and personal finance articles to help you earn more. Expert insights for professionals worldwide.",
   keywords: [
+    "Singh Yogendra",
+    "SalaryPedia by Singh Yogendra",
     "career blog",
     "salary guide",
     "career advice",
@@ -20,7 +22,7 @@ export const metadata: Metadata = {
     "salary negotiation tips",
   ],
   alternates: {
-    canonical: "https://www.bestpayingjobs.net/blog",
+    canonical: "https://www.singhyogendra.com.np/blog",
   },
   openGraph: {
     title: "Career Blog — Salary Guides & Career Advice",
@@ -31,7 +33,7 @@ export const metadata: Metadata = {
         url: "/og/default.webp",
         width: 1200,
         height: 750,
-        alt: "BestPayingJobs.net Blog",
+        alt: "SalaryPedia by Singh Yogendra Blog",
       },
     ],
   },

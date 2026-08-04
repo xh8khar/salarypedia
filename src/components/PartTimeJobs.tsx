@@ -54,7 +54,7 @@ export default function PartTimeJobs({
       )
       .join("\n");
     navigator.clipboard.writeText(
-      `Top 10 Part-Time Jobs in ${countryName} for International Students (${year})\n${text}\n\nSource: BestPayingJobs.net`
+      `Top 10 Part-Time Jobs in ${countryName} for International Students (${year})\n${text}\n\nSource: singhyogendra.com.np`
     );
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
@@ -66,8 +66,8 @@ export default function PartTimeJobs({
 
   const chartData = [...jobs].sort((a, b) => b.monthlySalary - a.monthlySalary);
 
-  const shareUrl = `https://www.bestpayingjobs.net/part-time-jobs-in-${countrySlug}`;
-  const shareTitle = `Part-Time Jobs in ${countryName} for International Students ${year} | BestPayingJobs.net`;
+  const shareUrl = `https://www.singhyogendra.com.np/part-time-jobs-in-${countrySlug}`;
+  const shareTitle = `Part-Time Jobs in ${countryName} for International Students ${year} | SalaryPedia by Singh Yogendra`;
 
   return (
     <section id="parttimejobs" className="mb-12">
@@ -77,7 +77,7 @@ export default function PartTimeJobs({
             10 Highest Paying Part-time Jobs in {countryName} for International Students ({year})
           </h2>
           <p className="text-sm text-gray-400 mt-0.5">
-            {jobs[0]?.weeklyHours ?? 20} hours per week &middot; Monthly salary in {currency}{" "}&middot; BestPayingJobs.net
+            {jobs[0]?.weeklyHours ?? 20} hours per week &middot; Monthly salary in {currency}{" "}&middot; singhyogendra.com.np
           </p>
         </div>
         <div className="flex items-center gap-2">
@@ -119,7 +119,7 @@ export default function PartTimeJobs({
           }))}
         />
         <p className="text-right text-[10px] text-gray-400 italic mt-3 select-none">
-          BestPayingJobs.net
+          singhyogendra.com.np
         </p>
       </div>
     </section>

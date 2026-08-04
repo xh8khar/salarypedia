@@ -21,13 +21,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: calc.ogTitle,
     description: calc.description,
     keywords: [
+      "Singh Yogendra",
+      "SalaryPedia by Singh Yogendra",
       `${calc.slug.replace(/-/g, " ")} calculator`,
       `${calc.title.toLowerCase()} calculator`,
       `free salary calculator`,
       `${calc.slug.replace(/-/g, " ")} tool`,
     ],
     alternates: {
-      canonical: `https://www.bestpayingjobs.net/calculator/${slug}`,
+      canonical: `https://www.singhyogendra.com.np/calculator/${slug}`,
     },
     openGraph: {
       title: calc.ogTitle,
@@ -60,13 +62,13 @@ export default async function CalculatorPage({ params }: Props) {
   const imageSchema = {
     "@context": "https://schema.org",
     "@type": "ImageObject",
-    contentUrl: `https://www.bestpayingjobs.net/og/calculators/${slug}.webp`,
+    contentUrl: `https://www.singhyogendra.com.np/og/calculators/${slug}.webp`,
     name: calc.title,
     description: calc.description,
     representativeOfPage: true,
     thumbnail: {
       "@type": "ImageObject",
-      contentUrl: `https://www.bestpayingjobs.net/og/calculators/${slug}.webp`,
+      contentUrl: `https://www.singhyogendra.com.np/og/calculators/${slug}.webp`,
       width: 1200,
       height: 750,
     },

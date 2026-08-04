@@ -43,7 +43,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       .replace(/\{currency\}/g, c.currency);
 
   const metaImage = {
-    url: `https://www.bestpayingjobs.net/og/${c.slug}.webp`,
+    url: `https://www.singhyogendra.com.np/og/${c.slug}.webp`,
     width: 1200,
     height: 750,
     alt: `Part-time jobs in ${c.name} for international students`,
@@ -54,7 +54,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: resolve(cfg.metaDescription),
     keywords: partTimeKeywords({ country: c.name, year: getCurrentYear() }),
     alternates: {
-      canonical: `https://www.bestpayingjobs.net/part-time-jobs-in-${c.slug}`,
+      canonical: `https://www.singhyogendra.com.np/part-time-jobs-in-${c.slug}`,
     },
     openGraph: {
       title: resolve(cfg.metaTitle),
@@ -89,7 +89,7 @@ export default async function PartTimeJobsPage({ params }: Props) {
       .replace(/\{year\}/g, String(year))
       .replace(/\{currency\}/g, c.currency);
 
-  const siteUrl = "https://www.bestpayingjobs.net";
+  const siteUrl = "https://www.singhyogendra.com.np";
   const pageUrl = `${siteUrl}/part-time-jobs-in-${c.slug}`;
 
   const breadcrumbSchema = {
@@ -248,7 +248,7 @@ export default async function PartTimeJobsPage({ params }: Props) {
         <div className="mb-12 rounded-xl overflow-hidden border border-gray-200">
           <img
             src={`/og/${c.slug}.webp`}
-            alt={`Best paying jobs in ${c.name} — top careers and salaries`}
+            alt={`Best paying jobs in ${c.name} — top careers and salaries | SalaryPedia by Singh Yogendra`}
             title={`Highest paying jobs and salary data for ${c.name}`}
             className="w-full h-auto"
             loading="lazy"

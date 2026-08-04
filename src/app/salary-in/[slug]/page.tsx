@@ -24,14 +24,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const year = getCurrentYear();
   return {
     title: `Best Paying Jobs in ${city.name}, ${city.countryName} ${year}`,
-    description: `Discover the highest paying jobs in ${city.name}, ${city.countryName} for ${year}. Compare salaries across 30+ career categories.`,
+    description: `SalaryPedia by Singh Yogendra – Discover the highest paying jobs in ${city.name}, ${city.countryName} for ${year}. Compare salaries across 30+ career categories.`,
     keywords: cityKeywords({
       city: city.name,
       country: city.countryName,
       year: getCurrentYear(),
     }),
     alternates: {
-      canonical: `https://www.bestpayingjobs.net/salary-in-${slug}`,
+      canonical: `https://www.singhyogendra.com.np/salary-in-${slug}`,
     },
     openGraph: {
       title: `Best Paying Jobs in ${city.name}, ${city.countryName} ${year}`,
@@ -84,11 +84,11 @@ export default async function CityPage({ params }: Props) {
   const imageSchema = {
     "@context": "https://schema.org",
     "@type": "ImageObject",
-    contentUrl: `https://www.bestpayingjobs.net/og/${city.countrySlug}.webp`,
+    contentUrl: `https://www.singhyogendra.com.np/og/${city.countrySlug}.webp`,
     name: `Best Paying Jobs in ${city.name}, ${city.countryName}`,
     description: `Salary chart showing top paying jobs in ${city.name}, ${city.countryName}.`,
     representativeOfPage: true,
-    thumbnail: { "@type": "ImageObject", contentUrl: `https://www.bestpayingjobs.net/og/${city.countrySlug}.webp`, width: 1200, height: 750 },
+    thumbnail: { "@type": "ImageObject", contentUrl: `https://www.singhyogendra.com.np/og/${city.countrySlug}.webp`, width: 1200, height: 750 },
   };
 
   return (
@@ -135,7 +135,7 @@ export default async function CityPage({ params }: Props) {
         <div className="mb-12 rounded-xl overflow-hidden border border-gray-200">
           <img
             src={`/og/${city.countrySlug}.webp`}
-            alt={`Best paying jobs in ${city.name}, ${city.countryName}`}
+            alt={`Best paying jobs in ${city.name}, ${city.countryName} | SalaryPedia by Singh Yogendra`}
             title={`Salary data for ${city.name}, ${city.countryName}`}
             className="w-full h-auto"
             loading="lazy"

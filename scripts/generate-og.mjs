@@ -61,11 +61,11 @@ function buildCountrySvg(country, top10) {
     ${gradientDef}
     <rect width="1200" height="${H}" fill="url(#bg)"/>
     <rect x="0" y="0" width="1200" height="6" fill="url(#accent)"/>
-    <text x="80" y="85" font-family="system-ui, Arial, sans-serif" font-size="20" fill="rgba(255,255,255,0.4)">BestPayingJobs.net</text>
+    <text x="80" y="85" font-family="system-ui, Arial, sans-serif" font-size="20" fill="rgba(255,255,255,0.4)">singhyogendra.com.np</text>
     <text x="80" y="145" font-family="system-ui, Arial, sans-serif" font-size="36" font-weight="bold" fill="#ffffff">Best Paying Jobs in ${esc(country.name)}</text>
     ${buildRows(jobs, country, 190)}
     <rect x="0" y="${H - 45}" width="1200" height="45" fill="rgba(0,0,0,0.3)"/>
-    <text x="600" y="${H - 20}" font-family="system-ui, Arial, sans-serif" font-size="13" fill="rgba(255,255,255,0.35)" text-anchor="middle">BestPayingJobs.net — Best Paying Jobs in Every Country</text>
+    <text x="600" y="${H - 20}" font-family="system-ui, Arial, sans-serif" font-size="13" fill="rgba(255,255,255,0.35)" text-anchor="middle">singhyogendra.com.np — Best Paying Jobs in Every Country</text>
   </svg>`;
 }
 
@@ -75,11 +75,11 @@ function buildCategorySvg(country, cat, jobs) {
     ${gradientDef}
     <rect width="1200" height="${H}" fill="url(#bg)"/>
     <rect x="0" y="0" width="1200" height="6" fill="url(#accent)"/>
-    <text x="80" y="85" font-family="system-ui, Arial, sans-serif" font-size="20" fill="rgba(255,255,255,0.4)">BestPayingJobs.net</text>
+    <text x="80" y="85" font-family="system-ui, Arial, sans-serif" font-size="20" fill="rgba(255,255,255,0.4)">singhyogendra.com.np</text>
     <text x="80" y="145" font-family="system-ui, Arial, sans-serif" font-size="32" font-weight="bold" fill="#ffffff">${esc(cat.name)} Jobs in ${esc(country.name)}</text>
     ${buildRows(top10, country, 190)}
     <rect x="0" y="${H - 45}" width="1200" height="45" fill="rgba(0,0,0,0.3)"/>
-    <text x="600" y="${H - 20}" font-family="system-ui, Arial, sans-serif" font-size="13" fill="rgba(255,255,255,0.35)" text-anchor="middle">BestPayingJobs.net — Best Paying Jobs in Every Country</text>
+    <text x="600" y="${H - 20}" font-family="system-ui, Arial, sans-serif" font-size="13" fill="rgba(255,255,255,0.35)" text-anchor="middle">singhyogendra.com.np — Best Paying Jobs in Every Country</text>
   </svg>`;
 }
 
@@ -88,13 +88,13 @@ function buildCalculatorSvg(calc) {
     ${gradientDef}
     <rect width="1200" height="${H}" fill="url(#bg)"/>
     <rect x="0" y="0" width="1200" height="6" fill="url(#accent)"/>
-    <text x="80" y="85" font-family="system-ui, Arial, sans-serif" font-size="20" fill="rgba(255,255,255,0.4)">BestPayingJobs.net</text>
+    <text x="80" y="85" font-family="system-ui, Arial, sans-serif" font-size="20" fill="rgba(255,255,255,0.4)">singhyogendra.com.np</text>
     <rect x="80" y="120" width="1040" height="160" rx="16" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
     <text x="600" y="170" font-family="system-ui, Arial, sans-serif" font-size="32" font-weight="bold" fill="#ffffff" text-anchor="middle">${esc(calc.title)}</text>
     <text x="600" y="210" font-family="system-ui, Arial, sans-serif" font-size="16" fill="#6EE7B7" text-anchor="middle">${esc(calc.subtitle)}</text>
-    <text x="600" y="255" font-family="system-ui, Arial, sans-serif" font-size="14" fill="rgba(255,255,255,0.35)" text-anchor="middle">Free online salary calculator at BestPayingJobs.net</text>
+    <text x="600" y="255" font-family="system-ui, Arial, sans-serif" font-size="14" fill="rgba(255,255,255,0.35)" text-anchor="middle">Free online salary calculator at singhyogendra.com.np</text>
     <rect x="0" y="${H - 45}" width="1200" height="45" fill="rgba(0,0,0,0.3)"/>
-    <text x="600" y="${H - 20}" font-family="system-ui, Arial, sans-serif" font-size="13" fill="rgba(255,255,255,0.35)" text-anchor="middle">BestPayingJobs.net — Free Salary Calculators</text>
+    <text x="600" y="${H - 20}" font-family="system-ui, Arial, sans-serif" font-size="13" fill="rgba(255,255,255,0.35)" text-anchor="middle">singhyogendra.com.np — Free Salary Calculators</text>
   </svg>`;
 }
 

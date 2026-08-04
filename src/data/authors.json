@@ -1,13 +1,13 @@
 {
   "_comment": "Edit `default` to publish under a real named person — that is worth considerably more for E-E-A-T than a team byline. Set type to 'Person', put the real name in `name`, and fill `jobTitle`, `bio` and `credentials` with things that are actually true. Add `sameAs` links (LinkedIn, X, personal site) so Google can corroborate the identity. Do not invent a person or credentials: fabricated authorship is a spam signal and misleads readers.",
-  "default": "editorial-team",
+  "default": "singh-yogendra",
   "authors": {
-    "editorial-team": {
-      "type": "Organization",
-      "name": "BestPayingJobs.net Editorial Team",
-      "slug": "editorial-team",
-      "jobTitle": "Salary research and career reporting",
-      "bio": "We compile salary data for 195 countries from published compensation research, normalise it into a consistent structure, and write the guides that explain it. Every article is reviewed against our source data before publication.",
+    "singh-yogendra": {
+      "type": "Person",
+      "name": "Singh Yogendra",
+      "slug": "singh-yogendra",
+      "jobTitle": "Founder and salary research lead at SalaryPedia",
+      "bio": "Singh Yogendra is the founder of SalaryPedia, a salary research site covering 195 countries and 31 career categories. He compiles compensation data from published research, normalises it into a consistent structure, and writes the guides that explain it. Every article is reviewed against source data before publication.",
       "credentials": [
         "Salary data compiled from the Economic Research Institute (ERI) and SalaryExpert",
         "Coverage of 195 countries and 31 career categories",
@@ -16,6 +16,6 @@
       "sameAs": []
     }
   },
-  "reviewPolicy": "Articles are written by our editorial team and checked against the salary data published on this site. Figures are estimates drawn from third-party compensation research, not offers or guarantees.",
+  "reviewPolicy": "Articles are written by Singh Yogendra and checked against the salary data published on this site. Figures are estimates drawn from third-party compensation research, not offers or guarantees.",
   "lastReviewed": "2026-07-29"
 }

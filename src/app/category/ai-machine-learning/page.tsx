@@ -17,6 +17,8 @@ export const metadata: Metadata = {
   title: aiCatTitle,
   description: aiCatDesc,
   keywords: [
+    "Singh Yogendra",
+    "SalaryPedia by Singh Yogendra",
     "AI jobs",
     "machine learning jobs",
     "AI salary",
@@ -25,7 +27,7 @@ export const metadata: Metadata = {
     "AI careers",
   ],
   alternates: {
-    canonical: "https://www.bestpayingjobs.net/jobs/ai-machine-learning",
+    canonical: "https://www.singhyogendra.com.np/jobs/ai-machine-learning",
   },
   robots: {
     index: false,
@@ -106,7 +108,7 @@ export default function AiMachineLearningPage() {
     })
     .slice(0, 6);
 
-  const siteUrl = "https://www.bestpayingjobs.net";
+  const siteUrl = "https://www.singhyogendra.com.np";
 
   const faqSchema = {
     "@context": "https://schema.org",

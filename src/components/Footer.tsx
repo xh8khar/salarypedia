@@ -113,7 +113,7 @@ export default function Footer() {
 
         <div className="mt-12 pt-7 border-t border-chalk/10 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-chalk/45 text-center sm:text-left">
-            &copy; {year} BestPayingJobs.net &mdash; Best paying jobs in every country.
+            &copy; {year} SalaryPedia by Singh Yogendra &mdash; Average Salaries, Highest Paying Jobs &amp; Career Guides.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs text-chalk/45">
             <Link href="/about/" className="hover:text-chalk transition-colors">About</Link>

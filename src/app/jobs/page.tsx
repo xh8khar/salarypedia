@@ -13,6 +13,8 @@ export const metadata: Metadata = {
   description:
     "Browse the highest paying jobs across 31 career categories in 195 countries. Compare salaries in Finance, AI, Healthcare, Engineering, and more.",
   keywords: [
+    "Singh Yogendra",
+    "SalaryPedia by Singh Yogendra",
     "jobs by category",
     "career categories",
     "best paying careers",
@@ -20,7 +22,7 @@ export const metadata: Metadata = {
     "professional career salaries",
   ],
   alternates: {
-    canonical: "https://www.bestpayingjobs.net/jobs",
+    canonical: "https://www.singhyogendra.com.np/jobs",
   },
   openGraph: {
     title: jobsMetaTitle,

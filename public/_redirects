@@ -23,4 +23,4 @@
 /api/jobs/* /api/jobs/:splat.json 200
 
 # Domain redirect
-https://bestpayingjobs.net/* https://www.bestpayingjobs.net/:splat 301
+https://singhyogendra.com.np/* https://www.singhyogendra.com.np/:splat 301

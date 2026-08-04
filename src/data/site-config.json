@@ -1,13 +1,13 @@
 {
   "site": {
-    "name": "BestPayingJobs.net",
-    "url": "https://www.bestpayingjobs.net",
+    "name": "SalaryPedia by Singh Yogendra – Average Salaries, Highest Paying Jobs & Career Guides",
+    "url": "https://www.singhyogendra.com.np",
     "year": 2026,
-    "description": "Compare salaries across 195 countries and 31 career categories. Make data-driven career decisions with real compensation insights.",
+    "description": "SalaryPedia by Singh Yogendra – compare average salaries and highest paying jobs across 195 countries and 31 career categories. Make data-driven career decisions with real compensation insights.",
     "locale": "en-US"
   },
   "seo": {
-    "titleSuffix": " | BestPayingJobs.net",
+    "titleSuffix": " | SalaryPedia",
     "ogImageWidth": 1200,
     "ogImageHeight": 750
   },
@@ -30,8 +30,8 @@
     "earnMoneyOnlineLabel": "Earn Online"
   },
   "homepage": {
-    "heroTitle": "Best Paying Jobs in {country}",
-    "heroSubtitle": "Compare salaries across {countries} countries and {categories} career categories.",
+    "heroTitle": "Average Salaries & Highest Paying Jobs in {country}",
+    "heroSubtitle": "Compare average salaries and the highest paying jobs across {countries} countries and {categories} career categories — by Singh Yogendra.",
     "statsBar": true,
     "showHowItWorks": false,
     "showGlobalJobs": true,

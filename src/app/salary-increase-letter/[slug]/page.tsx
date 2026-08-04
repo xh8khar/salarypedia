@@ -20,6 +20,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `${letter.title} — Salary Increase Letter`,
     description: letter.summary,
     keywords: [
+      "Singh Yogendra",
+      "SalaryPedia by Singh Yogendra",
       `salary increase letter`,
       `raise request letter`,
       `${letter.title.toLowerCase()}`,
@@ -27,7 +29,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       `pay raise letter sample`,
     ],
     alternates: {
-      canonical: `https://www.bestpayingjobs.net/salary-increase-letter/${slug}`,
+      canonical: `https://www.singhyogendra.com.np/salary-increase-letter/${slug}`,
     },
     openGraph: {
       title: `${letter.title} — Salary Increase Letter`,

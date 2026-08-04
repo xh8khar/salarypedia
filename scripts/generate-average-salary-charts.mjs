@@ -81,12 +81,12 @@ function buildDistributionSvg(country, moUSD, currency) {
     </defs>
     <rect width="${W}" height="${H}" fill="url(#bg)"/>
     <rect x="0" y="0" width="${W}" height="4" fill="url(#acc)"/>
-    <text x="${W - 16}" y="28" font-family="system-ui, Arial, sans-serif" font-size="13" fill="#9CA3AF" text-anchor="end">BestPayingJobs.net</text>
+    <text x="${W - 16}" y="28" font-family="system-ui, Arial, sans-serif" font-size="13" fill="#9CA3AF" text-anchor="end">singhyogendra.com.np</text>
     <text x="40" y="80" font-family="system-ui, Arial, sans-serif" font-size="22" font-weight="bold" fill="#111827">Salary Distribution in ${esc(country.name)}</text>
     <text x="40" y="108" font-family="system-ui, Arial, sans-serif" font-size="14" fill="#6b7280">${esc(annualLabel)} - ${esc(monthlyLabel)}</text>
     ${bars.join("\n    ")}
     <rect x="0" y="${H - 36}" width="${W}" height="36" fill="#f9fafb"/>
-    <text x="${W / 2}" y="${H - 14}" font-family="system-ui, Arial, sans-serif" font-size="11" fill="#9CA3AF" text-anchor="middle">BestPayingJobs.net — Average Salary Data for Every Country</text>
+    <text x="${W / 2}" y="${H - 14}" font-family="system-ui, Arial, sans-serif" font-size="11" fill="#9CA3AF" text-anchor="middle">singhyogendra.com.np — Average Salary Data for Every Country</text>
   </svg>`;
 }
 
@@ -137,12 +137,12 @@ function buildEducationSvg(country, moUSD, currency) {
     </defs>
     <rect width="${W}" height="${H}" fill="url(#bg)"/>
     <rect x="0" y="0" width="${W}" height="4" fill="url(#acc)"/>
-    <text x="${W - 16}" y="28" font-family="system-ui, Arial, sans-serif" font-size="13" fill="#9CA3AF" text-anchor="end">BestPayingJobs.net</text>
+    <text x="${W - 16}" y="28" font-family="system-ui, Arial, sans-serif" font-size="13" fill="#9CA3AF" text-anchor="end">singhyogendra.com.np</text>
     <text x="40" y="80" font-family="system-ui, Arial, sans-serif" font-size="22" font-weight="bold" fill="#111827">Salary by Education in ${esc(country.name)}</text>
     <text x="40" y="108" font-family="system-ui, Arial, sans-serif" font-size="14" fill="#6b7280">Annual salary comparison by education level</text>
     ${bars.join("\n    ")}
     <rect x="0" y="${H - 36}" width="${W}" height="36" fill="#f9fafb"/>
-    <text x="${W / 2}" y="${H - 14}" font-family="system-ui, Arial, sans-serif" font-size="11" fill="#9CA3AF" text-anchor="middle">BestPayingJobs.net — Average Salary Data for Every Country</text>
+    <text x="${W / 2}" y="${H - 14}" font-family="system-ui, Arial, sans-serif" font-size="11" fill="#9CA3AF" text-anchor="middle">singhyogendra.com.np — Average Salary Data for Every Country</text>
   </svg>`;
 }
 
@@ -192,12 +192,12 @@ function buildExperienceSvg(country, moUSD, currency) {
     </defs>
     <rect width="${W}" height="${H}" fill="url(#bg)"/>
     <rect x="0" y="0" width="${W}" height="4" fill="url(#acc)"/>
-    <text x="${W - 16}" y="28" font-family="system-ui, Arial, sans-serif" font-size="13" fill="#9CA3AF" text-anchor="end">BestPayingJobs.net</text>
+    <text x="${W - 16}" y="28" font-family="system-ui, Arial, sans-serif" font-size="13" fill="#9CA3AF" text-anchor="end">singhyogendra.com.np</text>
     <text x="40" y="80" font-family="system-ui, Arial, sans-serif" font-size="22" font-weight="bold" fill="#111827">Salary by Experience in ${esc(country.name)}</text>
     <text x="40" y="108" font-family="system-ui, Arial, sans-serif" font-size="14" fill="#6b7280">Annual salary comparison by years of experience</text>
     ${bars.join("\n    ")}
     <rect x="0" y="${H - 36}" width="${W}" height="36" fill="#f9fafb"/>
-    <text x="${W / 2}" y="${H - 14}" font-family="system-ui, Arial, sans-serif" font-size="11" fill="#9CA3AF" text-anchor="middle">BestPayingJobs.net - Average Salary Data for Every Country</text>
+    <text x="${W / 2}" y="${H - 14}" font-family="system-ui, Arial, sans-serif" font-size="11" fill="#9CA3AF" text-anchor="middle">singhyogendra.com.np - Average Salary Data for Every Country</text>
   </svg>`;
 }
 
@@ -244,12 +244,12 @@ function buildIndustriesSvg(country, moUSD, currency) {
     </defs>
     <rect width="${W}" height="${H}" fill="url(#bg)"/>
     <rect x="0" y="0" width="${W}" height="4" fill="url(#acc)"/>
-    <text x="${W - 16}" y="28" font-family="system-ui, Arial, sans-serif" font-size="13" fill="#9CA3AF" text-anchor="end">BestPayingJobs.net</text>
+    <text x="${W - 16}" y="28" font-family="system-ui, Arial, sans-serif" font-size="13" fill="#9CA3AF" text-anchor="end">singhyogendra.com.np</text>
     <text x="40" y="80" font-family="system-ui, Arial, sans-serif" font-size="22" font-weight="bold" fill="#111827">Top Industries in ${esc(country.name)}</text>
     <text x="40" y="108" font-family="system-ui, Arial, sans-serif" font-size="14" fill="#6b7280">Highest paying industries by annual salary</text>
     ${bars.join("\n    ")}
     <rect x="0" y="${H - 36}" width="${W}" height="36" fill="#f9fafb"/>
-    <text x="${W / 2}" y="${H - 14}" font-family="system-ui, Arial, sans-serif" font-size="11" fill="#9CA3AF" text-anchor="middle">BestPayingJobs.net - Average Salary Data for Every Country</text>
+    <text x="${W / 2}" y="${H - 14}" font-family="system-ui, Arial, sans-serif" font-size="11" fill="#9CA3AF" text-anchor="middle">singhyogendra.com.np - Average Salary Data for Every Country</text>
   </svg>`;
 }
 
@@ -283,7 +283,7 @@ function buildGenderSvg(country, moUSD, currency) {
     </defs>
     <rect width="${W}" height="${H}" fill="url(#bg)"/>
     <rect x="0" y="0" width="${W}" height="4" fill="url(#maleG)"/>
-    <text x="${W - 16}" y="28" font-family="system-ui, Arial, sans-serif" font-size="13" fill="#9CA3AF" text-anchor="end">BestPayingJobs.net</text>
+    <text x="${W - 16}" y="28" font-family="system-ui, Arial, sans-serif" font-size="13" fill="#9CA3AF" text-anchor="end">singhyogendra.com.np</text>
     <text x="40" y="80" font-family="system-ui, Arial, sans-serif" font-size="22" font-weight="bold" fill="#111827">Gender Salary Gap in ${esc(country.name)}</text>
     <text x="40" y="108" font-family="system-ui, Arial, sans-serif" font-size="14" fill="#6b7280">${esc(gapText)} - Female earns ${esc(femaleLess)}</text>
 
@@ -302,7 +302,7 @@ function buildGenderSvg(country, moUSD, currency) {
     </g>
 
     <rect x="0" y="${H - 36}" width="${W}" height="36" fill="#f9fafb"/>
-    <text x="${W / 2}" y="${H - 14}" font-family="system-ui, Arial, sans-serif" font-size="11" fill="#9CA3AF" text-anchor="middle">BestPayingJobs.net — Average Salary Data for Every Country</text>
+    <text x="${W / 2}" y="${H - 14}" font-family="system-ui, Arial, sans-serif" font-size="11" fill="#9CA3AF" text-anchor="middle">singhyogendra.com.np — Average Salary Data for Every Country</text>
   </svg>`;
 }
 

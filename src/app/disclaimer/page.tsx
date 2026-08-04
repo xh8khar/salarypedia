@@ -7,8 +7,8 @@ const UPDATED = "July 29, 2026";
 export const metadata: Metadata = {
   title: "Disclaimer",
   description:
-    "Salary figures on BestPayingJobs.net are estimates for general information only and are not financial, legal or career advice.",
-  alternates: { canonical: "https://www.bestpayingjobs.net/disclaimer" },
+    "Salary figures on SalaryPedia by Singh Yogendra are estimates for general information only and are not financial, legal or career advice.",
+  alternates: { canonical: "https://www.singhyogendra.com.np/disclaimer" },
   robots: { index: true, follow: true },
 };
 
@@ -84,7 +84,7 @@ export default function Disclaimer() {
 
       <h2>No liability</h2>
       <p>
-        To the fullest extent permitted by law, BestPayingJobs.net accepts no liability for any loss
+        To the fullest extent permitted by law, SalaryPedia by Singh Yogendra accepts no liability for any loss
         or damage arising from reliance on information published here. Your use of the Site is at
         your own risk. See our <Link href="/terms/">Terms of Service</Link> for the full limitation
         of liability.

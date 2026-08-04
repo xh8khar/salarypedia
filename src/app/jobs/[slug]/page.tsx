@@ -25,11 +25,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const cat = getCategoryBySlug(slug);
   if (!cat) return {};
   return {
-    title: `Best Paying Jobs in ${cat.name} ${getCurrentYear()} in Every Country | BestPayingJobs.net`,
-    description: `Discover the highest paying ${cat.name.toLowerCase()} jobs in 195 countries. Compare salaries, find top careers, and make data-driven career decisions.`,
+    title: `Best Paying Jobs in ${cat.name} ${getCurrentYear()} in Every Country`,
+    description: `SalaryPedia by Singh Yogendra – Discover the highest paying ${cat.name.toLowerCase()} jobs in 195 countries. Compare salaries, find top careers, and make data-driven career decisions.`,
     keywords: categoryKeywords({ category: cat.name, year: getCurrentYear() }),
     alternates: {
-      canonical: `https://www.bestpayingjobs.net/jobs/${slug}`,
+      canonical: `https://www.singhyogendra.com.np/jobs/${slug}`,
     },
     openGraph: {
       title: `Best Paying Jobs in ${cat.name} ${getCurrentYear()}`,
@@ -109,7 +109,7 @@ export default async function JobsByCategoryPage({ params }: Props) {
     })
     .slice(0, 6);
 
-  const siteUrl = "https://www.bestpayingjobs.net";
+  const siteUrl = "https://www.singhyogendra.com.np";
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",

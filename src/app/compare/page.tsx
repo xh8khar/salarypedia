@@ -7,15 +7,17 @@ import { buildComparePayload } from "@/lib/compare";
 import { getCountries, getCurrentYear, CURRENT_YEAR } from "@/lib/db";
 import { faqPageSchema } from "@/lib/schema";
 
-const siteUrl = "https://www.bestpayingjobs.net";
+const siteUrl = "https://www.singhyogendra.com.np";
 
 const title = `Compare Salaries Between Countries ${CURRENT_YEAR}`;
 const description = `Compare average salaries and cost of living between any two of 195 countries. See which pays more, adjusted for what money actually buys locally. Updated for ${CURRENT_YEAR}.`;
 
 export const metadata: Metadata = {
-  title: `${title} | BestPayingJobs.net`,
+  title,
   description,
   keywords: [
+    "Singh Yogendra",
+    "SalaryPedia by Singh Yogendra",
     "compare salaries between countries",
     "salary comparison by country",
     "country salary comparison tool",

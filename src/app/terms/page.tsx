@@ -7,8 +7,8 @@ const UPDATED = "July 29, 2026";
 export const metadata: Metadata = {
   title: "Terms of Service",
   description:
-    "The terms and conditions that govern your use of BestPayingJobs.net, including acceptable use, intellectual property and limitation of liability.",
-  alternates: { canonical: "https://www.bestpayingjobs.net/terms" },
+    "The terms and conditions that govern your use of SalaryPedia by Singh Yogendra, including acceptable use, intellectual property and limitation of liability.",
+  alternates: { canonical: "https://www.singhyogendra.com.np/terms" },
   robots: { index: true, follow: true },
 };
 
@@ -16,12 +16,12 @@ export default function Terms() {
   return (
     <LegalPage
       title="Terms of Service"
-      intro="By using BestPayingJobs.net you agree to these terms. Please read them before relying on anything published here."
+      intro="By using SalaryPedia by Singh Yogendra you agree to these terms. Please read them before relying on anything published here."
       updated={UPDATED}
     >
       <h2>Acceptance of terms</h2>
       <p>
-        By accessing or using BestPayingJobs.net (the &ldquo;Site&rdquo;), you agree to be bound by
+        By accessing or using SalaryPedia by Singh Yogendra (the &ldquo;Site&rdquo;), you agree to be bound by
         these Terms of Service and our <Link href="/privacy/">Privacy Policy</Link>. If you do not
         agree, please discontinue use of the Site.
       </p>
@@ -56,8 +56,8 @@ export default function Terms() {
       <h2>Intellectual property</h2>
       <p>
         The design, original text, layout and compilation of data on this Site are owned by
-        BestPayingJobs.net and protected by applicable intellectual-property laws. You may quote
-        short excerpts for commentary, research or reporting provided you credit BestPayingJobs.net
+        SalaryPedia by Singh Yogendra and protected by applicable intellectual-property laws. You may quote
+        short excerpts for commentary, research or reporting provided you credit SalaryPedia
         with a visible link to the source page. Country names, flags and third-party trademarks
         remain the property of their respective owners.
       </p>
@@ -72,7 +72,7 @@ export default function Terms() {
       <h2>Limitation of liability</h2>
       <p>
         The Site is provided &ldquo;as is&rdquo; and &ldquo;as available&rdquo; without warranties of
-        any kind, express or implied. To the fullest extent permitted by law, BestPayingJobs.net and
+        any kind, express or implied. To the fullest extent permitted by law, SalaryPedia by Singh Yogendra and
         its operators shall not be liable for any direct, indirect, incidental, consequential or
         punitive damages &mdash; including lost earnings, lost opportunities or career decisions
         &mdash; arising from your use of, or reliance on, the Site.

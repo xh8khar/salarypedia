@@ -42,8 +42,8 @@ export default function ChartSection({
     }
   }, [countrySlug]);
 
-  const shareUrl = `https://www.bestpayingjobs.net/best-paying-jobs-in-${countrySlug}`;
-  const shareTitle = `Top 10 Highest Paying Jobs in ${countryName} ${CURRENT_YEAR} | BestPayingJobs.net`;
+  const shareUrl = `https://www.singhyogendra.com.np/best-paying-jobs-in-${countrySlug}`;
+  const shareTitle = `Top 10 Highest Paying Jobs in ${countryName} ${CURRENT_YEAR} | SalaryPedia by Singh Yogendra`;
 
   return (
     <section className="mb-12">
@@ -53,7 +53,7 @@ export default function ChartSection({
             Salary Overview — Top 10 Jobs
           </h2>
           <p className="text-sm text-gray-400 mt-0.5">
-            Monthly salary in {currency}{" "}&middot; BestPayingJobs.net
+            Monthly salary in {currency}{" "}&middot; singhyogendra.com.np
           </p>
         </div>
         <div className="flex items-center gap-2">
@@ -77,7 +77,7 @@ export default function ChartSection({
       <div className="bg-white rounded-xl border border-gray-200 p-4 sm:p-5" ref={chartRef}>
         <CountrySalaryChart jobs={jobs} currency={currency} />
         <p className="text-right text-[10px] text-gray-400 italic mt-3 select-none">
-          BestPayingJobs.net
+          singhyogendra.com.np
         </p>
       </div>
     </section>

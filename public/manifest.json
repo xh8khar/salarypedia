@@ -1,7 +1,7 @@
 {
-  "name": "Best Paying Jobs in Every Country",
-  "short_name": "BestPayingJobs",
-  "description": "Discover the highest paying jobs in every country. Compare salaries across 30+ career categories.",
+  "name": "SalaryPedia by Singh Yogendra – Average Salaries, Highest Paying Jobs & Career Guides",
+  "short_name": "SalaryPedia",
+  "description": "Discover average salaries and the highest paying jobs in every country by Singh Yogendra. Compare salaries across 30+ career categories.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",

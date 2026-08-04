@@ -7,8 +7,8 @@ const UPDATED = "July 29, 2026";
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description:
-    "How BestPayingJobs.net collects, uses and protects your information, including cookies, analytics and third-party advertising.",
-  alternates: { canonical: "https://www.bestpayingjobs.net/privacy" },
+    "How SalaryPedia by Singh Yogendra collects, uses and protects your information, including cookies, analytics and third-party advertising.",
+  alternates: { canonical: "https://www.singhyogendra.com.np/privacy" },
   robots: { index: true, follow: true },
 };
 
@@ -16,12 +16,12 @@ export default function PrivacyPolicy() {
   return (
     <LegalPage
       title="Privacy Policy"
-      intro="This policy explains what information BestPayingJobs.net collects, why we collect it, and the choices you have."
+      intro="This policy explains what information SalaryPedia by Singh Yogendra collects, why we collect it, and the choices you have."
       updated={UPDATED}
     >
       <h2>Overview</h2>
       <p>
-        BestPayingJobs.net (&ldquo;we&rdquo;, &ldquo;us&rdquo;, &ldquo;our&rdquo;) publishes salary and
+        SalaryPedia by Singh Yogendra (&ldquo;we&rdquo;, &ldquo;us&rdquo;, &ldquo;our&rdquo;) publishes salary and
         career reference data. You can browse the entire site without creating an account or
         submitting personal details. We do not sell your personal information.
       </p>

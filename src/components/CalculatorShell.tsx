@@ -42,7 +42,7 @@ export default function CalculatorShell({ title, subtitle, description, faqs, ch
         <div className="my-12 rounded-xl overflow-hidden border border-gray-200 shadow-sm">
           <img
             src={`/og/calculators/${slug}.webp`}
-            alt={title}
+            alt={`${title} | SalaryPedia by Singh Yogendra`}
             title={`${title} — free online salary calculator`}
             className="w-full h-auto"
             loading="lazy"
@@ -107,7 +107,7 @@ export const calculatorFaqs: Record<string, { q: string; a: string }[]> = {
   "salary-increase": [
     { q: "How do I calculate a raise percentage?", a: "Subtract your old salary from new salary, divide by old salary, multiply by 100. Example: ($65,000 - $60,000) ÷ $60,000 × 100 = 8.33% raise." },
     { q: "What is a typical annual raise percentage?", a: "Average annual raises typically range from 3-5% for cost-of-living adjustments. Promotion raises are larger, often 10-20% depending on the role and company." },
-    { q: "How do I negotiate a raise?", a: "Research market rates for your role using sites like BestPayingJobs.net. Document your achievements and quantifiable impact. Practice your pitch and have a specific number in mind based on data." },
+    { q: "How do I negotiate a raise?", a: "Research market rates for your role using sites like SalaryPedia. Document your achievements and quantifiable impact. Practice your pitch and have a specific number in mind based on data." },
   ],
   "overtime-pay": [
     { q: "What is the standard overtime rate?", a: "Under federal law (FLSA), overtime is 1.5x your regular hourly rate (time-and-a-half) for hours worked beyond 40 in a workweek. Some states have daily overtime rules." },

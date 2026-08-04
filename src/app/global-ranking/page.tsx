@@ -13,6 +13,8 @@ export const metadata: Metadata = {
   description:
     `Discover the top 100 highest paying jobs in the world for ${CURRENT_YEAR}. Compare global salary averages across 195 countries. See which careers pay the most.`,
   keywords: [
+    "Singh Yogendra",
+    "SalaryPedia by Singh Yogendra",
     "highest paying jobs in the world",
     "top 100 highest paying jobs",
     "global salary ranking",
@@ -20,7 +22,7 @@ export const metadata: Metadata = {
     "highest salary careers",
   ],
   alternates: {
-    canonical: "https://www.bestpayingjobs.net/global-ranking",
+    canonical: "https://www.singhyogendra.com.np/global-ranking",
   },
   openGraph: {
     title: grTitleShort,

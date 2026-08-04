@@ -41,31 +41,31 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const year = getCurrentYear();
 
   const metaImage = {
-    url: `https://www.bestpayingjobs.net/og/${c.slug}.webp`,
+    url: `https://www.singhyogendra.com.np/og/${c.slug}.webp`,
     width: 1200,
     height: 750,
     alt: `Take-home pay in ${c.name} — after-tax salary estimates`,
   };
 
   return {
-    title: `Take-Home Pay in ${c.name} ${year} | After-Tax Salary Calculator | BestPayingJobs.net`,
-    description: `Calculate take-home pay in ${c.name} for ${year}. See gross-to-net salary breakdowns, tax rates, and how much you keep after deductions.`,
+    title: `Take-Home Pay in ${c.name} ${year} | After-Tax Salary Calculator`,
+    description: `SalaryPedia by Singh Yogendra – Calculate take-home pay in ${c.name} for ${year}. See gross-to-net salary breakdowns, tax rates, and how much you keep after deductions.`,
     keywords: takeHomePayKeywords({
       country: c.name,
       year: getCurrentYear(),
       currency: c.currency,
     }),
     alternates: {
-      canonical: `https://www.bestpayingjobs.net/take-home-pay-${c.slug}`,
+      canonical: `https://www.singhyogendra.com.np/take-home-pay-${c.slug}`,
     },
     openGraph: {
-      title: `Take-Home Pay in ${c.name} ${year} | BestPayingJobs.net`,
+      title: `Take-Home Pay in ${c.name} ${year} | SalaryPedia by Singh Yogendra`,
       description: `Calculate your after-tax salary in ${c.name}. See tax breakdowns, deductions, and net pay for ${year}.`,
-      url: `https://www.bestpayingjobs.net/take-home-pay-${c.slug}`,
+      url: `https://www.singhyogendra.com.np/take-home-pay-${c.slug}`,
       images: [metaImage],
     },
     twitter: {
-      title: `Take-Home Pay in ${c.name} ${year} | BestPayingJobs.net`,
+      title: `Take-Home Pay in ${c.name} ${year} | SalaryPedia by Singh Yogendra`,
       description: `Calculate your after-tax salary in ${c.name}. See tax breakdowns, deductions, and net pay for ${year}.`,
       card: "summary_large_image",
       images: [metaImage],
@@ -109,7 +109,7 @@ export default async function TakeHomePayPage({ params }: Props) {
   const categories = getCategories();
   const countries = getCountries();
 
-  const siteUrl = "https://www.bestpayingjobs.net";
+  const siteUrl = "https://www.singhyogendra.com.np";
   const pageUrl = `${siteUrl}/take-home-pay-${c.slug}`;
 
   const taxRate = effectiveTaxRate(index);
@@ -143,14 +143,14 @@ export default async function TakeHomePayPage({ params }: Props) {
   const imageSchema = {
     "@context": "https://schema.org",
     "@type": "ImageObject",
-    contentUrl: `https://www.bestpayingjobs.net/og/${c.slug}.webp`,
-    url: `https://www.bestpayingjobs.net/og/${c.slug}.webp`,
+    contentUrl: `https://www.singhyogendra.com.np/og/${c.slug}.webp`,
+    url: `https://www.singhyogendra.com.np/og/${c.slug}.webp`,
     name: `Take-Home Pay in ${c.name}`,
     description: `Take-home pay and tax breakdown chart for ${c.name} showing after-tax salary estimates for ${year}.`,
     representativeOfPage: true,
     thumbnail: {
       "@type": "ImageObject",
-      contentUrl: `https://www.bestpayingjobs.net/og/${c.slug}.webp`,
+      contentUrl: `https://www.singhyogendra.com.np/og/${c.slug}.webp`,
       width: 1200,
       height: 750,
     },

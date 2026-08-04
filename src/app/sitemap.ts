@@ -11,7 +11,7 @@ import colData from "@/data/col-index.json";
 export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const siteUrl = "https://www.bestpayingjobs.net";
+  const siteUrl = "https://www.singhyogendra.com.np";
   const countries = getCountries();
   const categories = getCategories();
   const cities = getCities();

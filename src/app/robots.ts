@@ -10,6 +10,6 @@ export default function robots(): MetadataRoute.Robots {
         allow: "/",
       },
     ],
-    sitemap: "https://www.bestpayingjobs.net/sitemap.xml",
+    sitemap: "https://www.singhyogendra.com.np/sitemap.xml",
   };
 }

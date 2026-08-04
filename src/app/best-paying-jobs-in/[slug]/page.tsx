@@ -39,15 +39,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const top3 = data?.top10?.slice(0, 3).map((j) => j.title).join(", ") ?? "";
 
   const metaImage = {
-    url: `https://www.bestpayingjobs.net/og/${c.slug}.webp`,
+    url: `https://www.singhyogendra.com.np/og/${c.slug}.webp`,
     width: 1200,
     height: 750,
     alt: `Best paying jobs in ${c.name} — top careers and salaries`,
   };
 
   return {
-    title: `Best Paying Jobs in ${c.name} ${year} | BestPayingJobs.net`,
-    description: `Discover the highest paying jobs in ${c.name} for ${year}. Top careers include ${top3}. Compare salaries across 30+ career categories in ${c.name}.`,
+    title: `Best Paying Jobs in ${c.name} ${year}`,
+    description: `SalaryPedia by Singh Yogendra – Discover the highest paying jobs in ${c.name} for ${year}. Top careers include ${top3}. Compare salaries across 30+ career categories in ${c.name}.`,
     keywords: countryKeywords({
       country: c.name,
       year,
@@ -59,16 +59,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         .map((cat) => cat.name),
     }),
     alternates: {
-      canonical: `https://www.bestpayingjobs.net/best-paying-jobs-in-${c.slug}`,
+      canonical: `https://www.singhyogendra.com.np/best-paying-jobs-in-${c.slug}`,
     },
     openGraph: {
-      title: `Best Paying Jobs in ${c.name} ${year} | BestPayingJobs.net`,
+      title: `Best Paying Jobs in ${c.name} ${year} | SalaryPedia by Singh Yogendra`,
       description: `Discover the highest paying jobs in ${c.name} for ${year}. Compare salaries across 30+ categories.`,
-      url: `https://www.bestpayingjobs.net/best-paying-jobs-in-${c.slug}`,
+      url: `https://www.singhyogendra.com.np/best-paying-jobs-in-${c.slug}`,
       images: [metaImage],
     },
     twitter: {
-      title: `Best Paying Jobs in ${c.name} ${year} | BestPayingJobs.net`,
+      title: `Best Paying Jobs in ${c.name} ${year} | SalaryPedia by Singh Yogendra`,
       description: `Discover the highest paying jobs in ${c.name} for ${year}. Compare salaries across 30+ categories.`,
       card: "summary_large_image",
       images: [metaImage],
@@ -88,7 +88,7 @@ export default async function CountryPage({ params }: Props) {
 
   const top10 = data?.top10 ?? [];
 
-  const siteUrl = "https://www.bestpayingjobs.net";
+  const siteUrl = "https://www.singhyogendra.com.np";
   const pageUrl = `${siteUrl}/best-paying-jobs-in-${c.slug}`;
 
   const breadcrumbSchema = {
@@ -118,14 +118,14 @@ export default async function CountryPage({ params }: Props) {
   const imageSchema = {
     "@context": "https://schema.org",
     "@type": "ImageObject",
-    contentUrl: `https://www.bestpayingjobs.net/og/${c.slug}.webp`,
-    url: `https://www.bestpayingjobs.net/og/${c.slug}.webp`,
+    contentUrl: `https://www.singhyogendra.com.np/og/${c.slug}.webp`,
+    url: `https://www.singhyogendra.com.np/og/${c.slug}.webp`,
     name: `Best Paying Jobs in ${c.name}`,
     description: `Salary chart showing the top 10 highest paying jobs and their salary ranges in ${c.name} for ${year}.`,
     representativeOfPage: true,
     thumbnail: {
       "@type": "ImageObject",
-      contentUrl: `https://www.bestpayingjobs.net/og/${c.slug}.webp`,
+      contentUrl: `https://www.singhyogendra.com.np/og/${c.slug}.webp`,
       width: 1200,
       height: 750,
     },
@@ -336,9 +336,9 @@ export default async function CountryPage({ params }: Props) {
 
         <div className="mb-12 rounded-xl overflow-hidden border border-gray-200">
           <img
-            src={`/og/${c.slug}.webp`}
-            alt={`Best paying jobs in ${c.name} — top careers and salaries`}
-            title={`Highest paying jobs and salary data for ${c.name}`}
+            src={`/posters/${c.slug}.webp`}
+            alt={`Highest paying jobs in ${c.name} — salary poster with the top 60 highest paying careers | SalaryPedia by Singh Yogendra`}
+            title={`Top 60 highest paying jobs and salary data for ${c.name}`}
             className="w-full h-auto"
             loading="lazy"
           />

@@ -18,15 +18,18 @@ import { iconFor } from "@/lib/category-icons";
 import { faqPageSchema } from "@/lib/schema";
 import posts from "@/data/blog-posts.json";
 
-const homeTitle = `Best Paying Jobs in Every Country ${CURRENT_YEAR} | BestPayingJobs.net`;
-const homeTitleShort = `Best Paying Jobs in Every Country ${CURRENT_YEAR}`;
-const homeDesc = `Discover the highest paying jobs in every country. Compare salaries across 30+ career categories including AI, Finance, IT, Healthcare, Engineering and more. Updated for ${CURRENT_YEAR}.`;
-const homeDescShort = `Discover the highest paying jobs in every country. Compare salaries across 30+ career categories. Updated for ${CURRENT_YEAR}.`;
+const homeTitle = `SalaryPedia by Singh Yogendra – Average Salaries, Highest Paying Jobs & Career Guides`;
+const homeTitleShort = `SalaryPedia by Singh Yogendra – Average Salaries, Highest Paying Jobs & Career Guides`;
+const homeDesc = `SalaryPedia by Singh Yogendra – Discover average salaries and the highest paying jobs in every country. Compare salaries across 30+ career categories including AI, Finance, IT, Healthcare, Engineering and more. Updated for ${CURRENT_YEAR}.`;
+const homeDescShort = `SalaryPedia by Singh Yogendra – Discover average salaries and the highest paying jobs in every country. Compare salaries across 30+ career categories. Updated for ${CURRENT_YEAR}.`;
 
 export const metadata: Metadata = {
   title: homeTitle,
   description: homeDesc,
   keywords: [
+    "Singh Yogendra",
+    "SalaryPedia",
+    "SalaryPedia by Singh Yogendra",
     "best paying jobs",
     "highest salary jobs",
     "salary by country",
@@ -36,12 +39,12 @@ export const metadata: Metadata = {
     "career salary guide",
   ],
   alternates: {
-    canonical: "https://www.bestpayingjobs.net",
+    canonical: "https://www.singhyogendra.com.np",
   },
   openGraph: {
     title: homeTitleShort,
     description: homeDesc,
-    url: "https://www.bestpayingjobs.net",
+    url: "https://www.singhyogendra.com.np",
     images: [
       {
         url: "/og/default.webp",
@@ -138,7 +141,7 @@ export default function Home() {
 
   const blogPosts = (posts as typeof posts).slice(0, 3);
 
-  const siteUrl = "https://www.bestpayingjobs.net";
+  const siteUrl = "https://www.singhyogendra.com.np";
 
   const collectionSchema = {
     "@context": "https://schema.org",
@@ -181,7 +184,7 @@ export default function Home() {
       a: "Figures are based on published research from the Economic Research Institute (ERI) and SalaryExpert, combined with cost-of-living indices and currency exchange rates. All numbers are estimates and vary with experience, employer, sector and location.",
     },
     {
-      q: "Is BestPayingJobs.net free to use?",
+      q: "Is SalaryPedia free to use?",
       a: `Yes. Every page, including all ${countries.length} country guides and the salary calculators, is free and requires no account. The site is supported by advertising.`,
     },
   ];

@@ -6,9 +6,11 @@ import Footer from "@/components/Footer";
 import FlagImage from "@/components/FlagImage";
 
 export const metadata: Metadata = {
-  title: "Part-Time Jobs for International Students 2026 | BestPayingJobs",
+  title: "Part-Time Jobs for International Students 2026",
   description: "Discover the highest paying part-time jobs for international students in 195 countries. Compare part-time salaries, hourly rates, and job opportunities worldwide.",
   keywords: [
+    "Singh Yogendra",
+    "SalaryPedia by Singh Yogendra",
     "part time jobs for students",
     "international student jobs",
     "student work abroad",
@@ -16,7 +18,7 @@ export const metadata: Metadata = {
     "student job opportunities",
   ],
   alternates: {
-    canonical: "https://www.bestpayingjobs.net/part-time-jobs",
+    canonical: "https://www.singhyogendra.com.np/part-time-jobs",
   },
   openGraph: {
     title: "Part-Time Jobs for International Students 2026",

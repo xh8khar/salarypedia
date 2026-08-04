@@ -5,13 +5,15 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import letters from "@/data/salary-letters.json";
 
-const silTitle = `Salary Increase Letter Templates ${CURRENT_YEAR} | BestPayingJobs.net`;
+const silTitle = `Salary Increase Letter Templates ${CURRENT_YEAR}`;
 const silTitleShort = `Salary Increase Letter Templates ${CURRENT_YEAR}`;
 
 export const metadata: Metadata = {
   title: silTitle,
   description: "24 professionally crafted salary increase letter templates for every situation. Copy, customize, and send. Get the raise you deserve.",
   keywords: [
+    "Singh Yogendra",
+    "SalaryPedia by Singh Yogendra",
     "salary increase letter",
     "raise letter template",
     "pay raise letter",
@@ -19,7 +21,7 @@ export const metadata: Metadata = {
     "request raise email",
   ],
   alternates: {
-    canonical: "https://www.bestpayingjobs.net/salary-increase-letter",
+    canonical: "https://www.singhyogendra.com.np/salary-increase-letter",
   },
   openGraph: {
     title: silTitleShort,

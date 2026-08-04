@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = getPost(slug);
   if (!post) return {};
   return {
-    title: `${post.title} | BestPayingJobs.net`,
+    title: post.title,
     description: post.summary,
     keywords: blogKeywords({
       title: post.title,
@@ -43,7 +43,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       terms: post.sections.slice(0, 4).map((s) => s.h.replace(/^\d+\.\s*/, "").toLowerCase()),
     }),
     alternates: {
-      canonical: `https://www.bestpayingjobs.net/blog/${slug}`,
+      canonical: `https://www.singhyogendra.com.np/blog/${slug}`,
     },
     openGraph: {
       title: post.title,
@@ -76,7 +76,7 @@ export default async function BlogPost({ params }: Props) {
   const countries = getCountries();
   const allCategories = getCategories();
 
-  const siteUrl = "https://www.bestpayingjobs.net";
+  const siteUrl = "https://www.singhyogendra.com.np";
 
   const postIndex = posts.findIndex((p) => p.id === slug);
   const pubDate = new Date(year, 0, 1 + postIndex);
@@ -108,7 +108,7 @@ export default async function BlogPost({ params }: Props) {
     author: authorSchema(author, siteUrl),
     publisher: {
       "@type": "Organization",
-      name: "BestPayingJobs.net",
+      name: "SalaryPedia by Singh Yogendra – Average Salaries, Highest Paying Jobs & Career Guides",
       logo: {
         "@type": "ImageObject",
         url: `${siteUrl}/favicon.svg`,

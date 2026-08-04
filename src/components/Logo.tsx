@@ -30,7 +30,7 @@ export default function Logo({
   href?: string;
 }) {
   return (
-    <Link href={href} className="group flex items-center gap-2.5 shrink-0" aria-label="BestPayingJobs home">
+    <Link href={href} className="group flex items-center gap-2.5 shrink-0" aria-label="SalaryPedia home">
       <Mark />
       {!compact && (
         <span
@@ -38,8 +38,7 @@ export default function Logo({
             onDark ? "text-chalk" : "text-gray-900"
           }`}
         >
-          BestPayingJobs
-          <span className={onDark ? "text-jade" : "text-emerald-600"}>.net</span>
+          SalaryPedia
         </span>
       )}
     </Link>

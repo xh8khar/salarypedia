@@ -8,8 +8,8 @@ const UPDATED = "July 29, 2026";
 export const metadata: Metadata = {
   title: "About Us",
   description:
-    "BestPayingJobs.net publishes free, comparable salary data for 195 countries so people can find out what their work is worth anywhere in the world.",
-  alternates: { canonical: "https://www.bestpayingjobs.net/about" },
+    "SalaryPedia by Singh Yogendra publishes free, comparable salary data for 195 countries so people can find out what their work is worth anywhere in the world.",
+  alternates: { canonical: "https://www.singhyogendra.com.np/about" },
   robots: { index: true, follow: true },
 };
 
@@ -26,7 +26,7 @@ export default function About() {
     >
       <h2>What we do</h2>
       <p>
-        BestPayingJobs.net is an independent reference site for salary and career data. We collect
+        SalaryPedia by Singh Yogendra is an independent reference site for salary and career data. We collect
         published compensation research, normalise it into a consistent structure, and present it so
         that a role in one country can be compared fairly against the same role in another.
       </p>

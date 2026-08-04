@@ -12,7 +12,7 @@ function fmt(n: number): string {
 
 function Watermark() {
   return (
-    <p className="text-right text-[10px] text-gray-400 italic mt-3">BestPayingJobs.net</p>
+    <p className="text-right text-[10px] text-gray-400 italic mt-3">singhyogendra.com.np</p>
   );
 }
 

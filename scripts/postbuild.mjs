@@ -79,19 +79,19 @@ const redirects = [
   "/api/jobs/* /api/jobs/:splat.json 200",
   "",
   // WWW domain redirect
-  "https://bestpayingjobs.net/* https://www.bestpayingjobs.net/:splat 301",
+  "https://singhyogendra.com.np/* https://www.singhyogendra.com.np/:splat 301",
 ];
 writeFileSync(resolve(outDir, "_redirects"), redirects.join("\n") + "\n");
 console.log("Generated _redirects");
 
 // Generate /llms.txt
-const content = `# BestPayingJobs.net
+const content = `# SalaryPedia by Singh Yogendra – Average Salaries, Highest Paying Jobs & Career Guides
 
 > Compare salaries and discover the highest paying jobs in ${countries.length} countries across ${categories.length} career categories. Updated for ${year}.
 
 ## About
 
-BestPayingJobs.net provides salary comparison data for every country in the world. Users can explore the highest paying jobs by country, career category, or city. The site includes interactive salary calculators, country comparison tools, and a global job ranking.
+SalaryPedia by Singh Yogendra – Average Salaries, Highest Paying Jobs & Career Guides provides salary comparison data for every country in the world. Users can explore the highest paying jobs by country, career category, or city. The site includes interactive salary calculators, country comparison tools, and a global job ranking.
 
 ## Key Features
 
@@ -104,47 +104,47 @@ BestPayingJobs.net provides salary comparison data for every country in the worl
 
 ## Key Pages
 
-- Home: https://www.bestpayingjobs.net/
-- All Categories: https://www.bestpayingjobs.net/jobs
-- Global Ranking: https://www.bestpayingjobs.net/global-ranking
-- Calculators: https://www.bestpayingjobs.net/calculator
-- Blog: https://www.bestpayingjobs.net/blog
-- Salary Letters: https://www.bestpayingjobs.net/salary-increase-letter
+- Home: https://www.singhyogendra.com.np/
+- All Categories: https://www.singhyogendra.com.np/jobs
+- Global Ranking: https://www.singhyogendra.com.np/global-ranking
+- Calculators: https://www.singhyogendra.com.np/calculator
+- Blog: https://www.singhyogendra.com.np/blog
+- Salary Letters: https://www.singhyogendra.com.np/salary-increase-letter
 
 ## Example Country Pages
 
-${countries.slice(0, 10).map((c) => `- ${c.name}: https://www.bestpayingjobs.net/best-paying-jobs-in-${c.slug}`).join("\n")}
+${countries.slice(0, 10).map((c) => `- ${c.name}: https://www.singhyogendra.com.np/best-paying-jobs-in-${c.slug}`).join("\n")}
 
 ## All Countries
 
-${countries.map((c) => `- ${c.name}: https://www.bestpayingjobs.net/best-paying-jobs-in-${c.slug}`).join("\n")}
+${countries.map((c) => `- ${c.name}: https://www.singhyogendra.com.np/best-paying-jobs-in-${c.slug}`).join("\n")}
 
 ## All Career Categories
 
-${categories.map((cat) => `- ${cat.name}: https://www.bestpayingjobs.net/jobs/${cat.slug}`).join("\n")}
+${categories.map((cat) => `- ${cat.name}: https://www.singhyogendra.com.np/jobs/${cat.slug}`).join("\n")}
 
 ## All Calculators
 
-- Salary to Hourly Wage: https://www.bestpayingjobs.net/calculator/salary-to-hourly
-- Take-Home Salary: https://www.bestpayingjobs.net/calculator/take-home-salary
-- Salary After Tax: https://www.bestpayingjobs.net/calculator/salary-after-tax
-- Monthly to Annual: https://www.bestpayingjobs.net/calculator/monthly-to-annual
-- Annual to Monthly: https://www.bestpayingjobs.net/calculator/annual-to-monthly
-- Salary Increase: https://www.bestpayingjobs.net/calculator/salary-increase
-- Overtime Pay: https://www.bestpayingjobs.net/calculator/overtime-pay
-- Bonus: https://www.bestpayingjobs.net/calculator/bonus
-- Commission: https://www.bestpayingjobs.net/calculator/commission
-- Rent Affordability: https://www.bestpayingjobs.net/calculator/rent-affordability
-- Home Affordability: https://www.bestpayingjobs.net/calculator/house-affordability
-- Car Affordability: https://www.bestpayingjobs.net/calculator/car-affordability
-- Cost of Living: https://www.bestpayingjobs.net/calculator/salary-vs-cost-of-living
-- Salary Inflation: https://www.bestpayingjobs.net/calculator/salary-inflation
-- Salary Comparison: https://www.bestpayingjobs.net/calculator/salary-comparison
-- Salary Percentile: https://www.bestpayingjobs.net/calculator/salary-percentile
-- Savings: https://www.bestpayingjobs.net/calculator/salary-savings
-- FIRE Calculator: https://www.bestpayingjobs.net/calculator/fire-calculator
-- Job Offer Comparison: https://www.bestpayingjobs.net/calculator/job-offer-comparison
-- Freelance Rate: https://www.bestpayingjobs.net/calculator/freelance-hourly-rate
+- Salary to Hourly Wage: https://www.singhyogendra.com.np/calculator/salary-to-hourly
+- Take-Home Salary: https://www.singhyogendra.com.np/calculator/take-home-salary
+- Salary After Tax: https://www.singhyogendra.com.np/calculator/salary-after-tax
+- Monthly to Annual: https://www.singhyogendra.com.np/calculator/monthly-to-annual
+- Annual to Monthly: https://www.singhyogendra.com.np/calculator/annual-to-monthly
+- Salary Increase: https://www.singhyogendra.com.np/calculator/salary-increase
+- Overtime Pay: https://www.singhyogendra.com.np/calculator/overtime-pay
+- Bonus: https://www.singhyogendra.com.np/calculator/bonus
+- Commission: https://www.singhyogendra.com.np/calculator/commission
+- Rent Affordability: https://www.singhyogendra.com.np/calculator/rent-affordability
+- Home Affordability: https://www.singhyogendra.com.np/calculator/house-affordability
+- Car Affordability: https://www.singhyogendra.com.np/calculator/car-affordability
+- Cost of Living: https://www.singhyogendra.com.np/calculator/salary-vs-cost-of-living
+- Salary Inflation: https://www.singhyogendra.com.np/calculator/salary-inflation
+- Salary Comparison: https://www.singhyogendra.com.np/calculator/salary-comparison
+- Salary Percentile: https://www.singhyogendra.com.np/calculator/salary-percentile
+- Savings: https://www.singhyogendra.com.np/calculator/salary-savings
+- FIRE Calculator: https://www.singhyogendra.com.np/calculator/fire-calculator
+- Job Offer Comparison: https://www.singhyogendra.com.np/calculator/job-offer-comparison
+- Freelance Rate: https://www.singhyogendra.com.np/calculator/freelance-hourly-rate
 
 ## Data Sources
 

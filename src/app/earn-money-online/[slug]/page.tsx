@@ -49,7 +49,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: resolve(cfg.metaDescription),
     keywords: earnOnlineKeywords({ country: c.name, year: getCurrentYear() }),
     alternates: {
-      canonical: `https://www.bestpayingjobs.net/earn-money-online-${c.slug}`,
+      canonical: `https://www.singhyogendra.com.np/earn-money-online-${c.slug}`,
     },
     openGraph: {
       title: resolve(cfg.metaTitle),
@@ -88,7 +88,7 @@ export default async function EarnMoneyOnlinePage({ params }: Props) {
       .replace(/\{year\}/g, String(year))
       .replace(/\{currency\}/g, c.currency);
 
-  const siteUrl = "https://www.bestpayingjobs.net";
+  const siteUrl = "https://www.singhyogendra.com.np";
   const pageUrl = `${siteUrl}/earn-money-online-${c.slug}`;
 
   const breadcrumbSchema = {

@@ -6,14 +6,16 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FlagImage from "@/components/FlagImage";
 
-const siteUrl = "https://www.bestpayingjobs.net";
+const siteUrl = "https://www.singhyogendra.com.np";
 
-const thpTitle = `Take-Home Pay by Country ${CURRENT_YEAR} | BestPayingJobs.net`;
+const thpTitle = `Take-Home Pay by Country ${CURRENT_YEAR}`;
 
 export const metadata: Metadata = {
   title: thpTitle,
   description: "Compare estimated take-home pay after taxes across 195 countries. See salary after tax and net pay for every country worldwide.",
   keywords: [
+    "Singh Yogendra",
+    "SalaryPedia by Singh Yogendra",
     "take home pay by country",
     "salary after tax",
     "net pay by country",

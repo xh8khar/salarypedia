@@ -11,6 +11,8 @@ export const metadata: Metadata = {
   title: calcTitle,
   description: "Use our free salary calculators: hourly rate, take-home pay, after-tax, raise, overtime, bonus, commission, affordability, FIRE, and more.",
   keywords: [
+    "Singh Yogendra",
+    "SalaryPedia by Singh Yogendra",
     "salary calculator",
     "free salary calculator",
     "pay calculator",
@@ -18,7 +20,7 @@ export const metadata: Metadata = {
     "wage calculator",
   ],
   alternates: {
-    canonical: "https://www.bestpayingjobs.net/calculator",
+    canonical: "https://www.singhyogendra.com.np/calculator",
   },
   openGraph: {
     title: calcTitle,
