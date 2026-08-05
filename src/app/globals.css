@@ -430,10 +430,14 @@ h1 {
   box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.25);
 }
 
-/* AdSense placement shell — responsive container that fills the row. */
+/* AdSense placement shell — collapsed until Google fills the unit, then it
+   expands to the rendered ad size. Prevents big empty gaps before approval. */
 .ad-slot {
   display: block;
   width: 100%;
+}
+
+.ad-slot--filled {
   min-height: 120px;
 }
 
