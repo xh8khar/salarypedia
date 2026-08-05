@@ -242,7 +242,7 @@ export default async function BlogPost({ params }: Props) {
         )}
 
         <div className="mb-8">
-          <AdSlot slot="inArticle" minHeight={280} />
+          <AdSlot slot="inArticle" />
         </div>
 
         {/* Body */}
@@ -251,7 +251,7 @@ export default async function BlogPost({ params }: Props) {
             <Fragment key={section.h}>
               {si > 0 && si % 4 === 0 && (
                 <div className="mb-10">
-                  <AdSlot slot="inArticle" minHeight={280} />
+                  <AdSlot slot="inArticle" />
                 </div>
               )}
               <section id={slugifyHeading(section.h)} className="mb-10 scroll-mt-24">

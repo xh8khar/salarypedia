@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { adsConfig } from "@/config/ads";
+import { adsConfig, type AdSlotName } from "@/config/ads";
 
 declare global {
   interface Window {
@@ -10,14 +10,13 @@ declare global {
 }
 
 type Props = {
-  slot: keyof typeof adsConfig.slots;
+  slot: AdSlotName;
   className?: string;
-  // Reserve vertical space before the ad loads to avoid layout shift.
-  minHeight?: number;
 };
 
-export default function AdSlot({ slot, className = "", minHeight = 0 }: Props) {
+export default function AdSlot({ slot, className = "" }: Props) {
   const pushed = useRef(false);
+  const unit = adsConfig.slots[slot];
 
   useEffect(() => {
     if (!adsConfig.enabled || pushed.current) return;
@@ -32,14 +31,21 @@ export default function AdSlot({ slot, className = "", minHeight = 0 }: Props) {
   if (!adsConfig.enabled) return null;
 
   return (
-    <div className={`ad-slot ${className}`} style={minHeight ? { minHeight } : undefined}>
+    <div
+      className={`ad-slot ${className}`}
+      style={{
+        width: "100%",
+        maxWidth: unit.width,
+        minHeight: unit.height,
+      }}
+    >
       <ins
         className="adsbygoogle"
-        style={{ display: "block", width: "100%", minHeight: minHeight || undefined }}
+        style={{ display: "block", width: "100%", minHeight: unit.height }}
         data-ad-client={adsConfig.client}
-        data-ad-slot={adsConfig.slots[slot]}
-        data-ad-format="auto"
-        data-full-width-responsive="true"
+        data-ad-slot={unit.id}
+        data-ad-format={unit.format}
+        data-full-width-responsive={unit.format === "rectangle"}
       />
     </div>
   );
