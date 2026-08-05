@@ -12,11 +12,12 @@ declare global {
 type Props = {
   slot: AdSlotName;
   className?: string;
+  // Reserve a minimum height to avoid layout shift while a responsive ad loads.
+  minHeight?: number;
 };
 
-export default function AdSlot({ slot, className = "" }: Props) {
+export default function AdSlot({ slot, className = "", minHeight = 120 }: Props) {
   const pushed = useRef(false);
-  const unit = adsConfig.slots[slot];
 
   useEffect(() => {
     if (!adsConfig.enabled || pushed.current) return;
@@ -31,21 +32,14 @@ export default function AdSlot({ slot, className = "" }: Props) {
   if (!adsConfig.enabled) return null;
 
   return (
-    <div
-      className={`ad-slot ${className}`}
-      style={{
-        width: "100%",
-        maxWidth: unit.width,
-        minHeight: unit.height,
-      }}
-    >
+    <div className={`ad-slot ${className}`} style={{ width: "100%", minHeight }}>
       <ins
         className="adsbygoogle"
-        style={{ display: "block", width: "100%", minHeight: unit.height }}
+        style={{ display: "block", width: "100%", minHeight }}
         data-ad-client={adsConfig.client}
-        data-ad-slot={unit.id}
-        data-ad-format={unit.format}
-        data-full-width-responsive={unit.format === "rectangle"}
+        data-ad-slot={adsConfig.slots[slot]}
+        data-ad-format="auto"
+        data-full-width-responsive="true"
       />
     </div>
   );
