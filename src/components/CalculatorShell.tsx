@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import ShareButtons from "@/components/ShareButtons";
+import AdSlot from "@/components/AdSlot";
 
 interface FaqItem {
   q: string;
@@ -51,6 +52,10 @@ export default function CalculatorShell({ title, subtitle, description, faqs, ch
               t.style.display = "none";
             }}
           />
+        </div>
+
+        <div className="mt-10 mb-2">
+          <AdSlot slot="inContent" />
         </div>
 
         {faqs.length > 0 && (

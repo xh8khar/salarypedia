@@ -4,6 +4,7 @@ import { CURRENT_YEAR } from "@/lib/db";
 import calculators from "@/data/calculators.json";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import AdSlot from "@/components/AdSlot";
 
 const calcTitle = `Free Salary Calculators ${CURRENT_YEAR}`;
 
@@ -77,6 +78,10 @@ export default function CalculatorIndex() {
           ))}
         </div>
       </main>
+      <div className="mx-auto max-w-5xl px-6 py-8">
+        <AdSlot slot="top" />
+      </div>
+
       <Footer />
     </div>
   );

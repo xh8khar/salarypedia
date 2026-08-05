@@ -11,6 +11,7 @@ import { getPartTimeJobs, getConfig } from "@/lib/part-time";
 import { seededShuffle } from "@/lib/shuffle";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import AdSlot from "@/components/AdSlot";
 import PartTimeJobs from "@/components/PartTimeJobs";
 import ShareButtons from "@/components/ShareButtons";
 import { getCitiesByCountry } from "@/lib/city";
@@ -308,6 +309,10 @@ export default async function PartTimeJobsPage({ params }: Props) {
           </p>
         </div>
       </section>
+
+      <div className="mx-auto max-w-5xl px-6 py-8">
+        <AdSlot slot="top" />
+      </div>
 
       <Footer />
     </div>

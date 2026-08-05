@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FlagImage from "@/components/FlagImage";
 import SalaryTicker from "@/components/SalaryTicker";
+import AdSlot from "@/components/AdSlot";
 import {
   getCountries,
   getCategories,
@@ -288,6 +289,10 @@ export default function Home() {
         <SalaryTicker items={tickerItems} />
       </section>
 
+      <div className="mx-auto max-w-5xl px-6 py-8">
+        <AdSlot slot="top" />
+      </div>
+
       {/* ──────────────── Highest paying jobs worldwide ──────────────── */}
       <section className="py-20 lg:py-24 bg-white">
         <div className="mx-auto max-w-6xl px-6">
@@ -561,6 +566,9 @@ export default function Home() {
       {/* ───────────────────── FAQ ───────────────────── */}
       <section className="py-20 lg:py-24 bg-white">
         <div className="mx-auto max-w-3xl px-6">
+          <div className="mx-auto max-w-5xl px-6 pb-10">
+            <AdSlot slot="inContent" />
+          </div>
           <div className="mb-10">
             <span className="text-xs font-bold uppercase tracking-wider text-emerald-600">
               Common questions

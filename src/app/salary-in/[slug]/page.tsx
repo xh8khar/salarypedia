@@ -5,6 +5,7 @@ import { getCountries, getCountryJobs, getCountryByCode, getCategories, getCurre
 import { getCityBySlug, cityMultiplier } from "@/lib/city";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import AdSlot from "@/components/AdSlot";
 import ShareButtons from "@/components/ShareButtons";
 import { cityKeywords } from "@/lib/keywords";
 
@@ -238,6 +239,10 @@ export default async function CityPage({ params }: Props) {
           </p>
         </div>
       </section>
+      <div className="mx-auto max-w-5xl px-6 py-8">
+        <AdSlot slot="top" />
+      </div>
+
       <Footer />
     </div>
   );

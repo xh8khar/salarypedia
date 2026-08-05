@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { getCountries, getCategories, getCurrentYear } from "@/lib/db";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import AdSlot from "@/components/AdSlot";
 import posts from "@/data/blog-posts.json";
 
 const categories = [...new Set(posts.map((p) => p.category))];
@@ -79,6 +80,10 @@ export default function BlogIndex() {
           </div>
         </div>
       </section>
+
+      <div className="mx-auto max-w-5xl px-6 py-8">
+        <AdSlot slot="top" />
+      </div>
 
       <section className="py-16 bg-white flex-1">
         <div className="mx-auto max-w-5xl px-6">

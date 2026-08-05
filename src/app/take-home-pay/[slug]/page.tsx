@@ -15,6 +15,7 @@ import fxRatesData from "@/data/fx-rates.json";
 const fxRates = fxRatesData as Record<string, number>;
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import AdSlot from "@/components/AdSlot";
 import ShareButtons from "@/components/ShareButtons";
 import FlagImage from "@/components/FlagImage";
 import ChartSection from "@/components/ChartSection";
@@ -449,6 +450,10 @@ export default async function TakeHomePayPage({ params }: Props) {
           </p>
         </div>
       </section>
+
+      <div className="mx-auto max-w-5xl px-6 py-8">
+        <AdSlot slot="top" />
+      </div>
 
       <Footer />
     </div>

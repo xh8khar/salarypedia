@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import AdSlot from "@/components/AdSlot";
 import SalaryCompare from "@/components/SalaryCompare";
 import { buildComparePayload } from "@/lib/compare";
 import { getCountries, getCurrentYear, CURRENT_YEAR } from "@/lib/db";
@@ -155,6 +156,10 @@ export default function ComparePage() {
           </div>
         </section>
       </main>
+
+      <div className="mx-auto max-w-5xl px-6 py-8">
+        <AdSlot slot="top" />
+      </div>
 
       <Footer />
     </div>

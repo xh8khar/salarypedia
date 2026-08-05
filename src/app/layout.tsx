@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter, Sora, JetBrains_Mono } from "next/font/google";
+import Script from "next/script";
 import { CURRENT_YEAR } from "@/lib/db";
+import { adsConfig } from "@/config/ads";
 import "./globals.css";
 
 const inter = Inter({
@@ -165,7 +167,16 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">{children}
+        {adsConfig.enabled && (
+          <Script
+            id="adsbygoogle"
+            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsConfig.client}`}
+            strategy="afterInteractive"
+            crossOrigin="anonymous"
+          />
+        )}
+      </body>
     </html>
   );
 }

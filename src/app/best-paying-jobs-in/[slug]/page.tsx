@@ -15,6 +15,7 @@ import FlagImage from "@/components/FlagImage";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ShareButtons from "@/components/ShareButtons";
+import AdSlot from "@/components/AdSlot";
 import posts from "@/data/blog-posts.json";
 import { getCitiesByCountry } from "@/lib/city";
 import { seededShuffle } from "@/lib/shuffle";
@@ -334,6 +335,10 @@ export default async function CountryPage({ params }: Props) {
           />
         )}
 
+        <div className="mb-12">
+          <AdSlot slot="inContent" />
+        </div>
+
         <div className="mb-12 rounded-xl overflow-hidden border border-gray-200">
           <img
             src={`/posters/${c.slug}.webp`}
@@ -342,6 +347,10 @@ export default async function CountryPage({ params }: Props) {
             className="w-full h-auto"
             loading="lazy"
           />
+        </div>
+
+        <div className="mb-12">
+          <AdSlot slot="inContent" />
         </div>
 
         {cities.length > 0 && (
@@ -430,6 +439,10 @@ export default async function CountryPage({ params }: Props) {
             </Link>
           </div>
         </section>
+
+        <div className="mb-12">
+          <AdSlot slot="midList" />
+        </div>
 
         <section>
           <h2 className="text-xl font-semibold text-gray-900 mb-4">

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import AdSlot from "@/components/AdSlot";
 
 /**
  * Shared shell for the policy/company pages. Keeps the long-form pages
@@ -59,6 +60,10 @@ export default function LegalPage({
           {children}
         </div>
       </main>
+
+      <div className="mx-auto w-full max-w-3xl px-6 pb-8">
+        <AdSlot slot="footer" />
+      </div>
 
       <Footer />
     </div>

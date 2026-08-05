@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { getCountries, getCurrentYear } from "@/lib/db";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import AdSlot from "@/components/AdSlot";
 import FlagImage from "@/components/FlagImage";
 import emData from "@/data/earn-money-online.json";
 
@@ -95,6 +96,10 @@ export default function EarnMoneyOnlineIndex() {
           </div>
         </div>
       </section>
+
+      <div className="mx-auto max-w-5xl px-6 py-8">
+        <AdSlot slot="top" />
+      </div>
 
       <Footer />
     </div>

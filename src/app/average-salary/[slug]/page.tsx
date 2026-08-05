@@ -5,6 +5,7 @@ import { getCountries, getCurrentYear } from "@/lib/db";
 import { getAverageSalaryData, getAllCountrySlugs } from "@/lib/average-salary-data";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import AdSlot from "@/components/AdSlot";
 import ShareButtons from "@/components/ShareButtons";
 import { BarChart, DistributionChart, GenderChart } from "@/components/SalaryChart";
 import { averageSalaryKeywords } from "@/lib/keywords";
@@ -335,6 +336,10 @@ export default async function AverageSalaryPage({ params }: Props) {
           </div>
         </section>
 
+        <div className="mb-12">
+          <AdSlot slot="inContent" />
+        </div>
+
         {/* ==================== BONUS ==================== */}
         <section className="mb-12">
           <h2 className="text-xl font-semibold text-gray-900 mb-1">Bonus and Incentive Rates in {country.name}</h2>
@@ -499,6 +504,10 @@ export default async function AverageSalaryPage({ params }: Props) {
           </div>
         </section>
 
+        <div className="mb-12">
+          <AdSlot slot="midList" />
+        </div>
+
         {/* ==================== HOURLY WAGE ==================== */}
         <section className="mb-12">
           <h2 className="text-xl font-semibold text-gray-900 mb-2">Average Hourly Wage in {country.name}</h2>
@@ -638,6 +647,10 @@ export default async function AverageSalaryPage({ params }: Props) {
           </p>
         </div>
       </section>
+
+      <div className="mx-auto max-w-5xl px-6 py-8">
+        <AdSlot slot="top" />
+      </div>
 
       <Footer />
     </div>

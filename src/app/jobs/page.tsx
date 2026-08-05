@@ -2,6 +2,7 @@ import Link from "next/link";
 import { getCountries, getCategories, getCurrentYear, CURRENT_YEAR } from "@/lib/db";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import AdSlot from "@/components/AdSlot";
 import { getCategorySalaries } from "@/lib/category-stats";
 import { formatAnnual } from "@/lib/salary";
 import type { Metadata } from "next";
@@ -107,6 +108,10 @@ export default function JobsIndex() {
           </div>
         </div>
       </section>
+
+      <div className="mx-auto max-w-5xl px-6 py-8">
+        <AdSlot slot="top" />
+      </div>
 
       <Footer />
     </div>

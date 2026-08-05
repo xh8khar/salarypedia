@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { getCountries, getCategories, getCurrentYear } from "@/lib/db";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import AdSlot from "@/components/AdSlot";
 import letters from "@/data/salary-letters.json";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -104,6 +105,10 @@ export default async function SalaryLetterPage({ params }: Props) {
           </div>
         </div>
       </section>
+
+      <div className="mx-auto max-w-5xl px-6 py-8">
+        <AdSlot slot="top" />
+      </div>
 
       <Footer />
     </div>

@@ -9,7 +9,9 @@ import { posts, getPost, paragraphs, readingTime } from "@/lib/blog";
 import { blogKeywords } from "@/lib/keywords";
 import { getAuthor, authorSchema, reviewPolicy, lastReviewed } from "@/lib/authors";
 import { AuthorByline, AuthorCard } from "@/components/AuthorByline";
+import AdSlot from "@/components/AdSlot";
 import type { Metadata } from "next";
+import { Fragment } from "react";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -239,29 +241,40 @@ export default async function BlogPost({ params }: Props) {
           </nav>
         )}
 
+        <div className="mb-8">
+          <AdSlot slot="inArticle" minHeight={280} />
+        </div>
+
         {/* Body */}
         <article>
-          {post.sections.map((section) => (
-            <section key={section.h} id={slugifyHeading(section.h)} className="mb-10 scroll-mt-24">
-              <h2 className="font-display text-[1.4rem] font-bold text-gray-900 mb-4 leading-snug">
-                {section.h}
-              </h2>
-              {paragraphs(section.b).map((p, j) => (
-                <p key={j} className="text-[17px] text-gray-600 leading-[1.75] mb-4">
-                  {p}
-                </p>
-              ))}
-              {section.list?.length ? (
-                <ul className="mt-4 mb-2 space-y-2.5">
-                  {section.list.map((item, j) => (
-                    <li key={j} className="relative pl-6 text-[16px] text-gray-600 leading-relaxed">
-                      <span className="absolute left-0 top-[0.65em] w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              ) : null}
-            </section>
+          {post.sections.map((section, si) => (
+            <Fragment key={section.h}>
+              {si > 0 && si % 4 === 0 && (
+                <div className="mb-10">
+                  <AdSlot slot="inArticle" minHeight={280} />
+                </div>
+              )}
+              <section id={slugifyHeading(section.h)} className="mb-10 scroll-mt-24">
+                <h2 className="font-display text-[1.4rem] font-bold text-gray-900 mb-4 leading-snug">
+                  {section.h}
+                </h2>
+                {paragraphs(section.b).map((p, j) => (
+                  <p key={j} className="text-[17px] text-gray-600 leading-[1.75] mb-4">
+                    {p}
+                  </p>
+                ))}
+                {section.list?.length ? (
+                  <ul className="mt-4 mb-2 space-y-2.5">
+                    {section.list.map((item, j) => (
+                      <li key={j} className="relative pl-6 text-[16px] text-gray-600 leading-relaxed">
+                        <span className="absolute left-0 top-[0.65em] w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                ) : null}
+              </section>
+            </Fragment>
           ))}
         </article>
 

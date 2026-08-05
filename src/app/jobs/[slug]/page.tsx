@@ -7,6 +7,7 @@ import { seededShuffle } from "@/lib/shuffle";
 import CategorySalaryChart from "@/components/CategorySalaryChart";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import AdSlot from "@/components/AdSlot";
 import FlagImage from "@/components/FlagImage";
 import posts from "@/data/blog-posts.json";
 import type { Metadata } from "next";
@@ -160,6 +161,10 @@ export default async function JobsByCategoryPage({ params }: Props) {
           </div>
         </div>
       </section>
+
+      <div className="mx-auto max-w-4xl px-6 py-8">
+        <AdSlot slot="inContent" />
+      </div>
 
       <section className="py-12 bg-gray-50">
         <div className="mx-auto max-w-4xl px-6">

@@ -16,6 +16,8 @@ export const adsConfig = {
     inContent: "4345862479",
     // Mid-article unit inside long-form content.
     inArticle: "4345862479",
+    // Mid-list unit inside long ranking grids.
+    midList: "4345862479",
     // Above the footer.
     footer: "4345862479",
   },

@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { getCountries, getCategories, getCurrentYear, CURRENT_YEAR } from "@/lib/db";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import AdSlot from "@/components/AdSlot";
 import letters from "@/data/salary-letters.json";
 
 const silTitle = `Salary Increase Letter Templates ${CURRENT_YEAR}`;
@@ -84,6 +85,10 @@ export default function SalaryIncreaseLetterIndex() {
           </div>
         </div>
       </section>
+
+      <div className="mx-auto max-w-5xl px-6 py-8">
+        <AdSlot slot="top" />
+      </div>
 
       <Footer />
     </div>

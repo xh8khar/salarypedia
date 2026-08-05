@@ -4,6 +4,7 @@ import { getCountries, getCurrentYear, CURRENT_YEAR } from "@/lib/db";
 import { getAverageSalaryData } from "@/lib/average-salary-data";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import AdSlot from "@/components/AdSlot";
 import FlagImage from "@/components/FlagImage";
 
 const siteUrl = "https://www.singhyogendra.com.np";
@@ -114,6 +115,10 @@ export default function AverageSalaryIndex() {
           })}
         </div>
       </main>
+      <div className="mx-auto max-w-5xl px-6 py-8">
+        <AdSlot slot="top" />
+      </div>
+
       <Footer />
     </div>
   );

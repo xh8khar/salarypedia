@@ -3,6 +3,7 @@ import { getCountries, getCategories, getCountryJobs, getCurrentYear, CURRENT_YE
 import { toUSD, formatAnnual, adjustedSalary } from "@/lib/salary";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import AdSlot from "@/components/AdSlot";
 import GlobalRankingClient from "@/components/GlobalRanking";
 
 const grTitle = `Highest Paying Jobs in the World ${CURRENT_YEAR} — Top 100 Global Careers`;
@@ -101,6 +102,10 @@ export default function GlobalRankingPage() {
           <GlobalRankingClient jobs={jobs} total={jobs.length} />
         </div>
       </section>
+      <div className="mx-auto max-w-5xl px-6 py-8">
+        <AdSlot slot="top" />
+      </div>
+
       <Footer />
     </div>
   );
